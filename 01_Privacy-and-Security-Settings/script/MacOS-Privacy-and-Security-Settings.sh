@@ -844,7 +844,7 @@ echo "--------------------------------------------------------------------------
 echo " "
 while true
 do
-read -s -p "To ${bold} SPOTLIGHT PREFERENCES${reset}, press ${bold}[Y/y]${reset}
+read -s -p "To open ${bold}SPOTLIGHT PREFERENCES${reset}, press ${bold}[Y/y]${reset}
 Press ${bold}[N/n]${reset} to skip this step, or press ${bold}[C/c]${reset} to cancel: " SPOT1
 case $SPOT1 in
 
