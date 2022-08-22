@@ -3,7 +3,7 @@
 01) [Privacy and Security Settings](#01---Privacy-and-Security-Settings)
 02) [FEATURE LIST](#02---FEATURE-LIST)
 03) [Siri KillSwitch](#03---Siri-KillSwitch)
-04) [RESOURCES](#-RESOURCES)
+04) [RESOURCES](#RESOURCES)
 
 
 # 01 - Privacy and Security Settings
@@ -36,7 +36,7 @@ Our script can adjust most System Preferences that are enabled by default in Mac
 
 We have written an additional [script](script/kill-siri.sh) that sets up a [02 - Siri KillSwitch](#02---Siri-KillSwitch) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
 
-# 02 FEATURE LIST
+# 02 - FEATURE LIST
 
 Our script guides you through the following Privacy and Security Settings:
 
