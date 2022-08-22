@@ -1,7 +1,15 @@
+# CONTENTS
+
+01 - [Privacy and Security Settings](#01---Privacy-and-Security-Settings)<br>
+02 - [Siri KillSwitch](#02---Siri-KillSwitch)<br>
+03 - [RESOURCES](#03---RESOURCES)<br>
+
+
+
 # 01 - Privacy and Security Settings
 
 
-Our [script](script/01.1_MacOS-Privacy-and-Security-Settings.sh) is an interactive script that guides you through standard MacOS Privacy and Security Settings. It also gives you a brief explanation of each option, so you can decide wether or not you want to change it. To run our script, you have to download it first.
+Our [script](script/01.1_MacOS-Privacy-and-Security-Settings.sh) is an interactive script that guides you through standard MacOS Privacy and Security Settings. It also gives you a brief explanation of each available option, so you can make an informed decision wether or not you want to change it. To run our script, you first have to download it.
 
 Open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder).
 In your Terminal, navigate to your Downloads Folder:
@@ -10,23 +18,23 @@ In your Terminal, navigate to your Downloads Folder:
 
 Download the script:
 
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/01.1_MacOS-Privacy-and-Security-Settings.sh
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Privacy-and-Security-Settings.sh
 
 Give the file execute permissions:
 
-    chmod +x 01.1_MacOS-Privacy-and-Security-Settings.sh
+    chmod +x MacOS-Privacy-and-Security-Settings.sh
 
 Execute the file:
 
-    ./01.1_MacOS-Privacy-and-Security-Settings.sh
+    ./MacOS-Privacy-and-Security-Settings.sh
 
 
-Our script can adjust most of your System Preferences that are enabled by default in MacOS. You just have to press [Y/y] to proceed, [N/n] to skip a specific option, or [C/c] to cancel. If manual action is required, this script will open the required Settings Tab for you, so you can implement the changes manually. If you want to use a faster version of this script with less explanantion you can download our [speedy install script](script/02.1_SPEEDY-INSTALL_MacOS-Privacy-and-Security-Settings.sh) instead:
+Our script can adjust most System Preferences that are enabled by default in MacOS. You just have to press [Y/y] + [ENTER] to proceed, [N/n] + [ENTER] to skip a specific option, or [C/c] + [ENTER] to cancel. If manual action is required, this script will open the respective Settings Tab for you, so you can implement the changes yourself. If you want to use a faster version of this script with less explanation, you can download our [speedy install script](script/Speedy-Install_MacOS-Privacy-and-Security-Settings.sh) instead:
 
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/02.1_SPEEDY-INSTALL_MacOS-Privacy-and-Security-Settings.sh
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/Speedy-Install_MacOS-Privacy-and-Security-Settings.sh
 
 
-We have written an additional [script](#02---Siri-KillSwitch) that sets up a [02 - Siri KillSwitch](#02---Siri-KillSwitch) should you decide to disable Siri. yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
+We have written an additional [script](script/kill-siri.sh) that sets up a [02 - Siri KillSwitch](#02---Siri-KillSwitch) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
 
 ## FEATURE LIST
 
@@ -36,7 +44,7 @@ Our script guides you through the following Privacy and Security Settings:
 
 01) Turn off Apple Remote Events
 02) Disable Apple Remote Management Service
-03) Disable Siri (<em>-> we provide an additional script to setup a Siri KillSwitch if you don't want to disable SIP</em>)
+03) Disable Siri
 04) Adjust Spotlight Search Settings
 05) Disable Spotlight Search Indexing
 06) Disable Internet Based Spell Correction
@@ -59,3 +67,49 @@ Our script guides you through the following Privacy and Security Settings:
 08) Enable FileVault (Full Disk Encryption)
 
 # 02 - Siri KillSwitch
+
+MacOS does not allow you to disable Siri permanently unless you disable your Mac's SIP because Siri is baked into the core operating system, which is protected by Apple's System Integrity Protection (SIP). In oder to disable Siri completely, you have to first disable SIP, unload Siri and then keep SIP disabled, which will make your computer less secure and more vulnerable to external attacks. As soon as you re-enable SIP Siri will be reactivated too, even if you did disable Siri in your System Preferences.
+
+With SIP enabled and Siri switched off in your System Preferences, the following processes will keep to run in the background of your computer (tested on MacOS Monterey 12.5.1):
+
+<em>siriinferenced
+<br>siriactionsd
+<br>siriknowledged
+<br>com.apple.siri.embeddedspeech
+<br>assistantd
+</em>
+
+When Siri and another helper process (<em>assistantd</em>) become active, they modify files in this location:
+
+    ~/Library/Assistant/
+        
+Our [interactive script](script/kill-siri.sh) sets up a local <em>LaunchAgent</em> to watch this folder location and a global <em>LaunchDaemon</em> that terminates all processes related to Siri as soon as they are detected by our <em>LaunchAgent</em>.
+
+To set up this KillSwitch, open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder) and navigate to your Downloads Folder:
+
+    cd ~/Downloads
+
+Download the interactive script:
+
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/kill-siri.sh
+
+Give the file execute permissions:
+
+    chmod +x kill-siri.sh
+
+Execute the file:
+
+    ./kill-siri.sh
+
+If asked, enter your administrator password and hit [ENTER].
+Your password won't be shown by default.
+
+Alternatively you can also download our non-interactive [speedy install script](script/Speedy-Install_kill-siri.sh):
+
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/Speedy-Install_kill-siri.sh
+
+
+# 03 - RESOURCES
+
+Special thanks to https://privacy.sexy/ and https://github.com/drduh/macOS-Security-and-Privacy-Guide
+Without these two resources, this guide would not exist.
