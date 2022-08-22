@@ -6,7 +6,7 @@ We have noticed that a lot of our colleagues and friends who are working with Ma
 
 This guide is targeted to users who wish to make informed decisions and who want to improve their privacy and security on a Mac. We want everybody to be able to follow this guide, which is why this guide is meant to be educative and a source of learning.
 
-As an important part of this guide we have written several scripts that are meant to guide you through the installation of several helper tools. For advanced users, who want to speed up the whole process, we recommend you use the speedy install scripts. However, if you follow our tutorials and you are a novice user who has never worked with the command line (Terminal.app) before, we recommend you use the normal installation scripts which will guide you through the respective installation. In case you want to uninstall any of these helper tools, please use the provided uninstall scripts.
+As an important part of this guide we have written several scripts that are meant to guide you through the installation of several helper tools. For advanced users, who want to speed up the whole process, we recommend you use the speedy install scripts. However, if you follow our tutorials and you are a novice user who wants to learn and who has never worked with the command line (Terminal.app) before, we recommend you use the normal installation scripts which will guide you through the respective installation. In case you want to uninstall any of these helper tools, please use the provided uninstall scripts.
 
 In that spirit we conclude our introduction with a warning by *drudh*:
 
@@ -18,4 +18,6 @@ In that spirit we conclude our introduction with a warning by *drudh*:
 
 We have tested and developed our code on MacOS Monterey (12.5.1). All installed helper tools run fine on our system. However, you alone are responsible if you break your system. To suggest improvements, please report an issue or request a pull request.
 
-## 01 - MacOS Basics: [Privacy and Security Settings](Privacy-and-Security-Settings)
+## CHAPTERS:
+
+- [01 - Privacy and Security Settings](01_Privacy-and-Security-Settings)
