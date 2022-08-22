@@ -8,7 +8,7 @@
 #
 #   RESOURCES:
 #
-#   Special thanks to https://privacy.sexy/ and https://github.com/drduh/macOS-Security-and-Privacy-Guide#firewall
+#   Special thanks to https://privacy.sexy/ and https://github.com/drduh/macOS-Security-and-Privacy-Guide
 #   Without these two resources, this script would not exist.
 #
 #
@@ -709,7 +709,7 @@ echo "can be a custom system service, that monitors whenever Siri and/or assitan
 echo "become activate and that terminates the respective processes immideately."
 echo " "
 echo "--------------------------------------------------------------------------------"
-echo "             WE HAVE WRITTEN AN ADDITIONAL SCRIPT THAT CAN DO THAT${reset}"
+echo "             ${bold}WE HAVE WRITTEN AN ADDITIONAL SCRIPT THAT CAN DO THAT${reset}"
 echo "--------------------------------------------------------------------------------"
 echo " "
 echo "If you want to terminate all processes related to Siri and assistantd as soon as"
@@ -956,6 +956,35 @@ echo " "
 echo " "
 echo " "
 read -s -p "Review the output of this command and press ${bold}[ENTER]${reset} when you are ready: "
+
+# -------Spotlight Recommendation:--------
+
+echo " "
+echo " "
+echo "                                                               ${bold}/ PLEASE NOTICE /${reset}"
+echo " "
+echo "--------------------------------------------------------------------------------"
+echo " "
+echo "Spotlight Search can be a great feature. However, if you want to use Spotlight"
+echo "Search, we recommend you save sensitive Data on an encrypted external Harddisk"
+echo "and not on the internal Volume."
+echo " "
+echo "To re-enable Spotlight Indexing, run the following command:"
+echo " "
+echo "sudo mdutil -E -i on /Volumes/"
+echo " "
+echo "To exclude your external Volume (with sensitive Data) from the Spotlight Index,"
+echo "execute this command:"
+echo " "
+echo "sudo mdutil -i off -d /Volumes/NAME-OF-YOUR-VOLUME"
+echo " "
+echo "Then open your Spotlight System Preferences and make sure your Volume shows up"
+echo "under ${bold}Spotlight -> Privacy${reset}. If it is not in this list already,"
+echo "add it manually!"
+echo " "
+echo "--------------------------------------------------------------------------------"
+echo " "
+read -s -p "Press ${bold}[ENTER]${reset} to continue: "
 
 break;;
 
