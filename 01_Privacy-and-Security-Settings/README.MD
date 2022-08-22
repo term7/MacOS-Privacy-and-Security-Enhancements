@@ -1,9 +1,9 @@
 # CONTENTS
 
-01 - [Privacy and Security Settings](#01---Privacy-and-Security-Settings)<br>
-02 - [Siri KillSwitch](#02---Siri-KillSwitch)<br>
-03 - [RESOURCES](#03---RESOURCES)<br>
-
+01) [Privacy and Security Settings](#01---Privacy-and-Security-Settings)
+02) [FEATURE LIST](#02---FEATURE-LIST)
+03) [Siri KillSwitch](#03---Siri-KillSwitch)
+04) [RESOURCES](#-RESOURCES)
 
 
 # 01 - Privacy and Security Settings
@@ -36,7 +36,7 @@ Our script can adjust most System Preferences that are enabled by default in Mac
 
 We have written an additional [script](script/kill-siri.sh) that sets up a [02 - Siri KillSwitch](#02---Siri-KillSwitch) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
 
-## FEATURE LIST
+# 02 FEATURE LIST
 
 Our script guides you through the following Privacy and Security Settings:
 
@@ -66,7 +66,7 @@ Our script guides you through the following Privacy and Security Settings:
 07) Setup Firmware Password
 08) Enable FileVault (Full Disk Encryption)
 
-# 02 - Siri KillSwitch
+# 03 - Siri KillSwitch
 
 MacOS does not allow you to disable Siri permanently unless you disable your Mac's SIP because Siri is baked into the core operating system, which is protected by Apple's System Integrity Protection (SIP). In oder to disable Siri completely, you have to first disable SIP, unload Siri and then keep SIP disabled, which will make your computer less secure and more vulnerable to external attacks. As soon as you re-enable SIP Siri will be reactivated too, even if you did disable Siri in your System Preferences.
 
@@ -108,8 +108,11 @@ Alternatively you can also download our non-interactive [speedy install script](
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/Speedy-Install_kill-siri.sh
 
+We also provide a [script](script/UNINSTALL_kill-siri.sh) to uninstall our KillSwitch:
 
-# 03 - RESOURCES
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/UNINSTALL_kill-siri.sh
+
+# RESOURCES
 
 Special thanks to https://privacy.sexy/ and https://github.com/drduh/macOS-Security-and-Privacy-Guide
 Without these two resources, this guide would not exist.
