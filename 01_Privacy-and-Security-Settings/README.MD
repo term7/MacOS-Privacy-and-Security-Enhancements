@@ -29,9 +29,9 @@ Execute the file:
     ./MacOS-Privacy-and-Security-Settings.sh
 
 
-Our script can adjust most System Preferences that are enabled by default in MacOS. You just have to press [Y/y] + [ENTER] to proceed, [N/n] + [ENTER] to skip a specific option, or [C/c] + [ENTER] to cancel. If manual action is required, this script will open the respective Settings Tab for you, so you can implement the changes yourself. If you want to use a faster version of this script with less explanation, you can download our [speedy install script](script/Speedy-Install_MacOS-Privacy-and-Security-Settings.sh) instead:
+Our script can adjust most System Preferences that are enabled by default in MacOS. You just have to press [Y/y] + [ENTER] to proceed, [N/n] + [ENTER] to skip a specific option, or [C/c] + [ENTER] to cancel. If manual action is required, this script will open the respective Settings Tab for you, so you can implement the changes yourself. If you want to use a faster version of this script with less explanation, you can download our [speedy install script](script/SPEEDY-INSTALL_MacOS-Privacy-and-Security-Settings.sh) instead:
 
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/Speedy-Install_MacOS-Privacy-and-Security-Settings.sh
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Privacy-and-Security-Settings.sh
 
 
 We have written an additional [script](script/kill-siri.sh) that sets up a [KillSwitch](#03---Siri-KillSwitch) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
@@ -104,9 +104,9 @@ Execute the file:
 If asked, enter your administrator password and hit [ENTER].
 Your password won't be shown by default.
 
-Alternatively you can also download our non-interactive [speedy install script](script/Speedy-Install_kill-siri.sh):
+Alternatively you can also download our non-interactive [speedy install script](script/SPEEDY-INSTALL_kill-siri.sh):
 
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/Speedy-Install_kill-siri.sh
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_kill-siri.sh
 
 We also provide a [script](script/UNINSTALL_kill-siri.sh) to uninstall our KillSwitch:
 
