@@ -716,7 +716,7 @@ echo "If you want to terminate all processes related to Siri and assistantd as s
 echo "they start on your Mac, run our ${bold}KILL SIRI${reset} script to configure the required"
 echo "${bold}LaunchAgent${reset} and the required ${bold}LauchDaemon${reset}."
 echo " "
-echo "Our installation script is called: 01.2_kill-siri.sh"
+echo "Our installation script is called: kill-siri.sh"
 echo " "
 echo " "
 echo " "
