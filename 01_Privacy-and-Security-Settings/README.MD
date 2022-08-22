@@ -6,7 +6,7 @@
 04) [RESOURCES](#RESOURCES)
 
 
-# 01 - Privacy and Security Settings
+# 01 - MacOS Privacy and Security Settings
 
 
 Our [script](script/01.1_MacOS-Privacy-and-Security-Settings.sh) is an interactive script that guides you through standard MacOS Privacy and Security Settings. It also gives you a brief explanation of each available option, so you can make an informed decision wether or not you want to change it. To run our script, you first have to download it.
