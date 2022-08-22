@@ -34,7 +34,7 @@ Our script can adjust most System Preferences that are enabled by default in Mac
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/Speedy-Install_MacOS-Privacy-and-Security-Settings.sh
 
 
-We have written an additional [script](script/kill-siri.sh) that sets up a [02 - Siri KillSwitch](#02---Siri-KillSwitch) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
+We have written an additional [script](script/kill-siri.sh) that sets up a [KillSwitch](#03---Siri-KillSwitch) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
 
 # 02 - FEATURE LIST
 
