@@ -1,6 +1,6 @@
 # CONTENTS
 
-01) [Privacy and Security Settings](#01---Privacy-and-Security-Settings)
+01) [Privacy and Security Settings](#01---MacOS-Privacy-and-Security-Settings)
 02) [FEATURE LIST](#02---FEATURE-LIST)
 03) [Siri KillSwitch](#03---Siri-KillSwitch)
 04) [RESOURCES](#RESOURCES)
