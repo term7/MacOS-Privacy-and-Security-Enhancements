@@ -1414,7 +1414,7 @@ echo "--------------------------------------------------------------------------
 echo " "
 while true
 do
-read -s -p "To stop storing documents to ${bold}iCLoud${reset} by default, press ${bold}[Y/y]${reset}
+read -s -p "To ${bold}STOP STORING DOCUMENTS TO ICLOUD${reset} by default, press ${bold}[Y/y]${reset}
 Press ${bold}[N/n]${reset} to skip this step, or ${bold}[C/c]${reset} to cancel: " DRIVE
 case $DRIVE in
 
