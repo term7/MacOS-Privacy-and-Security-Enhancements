@@ -18,6 +18,6 @@ In that spirit we conclude our introduction with a warning by *drudh*:
 
 We have tested and developed our code on MacOS Monterey (12.5.1). All installed helper tools run fine on our system. However, you alone are responsible if you break your system. To suggest improvements, please report an issue or request a pull request.
 
-## CHAPTERS:
+## FOLDERS:
 
 - [01 - Privacy and Security Settings](01_Privacy-and-Security-Settings)
