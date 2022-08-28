@@ -152,7 +152,7 @@ GLOBAL_DAEMON=$GLOBAL_DAEMON_FOLDER/$GLOBAL_DAEMON_NAME.plist
 
 echo " "
 echo " "
-echo "---------------------------delete Trigger Location----------------------------"
+echo "----------------------------delete Trigger Location-----------------------------"
 echo " "
 echo "if [ -d \"${TRIGGER_LOCATION}\" ]; then sudo -u $(stat -f '%Su' /dev/console) rm -rf ${TRIGGER_LOCATION} fi"
 
@@ -165,7 +165,7 @@ sleep 1
 # -------Delete Local Helper Daemon:--------
 
 echo " "
-echo "-------------------------unload and delete KillSwitch-------------------------"
+echo "--------------------------unload and delete KillSwitch--------------------------"
 echo " "
 echo "sudo -u $(stat -f '%Su' /dev/console) launchctl unload ${LOCAL_DAEMON}"
 sudo -u $(stat -f '%Su' /dev/console) launchctl unload "$LOCAL_DAEMON"
