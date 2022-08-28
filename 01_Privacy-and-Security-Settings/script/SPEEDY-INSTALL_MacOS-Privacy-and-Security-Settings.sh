@@ -103,7 +103,7 @@ echo " "
 sudo systemsetup -setremoteappleevents off
 break;;
 
-# -------Input [C/c]: Abort:--------
+# -------Input [C/c]: Abort and open Settings (Full Disk Access):--------
 
 [Cc])
 echo " "
@@ -142,7 +142,7 @@ esac;;
 echo " "
 break;;
 
-# -------Input [C/c]: Abort and open Settings (Full Disk Access):--------
+# -------Input [C/c]: Abort:--------
 
 [Cc])
 exit;;
