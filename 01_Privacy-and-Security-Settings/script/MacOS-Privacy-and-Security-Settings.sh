@@ -329,7 +329,7 @@ countdown "00:00:3"
 
 break;;
 
-# -------Input [C/c]: Abort:--------
+# -------Input [C/c]: and open Settings (Full Disk Access)--------
 
 [Cc])
 
@@ -380,7 +380,7 @@ esac;;
 skip
 break;;
 
-# -------Input [C/c]: Abort and open Settings (Full Disk Access):--------
+# -------Input [C/c]: Abort:--------
 
 [Cc])
 abort
@@ -854,7 +854,7 @@ case $SPOT1 in
 
 echo " "
 echo " "
-echo "--------------------------- spotlight preferences---------------------------"
+echo "------------------------------spotlight preferences-----------------------------"
 echo " "
 echo "sudo -u $(stat -f '%Su' /dev/console) open -b com.apple.systempreferences /System/Library/PreferencePanes/Spotlight.prefPane"
 sudo -u $(stat -f '%Su' /dev/console) open -b com.apple.systempreferences /System/Library/PreferencePanes/Spotlight.prefPane
@@ -1047,7 +1047,7 @@ case $IBSC in
 
 echo " "
 echo " "
-echo "--------------------disable Internet Based Spell Correction--------------------"
+echo "---------------------disable Internet Based Spell Correction--------------------"
 echo " "
 echo "defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false"
 defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false
@@ -1163,7 +1163,6 @@ read -s -p "Press ${bold}[ENTER]${reset} when you are ready: "
 
 echo " "
 echo " "
-
 echo "--------------------open Analytics & Improvem... preferences--------------------"
 echo " "
 echo 'sudo -u $(stat -f '%Su' /dev/console) open "x-apple.systempreferences:com.apple.preference.security?Privacy_Diagnostics"'
@@ -1740,7 +1739,7 @@ case $PORT in
 
 echo " "
 echo " "
-echo "-----------------------------disable captive portal----------------------------"
+echo "-----------------------------disable captive portal-----------------------------"
 echo " "
 echo "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control.plist Active -bool false"
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control.plist Active -bool false
@@ -1848,7 +1847,7 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "-----------------------------turn on stealth mode-----------------------------"
+echo "------------------------------turn on stealth mode------------------------------"
 echo " "
 echo "/usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on"
 /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
@@ -1861,21 +1860,21 @@ defaults write com.apple.security.firewall EnableStealthMode -bool true
 sleep 1
 echo " "
 echo " "
-echo "----------prevent automatically allowing connections to signed apps-----------"
+echo "-----------prevent automatically allowing connections to signed apps------------"
 echo " "
 echo "sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool false"
 sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool false
 sleep 1
 echo " "
 echo " "
-echo "-----prevent automatically allowing connections to downloaded signed apps-----"
+echo "------prevent automatically allowing connections to downloaded signed apps------"
 echo " "
 echo "sudo defaults write /Library/Preferences/com.apple.alf allowdownloadsignedenabled -bool false"
 sudo defaults write /Library/Preferences/com.apple.alf allowdownloadsignedenabled -bool false
 sleep 1
 echo " "
 echo " "
-echo "--------------------------------enable firewall-------------------------------"
+echo "---------------------------------enable firewall--------------------------------"
 echo " "
 echo "/usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on"
 /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
@@ -1888,7 +1887,7 @@ defaults write com.apple.security.firewall EnableFirewall -bool true
 sleep 1
 echo " "
 echo " "
-echo "-------------------open system settings firewall preferences------------------"
+echo "--------------------open system settings firewall preferences-------------------"
 echo " "
 echo "osascript -e 'quit app \"System Preferences\"'"
 osascript -e 'quit app "System Preferences"'
@@ -2000,14 +1999,14 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "--------------disable signing in as Guest from the login screen---------------"
+echo "---------------disable signing in as Guest from the login screen----------------"
 echo " "
 echo "sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO"
 sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool NO
 sleep 1
 echo " "
 echo " "
-echo "-----------------disable Guest access to file shares over SMB-----------------"
+echo "------------------disable Guest access to file shares over SMB------------------"
 echo " "
 echo "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server AllowGuestAccess -bool NO"
 echo " "
@@ -2015,14 +2014,14 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 sleep 1
 echo " "
 echo " "
-echo "-----------------disable Guest access to file shares over AF------------------"
+echo "------------------disable Guest access to file shares over AF-------------------"
 echo " "
 echo "sudo defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool NO"
 sudo defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool NO
 sleep 1
 echo " "
 echo " "
-echo "----------------------open system settings Users & Groups---------------------"
+echo "-----------------------open system settings Users & Groups----------------------"
 echo " "
 echo 'sudo -u $(stat -f '%Su' /dev/console) open -b com.apple.systempreferences /System/Library/PreferencePanes/Accounts.prefPane'
 sudo -u $(stat -f '%Su' /dev/console) open -b com.apple.systempreferences /System/Library/PreferencePanes/Accounts.prefPane
@@ -2124,28 +2123,28 @@ echo 'yes' | sudo systemsetup -setremotelogin off
 sleep 1
 echo " "
 echo " "
-echo "------------------------disable insecure TFTP service-------------------------"
+echo "-------------------------disable insecure TFTP service--------------------------"
 echo " "
 echo "sudo launchctl disable 'system/com.apple.tftpd'"
 sudo launchctl disable 'system/com.apple.tftpd'
 sleep 1
 echo " "
 echo " "
-echo "--------------------disable Bonjour multicast advertising---------------------"
+echo "---------------------disable Bonjour multicast advertising----------------------"
 echo " "
 echo "sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool true"
 sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool true
 sleep 1
 echo " "
 echo " "
-echo "-----------------------disable insecure telnet protocol-----------------------"
+echo "------------------------disable insecure telnet protocol------------------------"
 echo " "
 echo "sudo launchctl disable system/com.apple.telnetd"
 sudo launchctl disable system/com.apple.telnetd
 sleep 1
 echo " "
 echo " "
-echo "---------------------------open Sharing Preferences---------------------------"
+echo "----------------------------open Sharing Preferences----------------------------"
 echo " "
 echo "osascript -e 'quit app \"System Preferences\"'"
 osascript -e 'quit app "System Preferences"'
@@ -2238,21 +2237,21 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "------------disable sharing of local printers with other computers------------"
+echo "-------------disable sharing of local printers with other computers-------------"
 echo " "
 echo "cupsctl --no-share-printers"
 cupsctl --no-share-printers
 sleep 1
 echo " "
 echo " "
-echo "-----------disable printing from any address including the internet-----------"
+echo "------------disable printing from any address including the internet------------"
 echo " "
 echo "cupsctl --no-remote-any"
 cupsctl --no-remote-any
 sleep 1
 echo " "
 echo " "
-echo "--------------------disable remote printer administration---------------------"
+echo "---------------------disable remote printer administration----------------------"
 echo " "
 echo "cupsctl --no-remote-admin"
 cupsctl --no-remote-admin
@@ -2352,21 +2351,21 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "------require a password to wake the computer from sleep or screen saver------"
+echo "-------require a password to wake the computer from sleep or screen saver-------"
 echo " "
 echo "sudo defaults write /Library/Preferences/com.apple.screensaver askForPassword -bool true"
 sudo defaults write /Library/Preferences/com.apple.screensaver askForPassword -bool true
 sleep 1
 echo " "
 echo " "
-echo "-------initiate session lock five seconds after screen saver is started-------"
+echo "--------initiate session lock five seconds after screen saver is started--------"
 echo " "
 echo "sudo defaults write /Library/Preferences/com.apple.screensaver 'askForPasswordDelay' -int 5"
 sudo defaults write /Library/Preferences/com.apple.screensaver 'askForPasswordDelay' -int 5
 sleep 1
 echo " "
 echo " "
-echo "-------------------open system settings security preferences------------------"
+echo "--------------------open system settings security preferences-------------------"
 echo " "
 echo "osascript -e 'quit app \"System Preferences\"'"
 osascript -e 'quit app "System Preferences"'
@@ -2478,7 +2477,7 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "----------------------------setup firmware password---------------------------"
+echo "-----------------------------setup firmware password----------------------------"
 echo " "
 echo "sudo firmwarepasswd -setpasswd -setmode command"
 sudo firmwarepasswd -setpasswd -setmode command
@@ -2581,7 +2580,7 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "-----------------------prevent firmware password resets-----------------------"
+echo "------------------------prevent firmware password resets------------------------"
 echo " "
 echo "sudo firmwarepasswd -disable-reset-capability"
 sudo firmwarepasswd -disable-reset-capability
@@ -2677,14 +2676,14 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "-------------------open system settings filevault preferences------------------"
+echo "-------------------open system settings filevault preferences-------------------"
 echo " "
 echo 'sudo -u $(stat -f '%Su' /dev/console) open "x-apple.systempreferences:com.apple.preference.security?FDE"'
 sudo -u $(stat -f '%Su' /dev/console) open "x-apple.systempreferences:com.apple.preference.security?FDE"
 sleep 1
 echo " "
 echo " "
-echo "-------------------------------enable filevault-------------------------------"
+echo "--------------------------------enable filevault--------------------------------"
 echo " "
 echo "sudo fdesetup enable"
 sudo fdesetup enable
