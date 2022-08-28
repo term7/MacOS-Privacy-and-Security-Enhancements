@@ -237,7 +237,7 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "----------------------------setup trigger location----------------------------"
+echo "-----------------------------setup trigger location-----------------------------"
 echo " "
 echo "open /Users/Shared"
 
@@ -265,7 +265,7 @@ sudo chmod +X "$TRIGGER_LOCATION"
 
 echo " "
 echo " "
-echo "------------------------------create LaunchAgent------------------------------"
+echo "-------------------------------create LaunchAgent-------------------------------"
 echo " "
 echo "${LOCAL_DAEMON}"
 sleep 1
@@ -295,7 +295,7 @@ EOF
 
 echo " "
 echo " "
-echo "-----------------------------create LaunchDaemon------------------------------"
+echo "------------------------------create LaunchDaemon-------------------------------"
 echo " "
 echo "${GLOBAL_DAEMON}"
 sleep 1
@@ -325,7 +325,7 @@ EOF
 
 echo " "
 echo " "
-echo "------------------------setup ownership & permissions-------------------------"
+echo "-------------------------setup ownership & permissions--------------------------"
 echo " "
 echo "sudo chown root:wheel ${LOCAL_DAEMON}"
 sleep 1
@@ -351,7 +351,7 @@ sudo chmod 644 "$GLOBAL_DAEMON"
 
 echo " "
 echo " "
-echo "------------------------------open watch folder-------------------------------"
+echo "-------------------------------open watch folder--------------------------------"
 echo " "
 
 sudo -u $(stat -f '%Su' /dev/console) open /Users/$(stat -f '%Su' /dev/console)/Library/Assistant
@@ -363,7 +363,7 @@ sleep 3
 
 echo " "
 echo " "
-echo "---------------------------------load daemons---------------------------------"
+echo "----------------------------------load daemons----------------------------------"
 echo " "
 
 echo "sudo -u $(stat -f '%Su' /dev/console) launchctl load ${LOCAL_DAEMON}"
@@ -380,7 +380,7 @@ sudo launchctl load "$GLOBAL_DAEMON"
 
 echo " "
 echo " "
-echo "-----------------------------trigger daemons once-----------------------------"
+echo "------------------------------trigger daemons once------------------------------"
 echo " "
 
 echo "sudo -u $(stat -f '%Su' /dev/console) touch /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/.tmp"
@@ -431,7 +431,7 @@ done
 
 
 echo " "
-echo "-----------------------open LaunchAgent in Text Editor------------------------"
+echo "------------------------open LaunchAgent in Text Editor-------------------------"
 echo " "
 echo "open -a TextEdit ${LOCAL_DAEMON}"
 open -a TextEdit "$LOCAL_DAEMON"
@@ -458,7 +458,7 @@ echo " "
 countdown "00:00:5"
 
 echo " "
-echo "-----------------------open LaunchDaemon in Text Editor-----------------------"
+echo "------------------------open LaunchDaemon in Text Editor------------------------"
 echo " "
 echo "open -a TextEdit ${GLOBAL_DAEMON}"
 open -a TextEdit "$GLOBAL_DAEMON"
