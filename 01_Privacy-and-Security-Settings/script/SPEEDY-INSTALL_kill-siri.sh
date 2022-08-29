@@ -32,14 +32,16 @@ TRIGGER_COMMAND="touch $TRIGGER; rm $TRIGGER; rm -f -- ~/Library/Assistant/SiriA
 KILLALL_COMMAND="if pgrep siriinferenced; then kill -9 \$(pgrep siriinferenced); fi; if pgrep siriactionsd; then kill -9 \$(pgrep siriactionsd); fi; if pgrep siriknowledged; then kill -9 \$(pgrep siriknowledged); fi; if pgrep assistantd; then kill -9 \$(pgrep assistantd); fi; if pgrep com.apple.siri.embeddedspeech; then kill -9 \$(pgrep com.apple.siri.embeddedspeech); fi"
 
 if [ ! -d "$ENHANCEMENTS" ]; then
-    mkdir $ENHANCEMENTS
+    sudo -u $(stat -f '%Su' /dev/console) mkdir $ENHANCEMENTS
 fi
 
 if [ ! -d "$TRIGGER_LOCATION" ]; then
-    mkdir $TRIGGER_LOCATION
+    sudo -u $(stat -f '%Su' /dev/console) mkdir $TRIGGER_LOCATION
 fi
 
-sudo chown -R $(stat -f '%Su' /dev/console):wheel "$ENHANCEMENTS"
+sudo chown $(stat -f '%Su' /dev/console):wheel "$ENHANCEMENTS"
+sudo chown $(stat -f '%Su' /dev/console):wheel "$TRIGGER_LOCATION"
+
 sudo chmod +X "$TRIGGER_LOCATION"
 
 # -------Local Helper Daemon:--------
