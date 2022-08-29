@@ -246,10 +246,10 @@ open /Users/Shared
 sleep 3
 
 echo " "
-echo "if [ ! -d \"${ENHANCEMENTS}\" ]; then mkdir ${ENHANCEMENTS} fi"
+echo "if [ ! -d \"${ENHANCEMENTS}\" ]; then sudo -u $(stat -f '%Su' /dev/console) mkdir ${ENHANCEMENTS} fi"
 
 if [ ! -d "$ENHANCEMENTS" ]; then
-    mkdir $ENHANCEMENTS
+    sudo -u $(stat -f '%Su' /dev/console) mkdir $ENHANCEMENTS
 fi
 
 echo "open -R ${ENHANCEMENTS}"
@@ -257,16 +257,19 @@ open -R $ENHANCEMENTS
 sleep 1
 
 echo " "
-echo "if [ ! -d \"${TRIGGER_LOCATION}\" ]; then mkdir ${TRIGGER_LOCATION} fi"
+echo "if [ ! -d \"${TRIGGER_LOCATION}\" ]; then sudo -u $(stat -f '%Su' /dev/console) mkdir ${TRIGGER_LOCATION} fi"
 
 if [ ! -d "$TRIGGER_LOCATION" ]; then
-    mkdir $TRIGGER_LOCATION
+    sudo -u $(stat -f '%Su' /dev/console) mkdir $TRIGGER_LOCATION
 fi
 
 sleep 1
-echo "sudo chown -R $(stat -f '%Su' /dev/console):wheel ${ENHANCEMENTS}"
+echo "sudo chown $(stat -f '%Su' /dev/console):wheel ${ENHANCEMENTS}"
+sudo chown $(stat -f '%Su' /dev/console):wheel "$ENHANCEMENTS"
 
-sudo chown -R $(stat -f '%Su' /dev/console):wheel "$ENHANCEMENTS"
+sleep 1
+echo "sudo chown $(stat -f '%Su' /dev/console):wheel ${TRIGGER_LOCATION}"
+sudo chown $(stat -f '%Su' /dev/console):wheel "$TRIGGER_LOCATION"
 
 sleep 1
 echo "sudo chmod +X ${TRIGGER_LOCATION}"
