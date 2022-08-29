@@ -196,7 +196,8 @@ case $KILLSIRI in
 # -------Variables:--------
 
 WATCH_LOCATION=~/Library/Assistant/
-TRIGGER_LOCATION=/Users/Shared/trigger
+ENHANCEMENTS=/Users/Shared/Enhancements
+TRIGGER_LOCATION=$ENHANCEMENTS/trigger
 TRIGGER=$TRIGGER_LOCATION/.trigger
 
 LOCAL_DAEMON_FOLDER=/Library/LaunchAgents
@@ -245,6 +246,17 @@ open /Users/Shared
 sleep 3
 
 echo " "
+echo "if [ ! -d \"${ENHANCEMENTS}\" ]; then mkdir ${ENHANCEMENTS} fi"
+
+if [ ! -d "$ENHANCEMENTS" ]; then
+    mkdir $ENHANCEMENTS
+fi
+
+echo "open -R ${ENHANCEMENTS}"
+open -R $ENHANCEMENTS
+sleep 1
+
+echo " "
 echo "if [ ! -d \"${TRIGGER_LOCATION}\" ]; then mkdir ${TRIGGER_LOCATION} fi"
 
 if [ ! -d "$TRIGGER_LOCATION" ]; then
@@ -252,9 +264,9 @@ if [ ! -d "$TRIGGER_LOCATION" ]; then
 fi
 
 sleep 1
-echo "sudo chown $(stat -f '%Su' /dev/console):wheel ${TRIGGER_LOCATION}"
+echo "sudo chown -R $(stat -f '%Su' /dev/console):wheel ${ENHANCEMENTS}"
 
-sudo chown $(stat -f '%Su' /dev/console):wheel "$TRIGGER_LOCATION"
+sudo chown -R $(stat -f '%Su' /dev/console):wheel "$ENHANCEMENTS"
 
 sleep 1
 echo "sudo chmod +X ${TRIGGER_LOCATION}"
