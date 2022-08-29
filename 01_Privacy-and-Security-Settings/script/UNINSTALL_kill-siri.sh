@@ -136,7 +136,8 @@ case $DELETE in
 
 # -------Variables:--------
 
-TRIGGER_LOCATION=/Users/Shared/trigger
+ENHANCEMENTS=/Users/Shared/Enhancements
+TRIGGER_LOCATION=$ENHANCEMENTS/trigger
 TRIGGER=$TRIGGER_LOCATION/.trigger
 
 LOCAL_DAEMON_FOLDER=/Library/LaunchAgents
