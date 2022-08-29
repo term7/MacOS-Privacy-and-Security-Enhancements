@@ -16,7 +16,8 @@
 # -------Variables:--------
 
 WATCH_LOCATION=~/Library/Assistant/
-TRIGGER_LOCATION=/Users/Shared/trigger
+ENHANCEMENTS=/Users/Shared/Enhancements
+TRIGGER_LOCATION=$ENHANCEMENTS/trigger
 TRIGGER=$TRIGGER_LOCATION/.trigger
 
 LOCAL_DAEMON_FOLDER=/Library/LaunchAgents
@@ -30,11 +31,15 @@ GLOBAL_DAEMON=$GLOBAL_DAEMON_FOLDER/$GLOBAL_DAEMON_NAME.plist
 TRIGGER_COMMAND="touch $TRIGGER; rm $TRIGGER; rm -f -- ~/Library/Assistant/SiriAnalytics.db; rm -f -- ~/Library/Assistant/SiriAnalytics.db-shm; rm -f -- ~/Library/Assistant/SiriAnalytics.db-wal; rm -f -- ~/Library/Assistant/assistantdDidLaunch; rm -f -- ~/Library/Assistant/session_did_finish_timestamp; if [ -d ~/Library/Assistant/SiriVocabulary ]; then rm -rf ~/Library/Assistant/SiriVocabulary; fi; if [ -d ~/Library/Assistant/CustomVocabulary ]; then rm -rf ~/Library/Assistant/CustomVocabulary; fi"
 KILLALL_COMMAND="if pgrep siriinferenced; then kill -9 \$(pgrep siriinferenced); fi; if pgrep siriactionsd; then kill -9 \$(pgrep siriactionsd); fi; if pgrep siriknowledged; then kill -9 \$(pgrep siriknowledged); fi; if pgrep assistantd; then kill -9 \$(pgrep assistantd); fi; if pgrep com.apple.siri.embeddedspeech; then kill -9 \$(pgrep com.apple.siri.embeddedspeech); fi"
 
+if [ ! -d "$ENHANCEMENTS" ]; then
+    mkdir $ENHANCEMENTS
+fi
+
 if [ ! -d "$TRIGGER_LOCATION" ]; then
     mkdir $TRIGGER_LOCATION
 fi
 
-sudo chown $(stat -f '%Su' /dev/console):wheel "$TRIGGER_LOCATION"
+sudo chown -R $(stat -f '%Su' /dev/console):wheel "$ENHANCEMENTS"
 sudo chmod +X "$TRIGGER_LOCATION"
 
 # -------Local Helper Daemon:--------
@@ -85,7 +90,6 @@ EOF
 
 # -------Ownership, Permission:--------
 
-
 sudo chown root:wheel "$LOCAL_DAEMON"
 sudo chmod 644 "$LOCAL_DAEMON"
 sudo chown root:wheel "$GLOBAL_DAEMON"
@@ -97,7 +101,6 @@ sudo -u $(stat -f '%Su' /dev/console) launchctl load "$LOCAL_DAEMON"
 sudo launchctl load "$GLOBAL_DAEMON"
 
 # -------Trigger Daemons:--------
-
 
 sudo -u $(stat -f '%Su' /dev/console) touch /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/.tmp
 sudo -u $(stat -f '%Su' /dev/console) rm /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/.tmp
