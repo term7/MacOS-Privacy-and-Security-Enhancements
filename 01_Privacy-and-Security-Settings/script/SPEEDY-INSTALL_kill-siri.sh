@@ -40,9 +40,9 @@ if [ ! -d "$TRIGGER_LOCATION" ]; then
 fi
 
 sudo chown $(stat -f '%Su' /dev/console):wheel "$ENHANCEMENTS"
-sudo chown $(stat -f '%Su' /dev/console):wheel "$TRIGGER_LOCATION"
+sudo chown $(stat -f '%Su' /dev/console):staff "$TRIGGER_LOCATION"
 
-sudo chmod +X "$TRIGGER_LOCATION"
+sudo chmod 775 "$TRIGGER_LOCATION"
 
 # -------Local Helper Daemon:--------
 
