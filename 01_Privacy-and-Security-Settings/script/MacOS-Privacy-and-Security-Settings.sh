@@ -199,7 +199,7 @@ echo "the required System Settings for you and instruct you what to do next."
 echo " "
 echo "--------------------------------------------------------------------------------"
 echo " "
-echo "                THIS SCRIPT HAS BEEN TESTED ON MACOS MONTEREY."${reset}
+echo "                ${bold}THIS SCRIPT HAS BEEN TESTED ON MACOS MONTEREY."${reset}
 echo " "
 echo "--------------------------------------------------------------------------------"
 echo " "
