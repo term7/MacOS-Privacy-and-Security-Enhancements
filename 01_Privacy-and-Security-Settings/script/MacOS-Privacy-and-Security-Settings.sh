@@ -3,7 +3,7 @@
 #   MacOS-Privacy-and-Security-Settings.sh
 #   term7 / 11.08.2022
 #
-#   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time - yet we have written this script with users in mind that are not yet used to the command line.
+#   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time. After all it is always possible to read the script - yet we have written this script with users in mind that are not yet used to the command line. After completing this script it is possible to scroll up and read the output of the whole script, including the commands that would otherwise be invisible in the Terminal window.
 #
 #
 #   RESOURCES:
@@ -716,7 +716,7 @@ echo "If you want to terminate all processes related to Siri and assistantd as s
 echo "they start on your Mac, run our ${bold}KILL SIRI${reset} script to configure the required"
 echo "${bold}LaunchAgent${reset} and the required ${bold}LauchDaemon${reset}."
 echo " "
-echo "Our installation script is called: kill-siri.sh"
+echo "Our installation script is called: ${bold}kill-siri.sh${reset}"
 echo " "
 echo " "
 echo " "
@@ -792,7 +792,11 @@ echo " "
 echo " "
 echo " "
 echo " "
-read -s -p "Please ${bold}REVIEW YOUR SIRI PREFERENCES${reset} and press ${bold}[ENTER]${reset} when you are ready: "
+echo " "
+echo " "
+read -s -p "Please ${bold}REVIEW YOUR SIRI PREFERENCES${reset}. Also click on ${bold}Siri Suggestions & Privacy${reset}, 
+double-check the settings of every app in the list and untick each option!
+Press ${bold}[ENTER]${reset} when you are ready: "
 
 break;;
 
@@ -911,18 +915,18 @@ echo "--------------------------------------------------------------------------
 echo " "
 echo "Spotlight Indexing is a function that keeps track of where all your documents"
 echo "and data are in order to find them more quickly. It can use a lot of CPU and be"
-echo "intensive, but is not necessarily a privacy issue."
+echo "resource intensive, but it is not necessarily a privacy issue."
+echo " "
+echo "--------------------------------------------------------------------------------"
+echo " "
+echo "${bold}PLEASE NOTICE: if you disable Spotlight Indexing you won't be able to use your"
+echo "Mac's built-in search function anymore."${reset}
+echo " "
+echo "--------------------------------------------------------------------------------"
+echo " "
+echo "The key combination ${bold}⌘ + [SPACE]${reset} (Spotlight Search) won't return any result!"
 echo " "
 echo "Do you want to disable Spotlight Indexing?"
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
 echo " "
 echo " "
 echo "--------------------------------------------------------------------------------"
@@ -971,7 +975,7 @@ echo "and not on the internal Volume."
 echo " "
 echo "To re-enable Spotlight Indexing, run the following command:"
 echo " "
-echo "sudo mdutil -E -i on /Volumes/"
+echo "sudo mdutil -i on -d /"
 echo " "
 echo "To exclude your external Volume (with sensitive Data) from the Spotlight Index,"
 echo "execute this command:"
@@ -2436,10 +2440,10 @@ echo "Programmer."
 echo " "
 echo "Do you want to setup a Firmware Password as an additional security layer?"
 echo " "
+echo "--------------------------------------------------------------------------------"
 echo " "
-echo " "
-echo " "
-echo " "
+echo "${bold}THIS IS ONLY RELEVANT FOR INTEL BASED MACS. NEWER ARM64 MACS WITH AN M1 SECURUTY"
+echo "CHIP (SILICON) DO NOT SUPPORT A FIRMWARE PASSWORD ANYMORE.${reset}"
 echo " "
 echo "--------------------------------------------------------------------------------"
 echo " "
