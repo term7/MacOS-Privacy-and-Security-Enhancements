@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-#   MacOS-Ventura_Privacy-and-Security-Settings.sh
-#   term7 / 30.11.2022
+#   MacOS-Privacy-and-Security-Settings.sh
+#   term7 / 30.10.2022
 #
 #   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time. After all it is always possible to read the script - yet we have written this script with users in mind that are not yet used to the command line. After completing this script it is possible to scroll up and read the output of the whole script, including the commands that would otherwise be invisible in the Terminal window.
 #
@@ -2714,6 +2714,64 @@ invalid
 esac
 done
 
+# -------About LockDown Mode:--------
+
+echo " "
+echo "                                               ${bold}/ MACOS SECURITY / LOCKDOWN MODE/${reset}"
+echo " "
+echo "--------------------------------------------------------------------------------"
+echo " "
+echo "With MacOS Ventura, Apple introduced ${bold}LOCKDOWN MODE${reset}."
+echo " "
+echo "According to Apple, ${bold}LOCKDOWN MODE${reset} is an optional, extreme protection that is"
+echo "designed for the very few individuals who, because of who they are or what they"
+echo "do, might be personally targeted by some of the most sophisticated digital"
+echo "threats. Most people are never targeted by attacks of this nature."
+echo " "
+echo "When ${bold}LOCKDOWN MODE${reset} is enabled, your device will not function like it typically"
+echo "does. To reduce the attack surface that potentially could be exploited by highly"
+echo "targeted mercenary spyware, certain apps, websites, and features are striclty"
+echo "limited for security and some experiences might not be available at all."
+echo " "
+echo "https://support.apple.com/en-us/HT212650"
+echo " "
+echo " "
+echo "--------------------------------------------------------------------------------"
+echo " "
+read -s -p "When you press ${bold}[ENTER]${reset} we will open the appropriate System Setting for you.
+Please finish this script first if you decide to enable ${bold}LOCKDOWN MODE${reset}, because
+enabeling it requires that you reboot your Mac: "
+
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo -----------------"open system settings lockdown mode preferences-----------------"
+echo " "
+echo 'sudo -u $(stat -f '%Su' /dev/console) open "x-apple.systempreferences:com.apple.preference.security?Security"'
+sudo -u $(stat -f '%Su' /dev/console) open "x-apple.systempreferences:com.apple.preference.security?Security" 
+sleep 1
+
 echo " "
 echo " "
 echo " "
@@ -2739,6 +2797,8 @@ echo " "
 echo " "
 echo " "
 countdown "00:00:7"
+
+# -------Cleanup:--------
 
 echo " "
 echo " "
