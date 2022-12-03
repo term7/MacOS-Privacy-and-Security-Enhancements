@@ -52,31 +52,31 @@ Our script guides you through the following Privacy and Security Settings:
 
 ### Privacy
 
-01) Turn off Apple Remote Events
-02) Disable Apple Remote Management Service
-03) Disable Siri
-04) Adjust Spotlight Search Settings
-05) Disable Spotlight Search Indexing
-06) Disable Internet Based Spell Correction
-07) Turn off Apple Analytics and Targeted Apple Advertising
-08) Turn off Location Services
-09) Configure iCLoud Settings
-10) Stop storing documents to iCloud by default
-11) Turn off Airdrop File Sharing
-12) Hide Recent Items in Dock
+01) <i>Turn off Apple Remote Events</i>
+02) <i>Disable Apple Remote Management Service</i>
+03) <i>Disable Siri</i>
+04) <i>Adjust Spotlight Search Settings</i>
+05) <i>Disable Spotlight Search Indexing</i>
+06) <i>Disable Internet Based Spell Correction</i>
+07) <i>Turn off Apple Analytics and Targeted Apple Advertising</i>
+08) <i>Turn off Location Services</i>
+09) <i>Configure iCLoud Settings</i>
+10) <i>Stop storing documents to iCloud by default</i>
+11) <i>Turn off Airdrop File Sharing</i>
+12) <i>Hide Recent Items in Dock</i>
 
 ### Security
 
-01) Disable Captive Portal
-02) Enable and configure basic Application Layer Firewall
-03) Disable Guest Accounts
-04) Disable Unauthorised Connections (SSH, SFTP, TFTP, Bonjour Multicast, Telnet)
-05) Disable Printer Sharing (CUPS Server)
-06) Setup Screen Saver Session Lock
-07) Setup Firmware Password (relevant only for Intel based Macs)
-08) Prevent Firmware Password Resets (relevant only for Intel based Macs)
-09) Enable FileVault (Full Disk Encryption)
-10) Lockdown Mode (MacOS Ventura or newer)
+01) <i>Disable Captive Portal</i>
+02) <i>Enable and configure basic Application Layer Firewall</i>
+03) <i>Disable Guest Accounts</i>
+04) <i>Disable Unauthorised Connections (SSH, SFTP, TFTP, Bonjour Multicast, Telnet)</i>
+05) <i>Disable Printer Sharing (CUPS Server)</i>
+06) <i>Setup Screen Saver Session Lock</i>
+07) <i>Setup Firmware Password (relevant only for Intel based Macs)</i></i>
+08) <i>Prevent Firmware Password Resets (relevant only for Intel based Macs)</i>
+09) <i>Enable FileVault (Full Disk Encryption)</i>
+10) <i>Lockdown Mode (MacOS Ventura or newer)</i>
 
 # 03 - Siri KillSwitch
 
