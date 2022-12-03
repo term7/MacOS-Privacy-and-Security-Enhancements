@@ -73,8 +73,9 @@ Our script guides you through the following Privacy and Security Settings:
 04) Disable Unauthorised Connections (SSH, SFTP, TFTP, Bonjour Multicast, Telnet)
 05) Disable Printer Sharing (CUPS Server)
 06) Setup Screen Saver Session Lock
-07) Setup Firmware Password
-08) Enable FileVault (Full Disk Encryption)
+07) Setup Firmware Password (relevant only for Intel based Macs)
+08) Prevent Firmware Password Resets (relevant only for Intel based Macs)
+09) Enable FileVault (Full Disk Encryption)
 
 # 03 - Siri KillSwitch
 
@@ -125,5 +126,12 @@ We also provide a [script](script/UNINSTALL_kill-siri.sh) to uninstall our KillS
 
 # RESOURCES
 
-Special thanks to https://privacy.sexy/ and https://github.com/drduh/macOS-Security-and-Privacy-Guide
+Special thanks to https://privacy.sexy/ and https://github.com/drduh/macOS-Security-and-Privacy-Guide.<br>
 Without these two resources, this guide would not exist.
+
+Furthermore it is quite difficult to find documentation by Apple on how to open specific System Settings Tabs via the commandline. These resources were very helpful:
+
+https://github.com/piarasj/piarasj.github.io/blob/master/ventura_settings.md#ventura-system-settings<br>
+https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Ventura.md<br>
+https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Monterey.md
+
