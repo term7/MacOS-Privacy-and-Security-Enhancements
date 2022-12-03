@@ -9,33 +9,41 @@
 # 01 - MacOS Privacy and Security Settings
 
 
-Our [script](script/01.1_MacOS-Privacy-and-Security-Settings.sh) is an interactive script that guides you through standard MacOS Privacy and Security Settings. It also gives you a brief explanation of each available option, so you can make an informed decision wether or not you want to change it. Please note that at the time we do not have access to the latest ARM64 Silicon Mac with M1 Security Chip. We wrote and tested this script on an Intel-based Mac running MacOS Monterey. To run our script, you first have to download it.
+Our [script](script/01.1_MacOS-Privacy-and-Security-Settings.sh) is an interactive script that guides you through standard MacOS Privacy and Security Settings. It also gives you a brief explanation of each available option, so you can make an informed decision wether or not you want to change it. Please note that at the time we do not have access to the latest ARM64 Silicon Mac with M1 Security Chip. We wrote and tested this script on an Intel-based Mac running MacOS Monterey and MacOS Ventura. To run our script, you first have to download it.
 
 Open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder).
 In your Terminal, navigate to your Downloads Folder:
 
     cd ~/Downloads
 
-Download the script:
+Download the script for MacOS Monterey or MacOS Ventura:
 
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Privacy-and-Security-Settings.sh
+    # MacOS Monterey:
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Monterey_Privacy-and-Security-Settings.sh
+    # MacOS Ventura:
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Ventura_Privacy-and-Security-Settings.sh
 
-Give the file execute permissions:
+Give the respective file execute permissions:
 
-    chmod +x MacOS-Privacy-and-Security-Settings.sh
+    chmod +x MacOS-Monterey_Privacy-and-Security-Settings.sh
+    chmod +x MacOS-Ventura_Privacy-and-Security-Settings.sh
 
-Execute the file:
+Execute the script (depending wether you are on MacOS Monterey or MacOS Ventura):
 
-    ./MacOS-Privacy-and-Security-Settings.sh
+    ./MacOS-Monterey_Privacy-and-Security-Settings.sh
+    ./MacOS-Ventura_Privacy-and-Security-Settings.sh
 
 
 Our script can adjust most System Preferences that are enabled by default in MacOS. You just have to press [Y/y] + [ENTER] to proceed, [N/n] + [ENTER] to skip a specific option, or [C/c] + [ENTER] to cancel. If manual action is required, this script will open the respective Settings Tab for you, so you can implement the changes yourself. If you want to use a faster version of this script with less explanation (which is useful if you want to skip quickly through the options), you can download our [speedy install script](script/SPEEDY-INSTALL_MacOS-Privacy-and-Security-Settings.sh) instead:
 
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Privacy-and-Security-Settings.sh
+    # MacOS Monterey:
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh
+    # MacOS Ventura:
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh
 
 We have written an additional [script](script/kill-siri.sh) that sets up a [KillSwitch](#03---Siri-KillSwitch) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
 
-# 02 - FEATURE LIST
+# 02 - SETTINGS FEATURE LIST
 
 Our script guides you through the following Privacy and Security Settings:
 
@@ -69,11 +77,12 @@ Our script guides you through the following Privacy and Security Settings:
 
 Apple does not allow you to disable Siri permanently unless you disable your Mac's SIP, because since MacOS BigSur Siri is baked into the core operating system - which is protected by Apple's System Integrity Protection (SIP). In oder to disable Siri completely, you have to first disable SIP, unload Siri and then keep SIP disabled, which will make your computer less secure and more vulnerable to external attacks. As soon as you re-enable SIP Siri will be reactivated too, even if you did disable Siri in your System Preferences.
 
-With SIP enabled and Siri switched off in your System Preferences, the following processes will keep to run in the background of your computer (tested on MacOS Monterey 12.5.1):
+With SIP enabled and Siri switched off in your System Preferences, the following processes will keep to run in the background of your computer (tested on MacOS Monterey 12.5.1 and MacOS Ventura 13.0.1):
 
 <em>siriinferenced
 <br>siriactionsd
 <br>siriknowledged
+<br>sirittsd
 <br>com.apple.siri.embeddedspeech
 <br>assistantd
 </em>
