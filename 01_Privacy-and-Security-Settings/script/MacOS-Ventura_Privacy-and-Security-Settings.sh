@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#   MacOS-Privacy-and-Security-Settings.sh
+#   MacOS-Ventura_Privacy-and-Security-Settings.sh
 #   term7 / 30.11.2022
 #
 #   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time. After all it is always possible to read the script - yet we have written this script with users in mind that are not yet used to the command line. After completing this script it is possible to scroll up and read the output of the whole script, including the commands that would otherwise be invisible in the Terminal window.
