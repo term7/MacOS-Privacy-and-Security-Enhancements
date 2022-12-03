@@ -3,7 +3,7 @@
 #   kill-siri.sh
 #   term7 / 19.08.2022
 #
-#   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time - yet we have written this script with users in mind that are not yet used to the command line.
+#   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time. After all it is always possible to read the script - yet we have written this script with users in mind that are not yet used to the command line. After completing this script it is possible to scroll up and read the output of the whole script, including the commands that would otherwise be invisible in the Terminal window.
 #
 ##   MIT License
 #   Copyright (c) 2022 term7
@@ -209,7 +209,7 @@ GLOBAL_DAEMON_NAME=info.term7.killall.siri
 GLOBAL_DAEMON=$GLOBAL_DAEMON_FOLDER/$GLOBAL_DAEMON_NAME.plist
 
 TRIGGER_COMMAND="touch $TRIGGER; rm $TRIGGER; rm -f -- ~/Library/Assistant/SiriAnalytics.db; rm -f -- ~/Library/Assistant/SiriAnalytics.db-shm; rm -f -- ~/Library/Assistant/SiriAnalytics.db-wal; rm -f -- ~/Library/Assistant/assistantdDidLaunch; rm -f -- ~/Library/Assistant/session_did_finish_timestamp; if [ -d ~/Library/Assistant/SiriVocabulary ]; then rm -rf ~/Library/Assistant/SiriVocabulary; fi; if [ -d ~/Library/Assistant/CustomVocabulary ]; then rm -rf ~/Library/Assistant/CustomVocabulary; fi"
-KILLALL_COMMAND="if pgrep siriinferenced; then kill -9 \$(pgrep siriinferenced); fi; if pgrep siriactionsd; then kill -9 \$(pgrep siriactionsd); fi; if pgrep siriknowledged; then kill -9 \$(pgrep siriknowledged); fi; if pgrep assistantd; then kill -9 \$(pgrep assistantd); fi; if pgrep com.apple.siri.embeddedspeech; then kill -9 \$(pgrep com.apple.siri.embeddedspeech); fi"
+KILLALL_COMMAND="if pgrep siriinferenced; then kill -9 \$(pgrep siriinferenced); fi; if pgrep siriactionsd; then kill -9 \$(pgrep siriactionsd); fi; if pgrep siriknowledged; then kill -9 \$(pgrep siriknowledged); fi; if pgrep sirittsd; then kill -9 \$(pgrep sirittsd); fi; if pgrep assistantd; then kill -9 \$(pgrep assistantd); fi; if pgrep com.apple.siri.embeddedspeech; then kill -9 \$(pgrep com.apple.siri.embeddedspeech); fi"
 
 
 # -------Trigger Location:--------
