@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#   SPEEDY-INSTALL_MacOS-Ventura-Privacy-and-Security-Settings.sh
+#   SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh
 #   term7 / 30.11.2022
 #
 #   RESOURCES:
