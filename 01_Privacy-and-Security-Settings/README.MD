@@ -76,6 +76,7 @@ Our script guides you through the following Privacy and Security Settings:
 07) Setup Firmware Password (relevant only for Intel based Macs)
 08) Prevent Firmware Password Resets (relevant only for Intel based Macs)
 09) Enable FileVault (Full Disk Encryption)
+10) Lockdown Mode (MacOS Ventura or newer)
 
 # 03 - Siri KillSwitch
 
