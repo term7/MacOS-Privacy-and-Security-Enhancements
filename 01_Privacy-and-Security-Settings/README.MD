@@ -11,8 +11,7 @@
 
 Our scripts for [MacOS Ventura](script/MacOS-Ventura_Privacy-and-Security-Settings.sh) and for [MacOS Monterey](script/MacOS-Monterey_Privacy-and-Security-Settings.sh) are interactive scripts that guide you through all relevant standard MacOS Privacy and Security Settings. The scripts also give you a brief explanation of each available option, so you can make an informed decision wether or not you want to change the respective system setting. Please note that at the time we do not have access to the latest ARM64 Silicon Mac with M1 Security Chip. We wrote and tested this script on an Intel-based Mac running MacOS Monterey and MacOS Ventura. To run our script, you first have to download it.
 
-BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! 
-VERIFY ITS CONTENT TO MAKE SURE IT IS SAFE TO EXECUTE.
+BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.
 
 Open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder).
 In your Terminal, navigate to your Downloads Folder:
