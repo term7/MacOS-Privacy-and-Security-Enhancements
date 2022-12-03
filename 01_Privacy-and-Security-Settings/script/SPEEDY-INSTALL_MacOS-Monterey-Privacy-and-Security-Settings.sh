@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#   SPEEDY-INSTALL_MacOS-Privacy-and-Security-Settings.sh
+#   SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh
 #   term7 / 20.08.2022
 #
 #   RESOURCES:
