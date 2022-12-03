@@ -21,3 +21,4 @@ We have tested and developed our code on MacOS Ventura (13.0.1). All installed h
 ## FOLDERS:
 
 - [01 - Privacy and Security Settings](01_Privacy-and-Security-Settings)
+- [02 - MacPorts](01_MacPorts)
