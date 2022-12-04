@@ -43,7 +43,7 @@ If you want to uninstall MacPorts from your system, please download and execute 
 
 # 03 - Automatic Updates
 
-Our installation script can set up automatic updates for you. If you decide to install everything manually, i.e. if you decide to follow the instructions of the [MacPorts project](https://www.macports.org/) to install MacPorts on your system, this is how our update mechanism works:
+Our installation script can set up automatic updates for you. If you decide to install everything manually, i.e. if you decide to follow the instructions of the [MacPorts project](https://www.macports.org/install.php) to install MacPorts on your system, this is how our update mechanism works:
 
 A [LaunchDaemon](macports_updater/info.term7.macports.updater.plist) runs a [script](macports_updater/macports_updater.sh) with the required MacPorts commands 5min after every reboot.
 
