@@ -2,8 +2,9 @@
 
 01) [About MacPorts](#01---About-MacPorts)
 02) [Installation](#02---Installation)
-03) [Usage](#03---Usage)
-04) [Resources](#03---Resources)
+03) [Usage](#03---Automatic-Updates)
+04) [Usage](#03---Usage)
+05) [Resources](#03---Resources)
 
 
 # 01 - About MacPorts
@@ -40,7 +41,15 @@ If you want to uninstall MacPorts from your system, please download and execute 
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/02_MacPorts/script/UNINSTALL_MacPorts.sh
 
-# 03 - Usage
+# 03 - Automatic Updates
+
+Our installation script can set up automatic updates for you. If you decide to install everything manually, this is how our update mechanism works:
+
+A [LaunchDaemon](System Service/info.term7.macports.updater.plist) runs a [script](System Service/macports_updater.sh) with the required MacPorts commands 5min after every reboot.
+
+
+
+# 04 - Usage
 
 If you do not want to use our System Service to update MacPorts automatically, you can also update and maintain your MacPorts installation manually. To do so, open a Terminal Window to type commands. You can also search for specific packages, look up additional info, select variants, etc. We list here only a few commands as examples. Please refer to the MacPorts documentation for a full manual: 
 
@@ -62,6 +71,6 @@ Unclutter your MacPorts Installation:
     sudo port uninstall inactive
     sudo port uninstall leaves
 
-# 04 - Resources
+# 05 - Resources
 
 The MacPorts Project: https://www.macports.org/
