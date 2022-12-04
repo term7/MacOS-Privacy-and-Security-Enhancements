@@ -67,9 +67,9 @@ Setup the log files:
 
 Setup ownership and permissions:
 
-    sudo chown root:wheel macports_updater.sh
-    sudo chown $(stat -f '%Su' /dev/console):admin macports.err.log macports.out.log
-    sudo chmod 744 macports_updater.sh
+    sudo chown root:wheel macports_updater.sh;
+    sudo chown $(stat -f '%Su' /dev/console):admin macports.err.log macports.out.log;
+    sudo chmod 744 macports_updater.sh;
     sudo chmod 644 macports.err.log macports.out.log
 
 Next you want to setup the LaunchDaemon that runs the updater. Navigate to the default location where LaunchDaemons are stored:
@@ -82,7 +82,7 @@ Download the LaunchDaemon:
 
 Setup ownership and permissions:
 
-    sudo chown root:wheel info.term7.macports.updater.plist
+    sudo chown root:wheel info.term7.macports.updater.plist;
     sudo chmod 644 info.term7.macports.updater.plist
 
 Manually start the LaunchDaemon (only required once):
@@ -106,7 +106,7 @@ Upgrade your MacPorts Installations:
 
 Unclutter your MacPorts Installation:
 
-    sudo port uninstall inactive
+    sudo port uninstall inactive;
     sudo port uninstall leaves
 
 # 05 - Resources
