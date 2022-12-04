@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>info.term7.macports.updater</string>
+  <key>LaunchOnlyOnce</key>
+  <true/>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/Shared/Enhancements/macports_updater/macports_updater.sh</string>
+  </array>
+  <key>StandardOutPath</key>
+  <string>/Users/Shared/Enhancements/macports_updater/macports.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/Shared/Enhancements/macports_updater/macports.err.log</string>
+  <key>StartInterval</key>
+  <integer>300</integer>
+</dict>
+</plist>
