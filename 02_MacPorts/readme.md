@@ -43,13 +43,13 @@ If you want to uninstall MacPorts from your system, please download and execute 
 
 # 03 - Automatic Updates
 
-Our installation script can set up automatic updates for you. If you decide to install everything manually, i.e. if you decide to follow the instructions of the [MacPorts project](https://www.macports.org/install.php) to install MacPorts on your system, this is how our update mechanism works:
+Our installation script can set up automatic updates for you. If you decide to install everything manually, i.e. if you decide to follow the instructions of the [MacPorts project](https://www.macports.org/install.php) to install MacPorts on your system instead of using our installation script, but you want to implement our autmatic update mechanism, this is how it works:
 
-A [LaunchDaemon](macports_updater/info.term7.macports.updater.plist) runs a [script](macports_updater/macports_updater.sh) with the required MacPorts commands 5min after every reboot.
+A [LaunchDaemon](macports_updater/info.term7.macports.updater.plist) runs a [script](macports_updater/macports_updater.sh) with the required MacPorts commands 5min after every reboot. Error messages will be written to temporary logfiles that will be overwritten with each reboot.
 
 Please Notice:
 
-We use the Shared Folder on our machine to run our own scripts. In our setup the location for the Macports Updater Script is: */Users/Shared/Enhancements/macports_updater*. If you want to use another location for the script you will have to adjust the path variable in your LaunchDaemon accordingly. To copy our setup, you first have to create the required folder structure:
+We use the Shared Folder on our machine to run our own scripts. In our setup the location for the Macports Updater Script is: */Users/Shared/Enhancements/macports_updater*. If you want to use another location for the script, you will have to adjust the path variable in the [LaunchDaemon](macports_updater/info.term7.macports.updater.plist) accordingly. To copy our setup, you first have to create the required folder structure:
 
     mkdir /Users/Shared/Enhancements && mkdir /Users/Shared/Enhancements/macports_updater
 
@@ -95,11 +95,9 @@ If you do not want to use our LaunchDaemon to update MacPorts automatically, you
 
 Please refer to the MacPorts documentation for a full manual: [https://guide.macports.org/](https://guide.macports.org/)
 
-
 Update MacPorts:
 
     sudo port -v selfupdate
-
 
 Upgrade your MacPorts Installations:
 
