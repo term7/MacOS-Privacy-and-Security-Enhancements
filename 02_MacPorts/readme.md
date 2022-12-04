@@ -2,7 +2,7 @@
 
 01) [About MacPorts](#01---About-MacPorts)
 02) [Installation](#02---Installation)
-03) [Usage](#03---Automatic-Updates)
+03) [Automatic Updates](#03---Automatic-Updates)
 04) [Usage](#03---Usage)
 05) [Resources](#03---Resources)
 
@@ -45,7 +45,7 @@ If you want to uninstall MacPorts from your system, please download and execute 
 
 Our installation script can set up automatic updates for you. If you decide to install everything manually, this is how our update mechanism works:
 
-A [LaunchDaemon](System Service/info.term7.macports.updater.plist) runs a [script](System Service/macports_updater.sh) with the required MacPorts commands 5min after every reboot.
+A [LaunchDaemon](macports_updater/info.term7.macports.updater.plist) runs a [script](macports_updater/macports_updater.sh) with the required MacPorts commands 5min after every reboot.
 
 
 
