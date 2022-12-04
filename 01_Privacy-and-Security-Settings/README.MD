@@ -1,12 +1,12 @@
-# CONTENTS
+# MACOS PRIVACY AND SECURITY SETTINGS
 
-01) [Privacy and Security Settings](#01---MacOS-Privacy-and-Security-Settings)
+01) [Privacy and Security Settings](#01---About-MacOS-Privacy-and-Security-Settings)
 02) [FEATURE LIST](#02---FEATURE-LIST)
 03) [Siri KillSwitch](#03---Siri-KillSwitch)
 04) [RESOURCES](#RESOURCES)
 
 
-# 01 - MacOS Privacy and Security Settings
+# 01 - About MacOS Privacy and Security Settings
 
 
 Our scripts for [MacOS Ventura](script/MacOS-Ventura_Privacy-and-Security-Settings.sh) and for [MacOS Monterey](script/MacOS-Monterey_Privacy-and-Security-Settings.sh) are interactive scripts that guide you through all relevant standard MacOS Privacy and Security Settings. The scripts also give you a brief explanation of each available option, so you can make an informed decision wether or not you want to change the respective system setting. Please note that at the time we do not have access to the latest ARM64 Silicon Mac with M1 Security Chip. We wrote and tested this script on an Intel-based Mac running MacOS Monterey and MacOS Ventura. To run our script, you first have to download it.
