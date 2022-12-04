@@ -42,7 +42,7 @@ If you want to uninstall MacPorts from your system, please download and execute 
 
 # 03 - Usage
 
-If you do not want to use our System Service to update MacPorts automatically, you can also update and clean your MacPorts installation manually. To do so, open a Terminal Window to type commands. You can also search for specific packages, look up additional info, select variants, etc. We list here only a few commands as examples. Please refer to the MacPorts documentation for a full manual: 
+If you do not want to use our System Service to update MacPorts automatically, you can also update and maintain your MacPorts installation manually. To do so, open a Terminal Window to type commands. You can also search for specific packages, look up additional info, select variants, etc. We list here only a few commands as examples. Please refer to the MacPorts documentation for a full manual: 
 
 * [https://guide.macports.org/](https://guide.macports.org/)
 
