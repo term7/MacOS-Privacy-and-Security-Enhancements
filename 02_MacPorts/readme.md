@@ -43,17 +43,57 @@ If you want to uninstall MacPorts from your system, please download and execute 
 
 # 03 - Automatic Updates
 
-Our installation script can set up automatic updates for you. If you decide to install everything manually, this is how our update mechanism works:
+Our installation script can set up automatic updates for you. If you decide to install everything manually, i.e. if you decide to follow the instructions of the [MacPorts project](https://www.macports.org/) to install MacPorts on your system, this is how our update mechanism works:
 
 A [LaunchDaemon](macports_updater/info.term7.macports.updater.plist) runs a [script](macports_updater/macports_updater.sh) with the required MacPorts commands 5min after every reboot.
 
+Please Notice:
 
+We use the Shared Folder on our machine to run our own scripts. In our setup the location for the Macports Updater Script is: */Users/Shared/Enhancements/macports_updater*. If you want to use another location for the script you will have to adjust the path variable in your LaunchDaemon accordingly. To copy our setup, you first have to create the required folder structure:
+
+    mkdir /Users/Shared/Enhancements && mkdir /Users/Shared/Enhancements/macports_updater
+
+Navigate to the Macorts Updater Folder:
+
+    cd /Users/Shared/Enhancements/macports_updater
+
+Download the script:
+
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/02_MacPorts/macports_updater/macports_updater.sh
+
+Setup the log files:
+
+    touch macports.err.log && touch macports.out.log
+
+Setup ownership and permissions:
+
+    sudo chown root:wheel macports_updater.sh
+    sudo chown $(stat -f '%Su' /dev/console):admin macports.err.log macports.out.log
+    sudo chmod 744 macports_updater.sh
+    sudo chmod 644 macports.err.log macports.out.log
+
+Next you want to setup the LaunchDaemon that runs the updater. Navigate to the default location where LaunchDaemons are stored:
+
+    cd /Library/LaunchDaemons
+
+Download the LaunchDaemon:
+
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/02_MacPorts/macports_updater/info.term7.macports.updater.plist
+
+Setup ownership and permissions:
+
+    sudo chown root:wheel info.term7.macports.updater.plist
+    sudo chmod 644 info.term7.macports.updater.plist
+
+Manually start the LaunchDaemon (only required once):
+
+    sudo launchctl load info.term7.macports.updater.plist
 
 # 04 - Usage
 
-If you do not want to use our System Service to update MacPorts automatically, you can also update and maintain your MacPorts installation manually. To do so, open a Terminal Window to type commands. You can also search for specific packages, look up additional info, select variants, etc. We list here only a few commands as examples. Please refer to the MacPorts documentation for a full manual: 
+If you do not want to use our LaunchDaemon to update MacPorts automatically, you can also update and maintain your MacPorts installation manually. To do so, open a Terminal Window to type commands. You can also search for specific packages, look up additional info, select variants, etc. We list here only a few commands as examples.
 
-* [https://guide.macports.org/](https://guide.macports.org/)
+Please refer to the MacPorts documentation for a full manual: [https://guide.macports.org/](https://guide.macports.org/)
 
 
 Update MacPorts:
