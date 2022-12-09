@@ -30,4 +30,5 @@ We have tested and developed our code on MacOS Ventura (13.0.1). All installed h
 This guide features a collection of scripts that are meant to enhance the security and privacy of a modern Apple Macintosh computer running macOS Ventura or later. It is organised in chapters which are located in their respective sub-folders:
 
 - [01 - Privacy and Security Settings](01_Privacy-and-Security-Settings)
-- [02 - MacPorts](02_MacPorts)
+- [02 - MacPorts](02_Kill-Siri)
+- [03 - MacPorts](03_MacPorts)
