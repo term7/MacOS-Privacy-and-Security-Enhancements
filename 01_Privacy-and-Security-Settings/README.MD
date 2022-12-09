@@ -1,7 +1,7 @@
 # MACOS PRIVACY AND SECURITY SETTINGS
 
 01) [About Privacy and Security Settings](#01---About-MacOS-Privacy-and-Security-Settings)
-02) [FEATURE LIST](#02---FEATURE-LIST)
+02) [FEATURE LIST](#02---SETTINGS-FEATURE-LIST)
 03) [RESOURCES](#03---RESOURCES)
 
 
