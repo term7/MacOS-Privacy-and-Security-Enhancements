@@ -1,9 +1,14 @@
 # MACOS PRIVACY AND SECURITY ENHANCEMENTS
 
-01) [introduction](#01---introduction)
-02) [CONTENT](#02---CONTENT)
+- [introduction](#introduction)
 
-# 01 - introduction
+This guide features a collection of scripts that are meant to enhance the security and privacy of a modern Apple Macintosh computer running macOS Ventura or later. It is organised in chapters which are located in their respective sub-folders:
+
+- [01 - Privacy and Security Settings](01_Privacy-and-Security-Settings)
+- [02 - MacPorts](02_Kill-Siri)
+- [03 - MacPorts](03_MacPorts)
+
+# introduction
 
 We have noticed that a lot of our colleagues and friends who are working with Macintosh Computers not only leave it in its factory configuration, but also have very little knowledge of how to reduce their digital fingerprint and what steps can be taken to enhance their privacy.
 
@@ -25,10 +30,4 @@ In that spirit we conclude our introduction with a warning by *drudh*:
 
 We have tested and developed our code on MacOS Ventura (13.0.1). All installed helper tools run fine on our system. However, you alone are responsible if you break your system. To suggest improvements, please write a comment, report an issue or request a pull request.
 
-# 02 - CONTENT:
 
-This guide features a collection of scripts that are meant to enhance the security and privacy of a modern Apple Macintosh computer running macOS Ventura or later. It is organised in chapters which are located in their respective sub-folders:
-
-- [01 - Privacy and Security Settings](01_Privacy-and-Security-Settings)
-- [02 - MacPorts](02_Kill-Siri)
-- [03 - MacPorts](03_MacPorts)
