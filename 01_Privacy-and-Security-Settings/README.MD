@@ -2,8 +2,7 @@
 
 01) [About Privacy and Security Settings](#01---About-MacOS-Privacy-and-Security-Settings)
 02) [FEATURE LIST](#02---FEATURE-LIST)
-03) [Siri KillSwitch](#03---Siri-KillSwitch)
-04) [RESOURCES](#RESOURCES)
+03) [RESOURCES](#03---RESOURCES)
 
 
 # 01 - About MacOS Privacy and Security Settings
@@ -77,54 +76,7 @@ Our script guides you through the following Privacy and Security Settings:
 09) <i>Enable FileVault (Full Disk Encryption)</i>
 10) <i>Lockdown Mode (MacOS Ventura or newer)</i>
 
-# 03 - Siri KillSwitch
-
-Apple does not allow you to disable Siri permanently unless you disable your Mac's SIP, because since MacOS BigSur Siri is baked into the core operating system - which is protected by Apple's System Integrity Protection (SIP). In oder to disable Siri completely, you have to first disable SIP, unload Siri and then keep SIP disabled, which will make your computer less secure and more vulnerable to external attacks. As soon as you re-enable SIP Siri will be reactivated too, even if you did disable Siri in your System Preferences.
-
-With SIP enabled and Siri switched off in your System Preferences, the following processes will keep to run in the background of your computer (tested on MacOS Monterey 12.5.1 and MacOS Ventura 13.0.1):
-
-<em>siriinferenced
-<br>siriactionsd
-<br>siriknowledged
-<br>sirittsd
-<br>com.apple.siri.embeddedspeech
-<br>assistantd
-</em>
-
-When Siri and another helper process (<em>assistantd</em>) become active, they modify files in this location:
-
-    ~/Library/Assistant/
-        
-Our [interactive script](script/kill-siri.sh) sets up a local <em>LaunchAgent</em> to watch this folder location and a global <em>LaunchDaemon</em> that terminates all processes related to Siri as soon as they are detected by our <em>LaunchAgent</em>.
-
-To set up this KillSwitch, open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder) and navigate to your Downloads Folder:
-
-    cd ~/Downloads
-
-Download the interactive script:
-
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/kill-siri.sh
-
-Give the file execute permissions:
-
-    chmod +x kill-siri.sh
-
-Execute the file:
-
-    ./kill-siri.sh
-
-If asked, enter your administrator password and hit [ENTER].
-Your password won't be shown by default.
-
-Alternatively you can also download our non-interactive [speedy install script](script/SPEEDY-INSTALL_kill-siri.sh):
-
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_kill-siri.sh
-
-We also provide a [script](script/UNINSTALL_kill-siri.sh) to uninstall our KillSwitch:
-
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/UNINSTALL_kill-siri.sh
-
-# RESOURCES
+# 03 - RESOURCES
 
 Special thanks to https://privacy.sexy/ and https://github.com/drduh/macOS-Security-and-Privacy-Guide.<br>
 Without these two resources, this guide would not exist.
