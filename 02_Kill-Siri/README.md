@@ -18,6 +18,8 @@ When Siri and another helper process (<em>assistantd</em>) become active, they m
         
 Our [interactive script](script/kill-siri.sh) sets up a local <em>LaunchAgent</em> to watch this folder location and a global <em>LaunchDaemon</em> that terminates all processes related to Siri as soon as they are detected by our <em>LaunchAgent</em>.
 
+BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.
+
 To set up this KillSwitch, open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder) and navigate to your Downloads Folder:
 
     cd ~/Downloads
