@@ -42,7 +42,7 @@ Our script can adjust most System Preferences that are enabled by default in Mac
     # MacOS Ventura:
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh
 
-Furthermore we have written an additional [script](script/kill-siri.sh) that sets up a [KillSwitch](#03---Siri-KillSwitch) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
+Furthermore we have written an additional [script](https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/02_Kill-Siri/script/kill-siri.sh) that sets up a [KillSwitch](https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/02_Kill-Siri) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
 
 # 02 - SETTINGS FEATURE LIST
 
