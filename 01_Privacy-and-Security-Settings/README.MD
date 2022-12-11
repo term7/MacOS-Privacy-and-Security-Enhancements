@@ -26,13 +26,11 @@ Download the script for MacOS Monterey or MacOS Ventura:
 
 Give the respective file execute permissions:
 
-    chmod +x MacOS-Monterey_Privacy-and-Security-Settings.sh
-    chmod +x MacOS-Ventura_Privacy-and-Security-Settings.sh
+    chmod +x *Privacy-and-Security-Settings.sh
 
 Execute the script (depending wether you are on MacOS Monterey or MacOS Ventura):
 
-    ./MacOS-Monterey_Privacy-and-Security-Settings.sh
-    ./MacOS-Ventura_Privacy-and-Security-Settings.sh
+    ./*Privacy-and-Security-Settings.sh
 
 
 Our script can adjust most System Preferences that are enabled by default in MacOS. You just have to press [Y/y] + [ENTER] to proceed, [N/n] + [ENTER] to skip a specific option, or [C/c] + [ENTER] to cancel. If manual action is required, this script will open the respective Settings Tab for you, so you can implement the changes yourself. If you want to use a faster version of this script with less explanation (which is useful if you want to skip quickly through the options), you can download our speedy install script for [MacOS Ventura](script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh) or [MacOS Monterey](script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh) instead:
