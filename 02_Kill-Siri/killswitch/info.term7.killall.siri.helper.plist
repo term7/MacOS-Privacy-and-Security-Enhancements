@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>info.term7.killall.siri.helper</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/sh</string>
+		<string>-c</string>
+		<string>touch /Users/Shared/Enhancements/trigger/.trigger; rm /Users/Shared/Enhancements/trigger/.trigger; rm -f -- ~/Library/Assistant/SiriAnalytics.db; rm -f -- ~/Library/Assistant/SiriAnalytics.db-shm; rm -f -- ~/Library/Assistant/SiriAnalytics.db-wal; rm -f -- ~/Library/Assistant/assistantdDidLaunch; rm -f -- ~/Library/Assistant/session_did_finish_timestamp; if [ -d ~/Library/Assistant/SiriVocabulary ]; then rm -rf ~/Library/Assistant/SiriVocabulary; fi; if [ -d ~/Library/Assistant/CustomVocabulary ]; then rm -rf ~/Library/Assistant/CustomVocabulary; fi; if [ -d ~/Library/Assistant/SiriReferenceResolution ]; then rm -rf ~/Library/Assistant/SiriReferenceResolution; fi</string>
+	</array>
+	<key>WatchPaths</key>
+	<array>
+		<string>~/Library/Assistant</string>
+	</array>
+</dict>
+</plist>
