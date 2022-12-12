@@ -4,11 +4,12 @@ Apple does not allow you to disable Siri permanently unless you disable your Mac
 
 With SIP enabled and Siri switched off in your System Preferences, the following processes will keep to run in the background of your computer (tested on MacOS Monterey 12.5.1 and MacOS Ventura 13.0.1):
 
-<em>siriinferenced
+<em>com.apple.siri.embeddedspeech
 <br>siriactionsd
-<br>siriknowledged
 <br>sirittsd
-<br>com.apple.siri.embeddedspeech
+<br>SiriTTSSynthesizerAU
+<br>siriknowledged
+<br>siriinferenced
 <br>assistantd
 </em>
 
