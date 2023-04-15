@@ -27,7 +27,7 @@ In your Terminal, navigate to your Downloads Folder:
 
 Download the script:
 
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/script/install_MacPorts.sh
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/install_MacPorts.sh
 
 Give the respective file execute permissions:
 
@@ -39,7 +39,7 @@ Execute the script:
 
 If you want to uninstall MacPorts from your system, please download and execute our [UNINSTALL SCRIPT](script/UNINSTALL_MacPorts.sh):
 
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/script/UNINSTALL_MacPorts.sh
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/UNINSTALL_MacPorts.sh
 
 # 03 - Automatic Updates
 
