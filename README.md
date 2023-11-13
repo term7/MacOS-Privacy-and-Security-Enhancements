@@ -28,6 +28,6 @@ In that spirit we conclude our introduction with a warning by *drudh*:
 
 *(drduh / Author of [macOS-Security-and-Privacy-Guide](https://github.com/drduh/macOS-Security-and-Privacy-Guide), 2016)*
 
-We have tested and developed our code on MacOS Ventura (13.0.1). All installed helper tools run fine on our system. However, you alone are responsible if you break your system. To suggest improvements, please write a comment, report an issue or request a pull request.
+We have tested and developed our code on MacOS Sonoma (14.1.1). All installed helper tools run fine on our system. However, you alone are responsible if you break your system. To suggest improvements, please write a comment, report an issue or request a pull request.
 
 
