@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#   SPEEDY-INSTALL_SpoofMac.sh
+#   SPEEDY-INSTALL_SpoofMAC.sh
 #   term7 / 10.03.2024
 #   Original code by feross: https://github.com/feross/spoof
 #
@@ -84,18 +84,18 @@ fi
 # -------Variables:--------
 
 DAEMON_FOLDER=/Library/LaunchDaemons
-SPOOFMAC_DAEMON_NAME=info.term7.spoof.mac
-SPOOFMAC_DAEMON_FILE=$DAEMON_FOLDER/$SPOOFMAC_DAEMON_NAME.plist
+SpoofMAC_DAEMON_NAME=info.term7.spoof.mac
+SpoofMAC_DAEMON_FILE=$DAEMON_FOLDER/$SpoofMAC_DAEMON_NAME.plist
 
 # -------Global Spoof Daemon:--------
 
-sudo tee "$SPOOFMAC_DAEMON_FILE" << EOF > /dev/null
+sudo tee "$SpoofMAC_DAEMON_FILE" << EOF > /dev/null
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>${SPOOFMAC_DAEMON_NAME}</string>
+    <string>${SpoofMAC_DAEMON_NAME}</string>
     <key>ProgramArguments</key>
     <array>
         <string>/opt/local/bin/node</string>
@@ -111,13 +111,13 @@ EOF
 
 # -------Ownership, Permission:--------
 
-sudo chown root:wheel "$SPOOFMAC_DAEMON_FILE"
-sudo chmod 644 "$SPOOFMAC_DAEMON_FILE"
+sudo chown root:wheel "$SpoofMAC_DAEMON_FILE"
+sudo chmod 644 "$SpoofMAC_DAEMON_FILE"
 
 # -------Load Daemons:--------
 
 networksetup -setairportpower en0 off
-sudo launchctl load "$SPOOFMAC_DAEMON_FILE"
+sudo launchctl load "$SpoofMAC_DAEMON_FILE"
 
 echo " "
 echo "Setup Finished! Press ${bold}[ANY KEY]${reset} to exit: "

@@ -1,18 +1,18 @@
-# SPOOFMAC
+# SpoofMAC
 
-01) [About SpoofMac](#01---About-SpoofMac)
-02) [Why install SpoofMac?](#02---Why-install-SpoofMac?)
-03) [Installation](#03---Install-SpoofMac)
-04) [How to use SpoofMac](#04---How-to-use-SpoofMac)
+01) [About SpoofMAC](#01---About-SpoofMAC)
+02) [Why install SpoofMAC](#02---Why-install-SpoofMAC)
+03) [Installation](#03---Installation)
+04) [How to use SpoofMAC](#04---How-to-use-SpoofMAC)
 05) [MAC Address Tracking](#05---MAC-Address-Tracking)
 06) [Resources](#06---Resources)
 
 
-# 01 - About SpoofMac
+# 01 - About SpoofMAC
 
-SpoofMac randomizes your Mac's MAC Adress.
+SpoofMAC randomizes your Mac's MAC Adress.
 
-SpoofMac originally was written in Python by feross:
+SpoofMAC originally was written in Python by feross:
 * [https://github.com/feross/SpoofMAC](https://github.com/feross/SpoofMAC)
 
 Feross also provides a node.js port of this package:
@@ -20,16 +20,16 @@ Feross also provides a node.js port of this package:
 
 
 
-# 02 - Why install SpoofMAC?
+# 02 - Why install SpoofMAC
 
 
 *"The MAC address is a unique identifier tied to your physical Network Interface (Wired Ethernet or Wi-Fi) and could of course be used to track you if it is not randomized."*
 
 (The Hitchhiker's Guide to Online Anonymity)
 
-*"I made SpoofMac because changing your MAC address in Mac OS X is harder than it should be. The biggest annoyance is that the Wi-Fi card (Airport) needs to be manually disassociated from any connected networks in order for the change to be applied correctly. Doing this manually every time is tedious and lame."*
+*"I made SpoofMAC because changing your MAC address in Mac OS X is harder than it should be. The biggest annoyance is that the Wi-Fi card (Airport) needs to be manually disassociated from any connected networks in order for the change to be applied correctly. Doing this manually every time is tedious and lame."*
 
-(Feross Aboukhadijeh / Maker of SpoofMac)
+(Feross Aboukhadijeh / Maker of SpoofMAC)
 
 To spoof your MAC address is especially recommended if you are working on a laptop using public Wifi, in order to mitigate tracking methods that identify and track your devices MAC address.
 
@@ -41,9 +41,9 @@ Our [installation script](script/install_SpoofMAC.sh) installs [spoof](https://g
 
 BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.
 
-# 04 - How to use SpoofMac
+# 04 - How to use SpoofMAC
 
-You can use SpoofMac to manually change your MAC addresses via the command line. To do so, open a Terminal Window to type commands.
+You can use SpoofMAC to manually change your MAC addresses via the command line. To do so, open a Terminal Window to type commands.
 
 
 List all usage instructions:

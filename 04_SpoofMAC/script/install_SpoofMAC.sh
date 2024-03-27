@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#   SPEEDY-INSTALL_SpoofMac.sh
+#   SPEEDY-INSTALL_SpoofMAC.sh
 #   term7 / 10.03.2024
 #   Original code by feross: https://github.com/feross/spoof
 #
@@ -131,20 +131,20 @@ echo " "
 echo "--------------------------------------------------------------------------------"
 
 echo " "
-echo "                                            ${bold}/ SPOOFMAC / WHAT THIS SCRIPT DOES /${reset}"
+echo "                                            ${bold}/ SpoofMAC / WHAT THIS SCRIPT DOES /${reset}"
 echo " "
 echo "--------------------------------------------------------------------------------"
 echo " "
-echo "${bold}... THIS INTERACTIVE SCRIPT IS DESIGNED TO INSTALL SPOOFMAC ON YOUR COMPUTER ...${reset}"
+echo "${bold}... THIS INTERACTIVE SCRIPT IS DESIGNED TO INSTALL SpoofMAC ON YOUR COMPUTER ...${reset}"
 echo " "
 echo "Your computer can always be identified via the unique MAC address of its network"
-echo "interfaces (i.e. Ethernet, Wi-Fi & Bluetooth). SpoofMac is an open source tool"
+echo "interfaces (i.e. Ethernet, Wi-Fi & Bluetooth). SpoofMAC is an open source tool"
 echo "that makes it easy for you to change the MAC addresses of your computer via the"
 echo "Command Line, so that it becomes impossible to track and fingerprint you via"
 echo "your device's MAC addresses."
 echo " "
 echo "This simple script uses MacPorts to install npm, before it proceeds to install"
-echo "SpoofMac. Further, if you choose so, it sets up a Launch Daemon that randomizes"
+echo "SpoofMAC. Further, if you choose so, it sets up a Launch Daemon that randomizes"
 echo "randomize the MAC address of your Ethernet and Wi-Fi Cards whenever you reboot"
 echo "your computer, making it impossible for other devices and network operators to"
 echo "discover your identity via its MAC address when you connect to the internet."
@@ -158,8 +158,8 @@ echo "--------------------------------------------------------------------------
 echo " "
 while true
 do
-read -p "Type ${bold}[install]${reset} to install SPOOFMAC, or ${bold}[exit]${reset} to abort & press ${bold}[ENTER]${reset}: " SPOOFMAC
-case $SPOOFMAC in
+read -p "Type ${bold}[install]${reset} to install SpoofMAC, or ${bold}[exit]${reset} to abort & press ${bold}[ENTER]${reset}: " SpoofMAC
+case $SpoofMAC in
 [i][n][s][t][a][l][l])
 
 # -------Abort this script unless MacPorts is installed:--------
@@ -267,12 +267,12 @@ read -s -p "Press ${bold}[ENTER]${reset} to continue: "
 # -------Variables:--------
 
 DAEMON_FOLDER=/Library/LaunchDaemons
-SPOOFMAC_DAEMON_NAME=info.term7.spoof.mac
-SPOOFMAC_DAEMON_FILE=$DAEMON_FOLDER/$SPOOFMAC_DAEMON_NAME.plist
+SpoofMAC_DAEMON_NAME=info.term7.spoof.mac
+SpoofMAC_DAEMON_FILE=$DAEMON_FOLDER/$SpoofMAC_DAEMON_NAME.plist
 
 
 echo " "
-echo "                                              ${bold}/ SPOOFMAC / RANDOMIZE ON REBOOT /${reset}"
+echo "                                              ${bold}/ SpoofMAC / RANDOMIZE ON REBOOT /${reset}"
 echo " "
 echo "--------------------------------------------------------------------------------"
 echo " "
@@ -330,18 +330,18 @@ echo " "
 echo " "
 echo "------------------------------create LaunchDaemon-------------------------------"
 echo " "
-echo "${SPOOFMAC_DAEMON_FILE}"
+echo "${SpoofMAC_DAEMON_FILE}"
 sleep 1
 
 # -------Global Spoof Daemon:--------
 
-sudo tee "$SPOOFMAC_DAEMON_FILE" << EOF > /dev/null
+sudo tee "$SpoofMAC_DAEMON_FILE" << EOF > /dev/null
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>${SPOOFMAC_DAEMON_NAME}</string>
+    <string>${SpoofMAC_DAEMON_NAME}</string>
     <key>ProgramArguments</key>
     <array>
         <string>/opt/local/bin/node</string>
@@ -361,15 +361,15 @@ echo " "
 echo " "
 echo "-------------------------setup ownership & permissions--------------------------"
 echo " "
-echo "sudo chown root:wheel ${SPOOFMAC_DAEMON_FILE}"
+echo "sudo chown root:wheel ${SpoofMAC_DAEMON_FILE}"
 sleep 1
 
-sudo chown root:wheel "$SPOOFMAC_DAEMON_FILE"
+sudo chown root:wheel "$SpoofMAC_DAEMON_FILE"
 
-echo "sudo chmod 644 ${SPOOFMAC_DAEMON_FILE}"
+echo "sudo chmod 644 ${SpoofMAC_DAEMON_FILE}"
 sleep 1
 
-sudo chmod 644 "$SPOOFMAC_DAEMON_FILE"
+sudo chmod 644 "$SpoofMAC_DAEMON_FILE"
 
 # -------Load spoof daemon:--------
 
@@ -381,8 +381,8 @@ echo " "
 networksetup -setairportpower en0 off
 echo "networksetup -setairportpower en0 off"
 
-echo "sudo launchctl load ${SPOOFMAC_DAEMON_FILE}"
-sudo launchctl load "$SPOOFMAC_DAEMON_FILE"
+echo "sudo launchctl load ${SpoofMAC_DAEMON_FILE}"
+sudo launchctl load "$SpoofMAC_DAEMON_FILE"
 
 sleep 1
 
@@ -390,8 +390,8 @@ echo " "
 echo " "
 echo "------------------------open LaunchDaemon in Text Editor------------------------"
 echo " "
-echo "open -a TextEdit ${SPOOFMAC_DAEMON_FILE}"
-open -a TextEdit "$SPOOFMAC_DAEMON_FILE"
+echo "open -a TextEdit ${SpoofMAC_DAEMON_FILE}"
+open -a TextEdit "$SpoofMAC_DAEMON_FILE"
 echo " "
 echo " "
 echo " "

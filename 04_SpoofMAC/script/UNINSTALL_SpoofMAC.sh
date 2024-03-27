@@ -115,7 +115,7 @@ echo " "
 echo " "
 echo " "
 echo "                   -----------------------------------------";
-echo "                   ARE YOU SURE YOU WANT TO DELETE SPOOFMAC?";
+echo "                   ARE YOU SURE YOU WANT TO DELETE SpoofMAC?";
 echo "                   -----------------------------------------";
 echo " "
 echo " "
@@ -139,8 +139,8 @@ case $DELETE in
 # -------Variables:--------
 
 DAEMON_FOLDER=/Library/LaunchDaemons
-SPOOFMAC_DAEMON_NAME=info.term7.spoof.mac
-SPOOFMAC_DAEMON=$DAEMON_FOLDER/$SPOOFMAC_DAEMON_NAME.plist
+SpoofMAC_DAEMON_NAME=info.term7.spoof.mac
+SpoofMAC_DAEMON=$DAEMON_FOLDER/$SpoofMAC_DAEMON_NAME.plist
 
 # -------Delete Spoof:--------
 
@@ -182,11 +182,11 @@ sleep 1
 echo " "
 echo "-----------------------unload and delete SpoofMAC Daemon------------------------"
 echo " "
-echo "sudo launchctl unload ${SPOOFMAC_DAEMON}"
-sudo launchctl unload "$SPOOFMAC_DAEMON"
+echo "sudo launchctl unload ${SpoofMAC_DAEMON}"
+sudo launchctl unload "$SpoofMAC_DAEMON"
 sleep 1
-echo "sudo rm ${SPOOFMAC_DAEMON}"
-sudo rm ${SPOOFMAC_DAEMON}
+echo "sudo rm ${SpoofMAC_DAEMON}"
+sudo rm ${SpoofMAC_DAEMON}
 sleep 1
 
 break;;
