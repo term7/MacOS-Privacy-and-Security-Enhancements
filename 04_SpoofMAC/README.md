@@ -92,6 +92,6 @@ Another example is Radio-Frequency tracking systems that are specifically design
 
 # 06 - Resources
 
-Wikipedia: https://en.wikipedia.org/wiki/MAC_address
-The Hitchhiker's Guide to Online Anonymity: https://anonymousplanet.org/guide#your-wi-fi-or-ethernet-mac-address
+Wikipedia: https://en.wikipedia.org/wiki/MAC_address<br>
+The Hitchhiker's Guide to Online Anonymity: https://anonymousplanet.org/guide#your-wi-fi-or-ethernet-mac-address<br>
 Github (feross): https://github.com/feross/spoof

@@ -3,8 +3,8 @@
 01) [About MacPorts](#01---About-MacPorts)
 02) [Installation](#02---Installation)
 03) [Automatic Updates](#03---Automatic-Updates)
-04) [Usage](#03---Usage)
-05) [Resources](#03---Resources)
+04) [Usage](#04---Usage)
+05) [Resources](#05---Resources)
 
 
 # 01 - About MacPorts
