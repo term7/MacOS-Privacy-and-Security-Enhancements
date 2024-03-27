@@ -37,7 +37,7 @@ To spoof your MAC address is especially recommended if you are working on a lapt
 
 # 03 - Installation
 
-Our [installation script](script/install_SpoofMAC.sh) installs [spoof](https://github.com/feross/spoof) by Github user *feross* and sets up a <em>LaunchDaemon</em>, that automatically randomizes your Mac's MAC Adress every time you reboot your computer. To install *spoof* you need to install *nodejs*. Our script takes care of that too, but it requires [MacPorts](https://www.macports.org/) to install the required software packages. If you have not yet installed MacPorts, please install MacPorts first! We have written an easy [MacPorts installation script](../03_MacPorts/install_MacPorts.sh) that guides you through the installation of MacPorts.
+Our [interactive script](script/install_SpoofMAC.sh) installs [spoof](https://github.com/feross/spoof) by Github user *feross* and sets up a <em>LaunchDaemon</em>, that automatically randomizes your Mac's MAC Adress every time you reboot your computer. To install *spoof* you need to install *nodejs*. Our script takes care of that too, but it requires [MacPorts](https://www.macports.org/) to install the required software packages. If you have not yet installed MacPorts, please install MacPorts first! We have written an easy [MacPorts installation script](../03_MacPorts/install_MacPorts.sh) that guides you through the installation of MacPorts.
 
 BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.
 
@@ -60,7 +60,11 @@ Execute the script:
 
 If you want to uninstall MacPorts from your system, please download and execute our [UNINSTALL SCRIPT](script/UNINSTALL_SpoofMAC.sh):
 
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main//script/UNINSTALL_SpoofMAC.sh
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/UNINSTALL_SpoofMAC.sh
+
+Alternatively you can also download our non-interactive [speedy install script](script/SPEEDY-INSTALL_SpoofMAC.sh):
+
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/SPEEDY-INSTALL_SpoofMAC.sh
 
 
 # 04 - How to use SpoofMAC
