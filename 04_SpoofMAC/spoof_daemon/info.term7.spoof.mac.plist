@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>info.term7.spoof.mac</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/local/bin/node</string>
+        <string>/opt/local/bin/spoof</string>
+        <string>randomize</string>
+        <string>en0</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>

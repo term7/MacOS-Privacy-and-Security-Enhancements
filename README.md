@@ -7,6 +7,7 @@ This guide features a collection of scripts that are meant to enhance the securi
 - [01 - Privacy and Security Settings](01_Privacy-and-Security-Settings)
 - [02 - Kill-Siri](02_Kill-Siri)
 - [03 - MacPorts](03_MacPorts)
+- [04 - Spoof-MAC](04_Spoof-MAC)
 
 # introduction
 

@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-#   UNINSTALL_kill-siri.sh
-#   term7 / 20.08.2022
+#   UNINSTALL_SpoofMAC.sh
 #
+#   term7 / 10.03.2024
+
 #   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time - yet we have written this script with users in mind that are not yet used to the command line.
 #
 ##   MIT License
@@ -16,32 +17,33 @@
 
 # -------Styles:--------
 
-lil=$(tput setaf 255,000,255)
 bold=$(tput bold)
-reset=$(tput sgr0)
+normal=$(tput sgr0)
 
 # -------Countdown Function:--------
 
-function countdown {
-  local OLD_IFS="${IFS}"
-  IFS=":"
-  local ARR=( $1 )
-  local SECONDS=$((  (ARR[0] * 60 * 60) + (ARR[1] * 60) + ARR[2]  ))
-  local START=$(date +%s)
-  local END=$((START + SECONDS))
-  local CUR=$START
-  
-  while [[ $CUR -lt $END ]]
-  do
-  CUR=$(date +%s)
-  LEFT=$((END-CUR))
-  
-  printf "\r%02d:%02d:%02d" \
-  $((LEFT/3600)) $(( (LEFT/60)%60)) $((LEFT%60))
-  sleep 1
-  done
-  IFS="${OLD_IFS}"
-  echo "        "
+function countdown
+{
+local OLD_IFS="${IFS}"
+IFS=":"
+local ARR=( $1 )
+local SECONDS=$((  (ARR[0] * 60 * 60) + (ARR[1] * 60) + ARR[2]  ))
+local START=$(date +%s)
+local END=$((START + SECONDS))
+local CUR=$START
+
+while [[ $CUR -lt $END ]]
+do
+CUR=$(date +%s)
+LEFT=$((END-CUR))
+
+printf "\r%02d:%02d:%02d" \
+$((LEFT/3600)) $(( (LEFT/60)%60)) $((LEFT%60))
+
+sleep 1
+done
+IFS="${OLD_IFS}"
+echo "        "
 }
 
 # -------Abort Function:--------
@@ -112,9 +114,9 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "              ----------------------------------------------------";
-echo "              ARE YOU SURE YOU WANT TO DELETE THE SIRI KILLSWITCH?";
-echo "              ----------------------------------------------------";
+echo "                   -----------------------------------------";
+echo "                   ARE YOU SURE YOU WANT TO DELETE SPOOFMAC?";
+echo "                   -----------------------------------------";
 echo " "
 echo " "
 echo " "
@@ -128,7 +130,7 @@ echo " "
 while true
 do
 read -s -p "Type ${bold}[delete]${reset} to unload and remove all Daemons and files that constitute 
-the KillSwitch, or ${bold}[exit]${reset} to abort and press ${bold}[ENTER]${reset}: " DELETE
+the SpoofMAC, or ${bold}[exit]${reset} to abort and press ${bold}[ENTER]${reset}: " DELETE
 
 case $DELETE in
 
@@ -136,20 +138,11 @@ case $DELETE in
 
 # -------Variables:--------
 
-ENHANCEMENTS=/Users/Shared/Enhancements
-TRIGGER_LOCATION=$ENHANCEMENTS/trigger
-TRIGGER=$TRIGGER_LOCATION/.trigger
+DAEMON_FOLDER=/Library/LaunchDaemons
+SPOOFMAC_DAEMON_NAME=info.term7.spoof.mac
+SPOOFMAC_DAEMON=$DAEMON_FOLDER/$SPOOFMAC_DAEMON_NAME.plist
 
-LOCAL_DAEMON_FOLDER=/Library/LaunchAgents
-LOCAL_DAEMON_NAME=info.term7.killall.siri.helper
-LOCAL_DAEMON=$LOCAL_DAEMON_FOLDER/$LOCAL_DAEMON_NAME.plist
-
-GLOBAL_DAEMON_FOLDER=/Library/LaunchDaemons
-GLOBAL_DAEMON_NAME=info.term7.killall.siri
-GLOBAL_DAEMON=$GLOBAL_DAEMON_FOLDER/$GLOBAL_DAEMON_NAME.plist
-
-
-# -------Delete Trigger Location:--------
+# -------Delete Spoof:--------
 
 echo " "
 echo " "
@@ -175,32 +168,25 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "----------------------------delete Trigger Location-----------------------------"
+echo "----------------------------------delete Spoof----------------------------------"
 echo " "
-echo "if [ -d \"${TRIGGER_LOCATION}\" ]; then sudo -u $(stat -f '%Su' /dev/console) rm -rf ${TRIGGER_LOCATION} fi"
+echo "sudo npm uninstall spoof -g"
 
-if [ -d "$TRIGGER_LOCATION" ]; then
-    sudo -u $(stat -f '%Su' /dev/console) rm -rf $TRIGGER_LOCATION
-fi
+sudo npm uninstall spoof -g
 
 sleep 1
 
-# -------Delete Daemons:--------
+
+# -------Delete Daemon:--------
 
 echo " "
-echo "--------------------------unload and delete KillSwitch--------------------------"
+echo "-----------------------unload and delete SpoofMAC Daemon------------------------"
 echo " "
-echo "sudo -u $(stat -f '%Su' /dev/console) launchctl unload ${LOCAL_DAEMON}"
-sudo -u $(stat -f '%Su' /dev/console) launchctl unload "$LOCAL_DAEMON"
+echo "sudo launchctl unload ${SPOOFMAC_DAEMON}"
+sudo launchctl unload "$SPOOFMAC_DAEMON"
 sleep 1
-echo "sudo rm ${LOCAL_DAEMON}"
-sudo rm ${LOCAL_DAEMON}
-sleep 1
-echo "sudo launchctl unload ${GLOBAL_DAEMON}"
-sudo launchctl unload "$GLOBAL_DAEMON"
-sleep 1
-echo "sudo rm ${GLOBAL_DAEMON}"
-sudo rm ${GLOBAL_DAEMON}
+echo "sudo rm ${SPOOFMAC_DAEMON}"
+sudo rm ${SPOOFMAC_DAEMON}
 sleep 1
 
 break;;

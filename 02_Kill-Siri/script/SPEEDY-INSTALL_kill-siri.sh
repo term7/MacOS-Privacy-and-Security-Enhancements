@@ -106,5 +106,6 @@ sudo launchctl load "$GLOBAL_DAEMON"
 sudo -u $(stat -f '%Su' /dev/console) touch /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/.tmp
 sudo -u $(stat -f '%Su' /dev/console) rm /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/.tmp
 
+echo " "
 echo "Setup Finished! Press ${bold}[ANY KEY]${reset} to exit: "
 read -n 1 -s
