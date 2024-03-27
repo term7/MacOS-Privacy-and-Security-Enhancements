@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#   SPEEDY-INSTALL_SpoofMAC.sh
+#   INSTALL_SpoofMAC.sh
 #   term7 / 10.03.2024
 #   Original code by feross: https://github.com/feross/spoof
 #
