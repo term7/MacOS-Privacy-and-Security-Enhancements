@@ -6,6 +6,8 @@
 04) [How to use SpoofMAC](#04---How-to-use-SpoofMAC)
 05) [MAC Address Tracking](#05---MAC-Address-Tracking)
 06) [Resources](#06---Resources)
+07) [Special Case: Software License Issues](#07---Special-Case:-Software-License-Issues)
+08) [Example DaVinci Resolve](#08---Example-DaVinci-Resolve)
 
 
 # 01 - About SpoofMAC
@@ -121,3 +123,5 @@ Another example is Radio-Frequency tracking systems that are specifically design
 Wikipedia: https://en.wikipedia.org/wiki/MAC_address<br>
 The Hitchhiker's Guide to Online Anonymity: https://anonymousplanet.org/guide#your-wi-fi-or-ethernet-mac-address<br>
 Github (feross): https://github.com/feross/spoof
+
+# 07 - Special Case: Software License Issues
