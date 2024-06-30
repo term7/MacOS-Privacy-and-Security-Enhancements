@@ -6,7 +6,7 @@
 04) [How to use SpoofMAC](#04---How-to-use-SpoofMAC)
 05) [MAC Address Tracking](#05---MAC-Address-Tracking)
 06) [Resources](#06---Resources)
-07) [Special Case: Software License Issues](#07---Special-Case:-Software-License-Issues)
+07) [Software License Issues](#07---Software-License-Issues)
 08) [Example DaVinci Resolve](#08---Example-DaVinci-Resolve)
 
 
