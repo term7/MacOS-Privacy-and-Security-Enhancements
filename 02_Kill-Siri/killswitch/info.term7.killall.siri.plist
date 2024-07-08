@@ -8,7 +8,7 @@
 	<array>
 		<string>/bin/sh</string>
 		<string>-c</string>
-		<string>if pgrep SiriAUSP; then kill -9 $(pgrep SiriAUSP); fi; if pgrep siriinferenced; then kill -9 $(pgrep siriinferenced); fi; if pgrep siriactionsd; then kill -9 $(pgrep siriactionsd); fi; if pgrep siriknowledged; then kill -9 $(pgrep siriknowledged); fi; if pgrep sirittsd; then kill -9 $(pgrep sirittsd); fi; if pgrep SiriTTSSynthesizerAU; then kill -9 $(pgrep SiriTTSSynthesizerAU); fi;  if pgrep assistantd; then kill -9 $(pgrep assistantd); fi; if pgrep com.apple.siri.embeddedspeech; then kill -9 $(pgrep com.apple.siri.embeddedspeech); fi; if pgrep com.apple.SiriTTSService.TrialProxy; then kill -9 $(pgrep com.apple.SiriTTSService.TrialProxy); fi</string>
+		<string>if pgrep SiriAUSP; then kill -9 $(pgrep SiriAUSP); fi; if pgrep siriinferenced; then kill -9 $(pgrep siriinferenced); fi; if pgrep siriactionsd; then kill -9 $(pgrep siriactionsd); fi; if pgrep siriknowledged; then kill -9 $(pgrep siriknowledged); fi; if pgrep sirittsd; then kill -9 $(pgrep sirittsd); fi; if pgrep SiriTTSSynthesizerAU; then kill -9 $(pgrep SiriTTSSynthesizerAU); fi;  if pgrep assistantd; then kill -9 $(pgrep assistantd); fi; if pgrep com.apple.siri.embeddedspeech; then kill -9 $(pgrep com.apple.siri.embeddedspeech); fi; if pgrep com.apple.SiriTTSService.TrialProxy; then kill -9 $(pgrep com.apple.SiriTTSService.TrialProxy); fi; if pgrep com.apple.siri-distributed-evaluation; then kill -9 $(pgrep com.apple.siri-distributed-evaluation); fi</string>
 	</array>
 	<key>WatchPaths</key>
 	<array>
