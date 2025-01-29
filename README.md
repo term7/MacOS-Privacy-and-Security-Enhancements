@@ -17,7 +17,7 @@ This guide is targeted to users who wish to make informed decisions and who want
 
 As an important part of this guide we have written several scripts that are meant to lead you through the installation of several helper tools. For advanced users, who want to speed up the whole process, we recommend you use the speedy install scripts. However, if you follow our tutorials and you are a novice user who has never worked with the command line before (Terminal.app), and you want to learn how to use scripts on MacOS (and maybe write your own at some point), we recommend you use the normal installation scripts which will guide you through the respective installation. In case you want to uninstall any of these helper tools, please use the provided uninstall scripts.
 
-This guide is a work in progress. We will ad more content in future.
+This guide is a work in progress. We will add more content in future.
 
 HOWEVER, BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.
 
