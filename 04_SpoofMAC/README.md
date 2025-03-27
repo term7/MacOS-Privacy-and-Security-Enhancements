@@ -135,6 +135,6 @@ The only way to avoid re-registration is to change your devices MAC address back
 
 #### Example AppleScript for DaVinci Resolve
 
-If you use the free version of DaVinci Resolve, there are no licensing issues. However if you purchased the professional version of DaVinci Resolve, you will have exaclty the issue we described above. Fortunately there is an easy fix. We wrote a small [AppleScript](misc/DaVinci_Startup.app) that changes its MAC address back to the MAC address you used when you registered your license key before it proceeds to start DaVinci Resolve:
+If you use the free version of DaVinci Resolve, there are no licensing issues. However if you purchased the professional version of DaVinci Resolve, you will have exaclty the issue we described above. Fortunately there is an easy fix. We wrote a small [AppleScript](misc/DaVinci_Startup.app) that changes its MAC address back to the MAC address you used when you registered your license key before it proceeds to start DaVinci Resolve (THIS IS AN EXAMPLE THAT USES A RANDOM MAC ADDRESS). Here a link to our Tutorial:
 
 [https://term7.info/troubleshooting-spoofmac/](https://term7.info/troubleshooting-spoofmac/)
