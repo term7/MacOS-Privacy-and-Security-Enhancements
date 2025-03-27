@@ -7,7 +7,7 @@
 - [05 MAC Address Tracking](#05-mac-address-tracking)
 - [06 Resources](#06-resources)
 - [07 Proprietary Software License Issues](#07-proprietary-software-license-issues)
-- [08 Example AppleScript for DaVinci Resolve](#08-example-applescript-for-davinci-resolve)
+- [08 Troubleshooting SpoofMAC](#08-troubleshooting-spoofmac)
 
 
 # 01 About SpoofMAC
@@ -131,6 +131,10 @@ Github (feross): https://github.com/feross/spoof
 Sometimes when you purchase proprietary software, you have to enter a license key in order to use it. Depending on the software, after you restart your computer with SpoofMac installed as a service, it suddenly stops working unless you enter your license key again. This can quickly become very annoying and is an indicator that the software you purchased checks the MAC address of your computer in order to verify that it is the machine that was connected to a specific license key. If it cannot find the MAC address you used when you registered the product, the software thinks it is on a new machine and will force you to do the registration process again.
 The only way to avoid re-registration is to change your devices MAC address back to the MAC address you used when you registered the software. Please be aware that it is not necessarily the original MAC address of your computer! It can be a spoofed MAC address already.
 
-# 08 Example AppleScript for DaVinci Resolve
+# 08 Troubleshooting SpoofMac
 
-If you use the free version of DaVinci Resolve, there are no licensing issues. However if you purchased the professional version of DaVinci Resolve, you will have exaclty the issue we described above. Fortunately there is an easy fix. We wrote a small AppleScript that changes 
+#### Example AppleScript for DaVinci Resolve
+
+If you use the free version of DaVinci Resolve, there are no licensing issues. However if you purchased the professional version of DaVinci Resolve, you will have exaclty the issue we described above. Fortunately there is an easy fix. We wrote a small [AppleScript](misc/DaVinci_Startup.app) that changes its MAC address back to the MAC address you used when you registered your license key before it proceeds to start DaVinci Resolve:
+
+[https://term7.info/troubleshooting-spoofmac/](https://term7.info/troubleshooting-spoofmac/)
