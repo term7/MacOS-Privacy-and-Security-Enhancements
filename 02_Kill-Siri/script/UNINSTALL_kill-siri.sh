@@ -131,7 +131,7 @@ the KillSwitch, or ${bold}[exit]${reset} to abort and press ${bold}[ENTER]${rese
 
 case $DELETE in
 
-[d][e][l][e][t][e])
+[dD][eE][lL][eE][tT][eT])
 
 # -------Variables:--------
 
@@ -204,7 +204,7 @@ break;;
 
 # -------Input [C/c]: Abort:--------
 
-[e][x][i][t])
+[eE][xX][iI][tT])
 abort
 exit;;
 
