@@ -12,7 +12,7 @@
 
 # 01 About SpoofMAC
 
-MORE INFO:<br>
+**MORE INFO**<br>
 [https://term7.info/spoofmac/](https://term7.info/spoofmac/)<br>
 [https://term7.info/troubleshooting-spoofmac/](https://term7.info/troubleshooting-spoofmac/)
 
