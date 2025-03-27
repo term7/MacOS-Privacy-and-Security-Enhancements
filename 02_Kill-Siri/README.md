@@ -28,9 +28,13 @@ To set up this KillSwitch, open the Terminal.app (found with Spotlight or in you
 
     cd ~/Downloads
 
-Download the interactive script:
+Download the interactive script (Codeberg or Github mirror):
+
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/02_Kill-Siri/script/install_kill-siri.sh
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/02_Kill-Siri/script/kill-siri.sh
+
+
 
 Give the file execute permissions:
 
@@ -43,10 +47,14 @@ Execute the file:
 If asked, enter your administrator password and hit [ENTER].
 Your password won't be shown by default.
 
-Alternatively you can also download our non-interactive [speedy install script](script/SPEEDY-INSTALL_kill-siri.sh):
+Alternatively you can also download our non-interactive [speedy install script](script/SPEEDY-INSTALL_kill-siri.sh) (Codeberg or Github mirror):
+
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/02_Kill-Siri/script/SPEEDY-INSTALL_kill-siri.sh
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/02_Kill-Siri/script/SPEEDY-INSTALL_kill-siri.sh
 
-We also provide a [script](script/UNINSTALL_kill-siri.sh) to uninstall our KillSwitch:
+We also provide a [script](script/UNINSTALL_kill-siri.sh) to uninstall our KillSwitch (Codeberg or Github mirror):
+
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/02_Kill-Siri/script/UNINSTALL_kill-siri.sh
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/02_Kill-Siri/script/UNINSTALL_kill-siri.sh
