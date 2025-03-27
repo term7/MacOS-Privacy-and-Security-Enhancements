@@ -13,12 +13,20 @@
 #   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+# -------Styles:--------
+
+bold=$(tput bold)
+reset=$(tput sgr0)
+
 # -------Variables:--------
 
 WATCH_LOCATION=~/Library/Assistant/
-ENHANCEMENTS=/Users/Shared/Enhancements
+ENHANCEMENTS=/Users/Shared/Enhancements/kill_siri
 TRIGGER_LOCATION=$ENHANCEMENTS/trigger
 TRIGGER=$TRIGGER_LOCATION/.trigger
+
+KILLSIRI_SCRIPT=$ENHANCEMENTS/kill_siri.sh
+KILLSIRI_HELPER=$ENHANCEMENTS/kill_siri-helper.sh
 
 LOCAL_DAEMON_FOLDER=/Library/LaunchAgents
 LOCAL_DAEMON_NAME=info.term7.killall.siri.helper
@@ -28,20 +36,115 @@ GLOBAL_DAEMON_FOLDER=/Library/LaunchDaemons
 GLOBAL_DAEMON_NAME=info.term7.killall.siri
 GLOBAL_DAEMON=$GLOBAL_DAEMON_FOLDER/$GLOBAL_DAEMON_NAME.plist
 
-TRIGGER_COMMAND="touch $TRIGGER; rm $TRIGGER; rm -f -- ~/Library/Assistant/SiriAnalytics.db; rm -f -- ~/Library/Assistant/SiriAnalytics.db-shm; rm -f -- ~/Library/Assistant/SiriAnalytics.db-wal; rm -f -- ~/Library/Assistant/assistantdDidLaunch; rm -f -- ~/Library/Assistant/session_did_finish_timestamp; if [ -d ~/Library/Assistant/SiriVocabulary ]; then rm -rf ~/Library/Assistant/SiriVocabulary; fi; if [ -d ~/Library/Assistant/CustomVocabulary ]; then rm -rf ~/Library/Assistant/CustomVocabulary; fi; if [ -d ~/Library/Assistant/SiriReferenceResolution ]; then rm -rf ~/Library/Assistant/SiriReferenceResolution; fi"
-KILLALL_COMMAND="if pgrep SiriAUSP; then kill -9 \$(pgrep SiriAUSP); fi; if pgrep siriinferenced; then kill -9 \$(pgrep siriinferenced); fi; if pgrep siriactionsd; then kill -9 \$(pgrep siriactionsd); fi; if pgrep siriknowledged; then kill -9 \$(pgrep siriknowledged); fi; if pgrep sirittsd; then kill -9 \$(pgrep sirittsd); fi; if pgrep SiriTTSSynthesizerAU; then kill -9 \$(pgrep SiriTTSSynthesizerAU); fi;  if pgrep assistantd; then kill -9 \$(pgrep assistantd); fi; if pgrep com.apple.siri.embeddedspeech; then kill -9 \$(pgrep com.apple.siri.embeddedspeech); fi; if pgrep com.apple.SiriTTSService.TrialProxy; then kill -9 \$(pgrep com.apple.SiriTTSService.TrialProxy); fi; if pgrep com.apple.siri-distributed-evaluation; then kill -9 \$(pgrep com.apple.siri-distributed-evaluation); fi"
 if [ ! -d "$ENHANCEMENTS" ]; then
-    sudo -u $(stat -f '%Su' /dev/console) mkdir $ENHANCEMENTS
+    sudo -u $(stat -f '%Su' /dev/console) mkdir -p "$ENHANCEMENTS"
 fi
 
 if [ ! -d "$TRIGGER_LOCATION" ]; then
-    sudo -u $(stat -f '%Su' /dev/console) mkdir $TRIGGER_LOCATION
+    sudo -u $(stat -f '%Su' /dev/console) mkdir -p "$TRIGGER_LOCATION"
 fi
 
 sudo chown $(stat -f '%Su' /dev/console):wheel "$ENHANCEMENTS"
 sudo chown $(stat -f '%Su' /dev/console):staff "$TRIGGER_LOCATION"
 
 sudo chmod 775 "$TRIGGER_LOCATION"
+
+# -------Create Kill Script:--------
+
+sudo tee /Users/Shared/Enhancements/kill_siri/kill_siri.sh > /dev/null << 'EOF'
+#!/bin/bash
+
+LOGFILE="/Users/Shared/Enhancements/kill_siri/kill_siri.log"
+chmod 666 "$LOGFILE"
+
+# List of Siri-related processes to kill
+PROCS=(
+  SiriAUSP
+  siriinferenced
+  siriactionsd
+  siriknowledged
+  sirittsd
+  SiriTTSSynthesizerAU
+  assistantd
+  com.apple.siri.embeddedspeech
+  com.apple.SiriTTSService.TrialProxy
+  com.apple.siri-distributed-evaluation
+)
+
+echo "$(date): !!! KILL SIRI !!!" > "$LOGFILE"
+
+# Kill matching processes and log each kill
+for proc in "${PROCS[@]}"; do
+  if /usr/bin/pgrep "$proc" >/dev/null; then
+    /usr/bin/pkill -9 "$proc"
+    echo "$(/bin/date): Killed $proc" >> "$LOGFILE"
+  fi
+done
+EOF
+
+# -------Create Helper Script:--------
+
+sudo tee /Users/Shared/Enhancements/kill_siri/kill_siri-helper.sh > /dev/null << 'EOF'
+#!/bin/bash
+
+export USER=$(stat -f '%Su' /dev/console)
+export HOME="/Users/$USER"
+
+LOGFILE="/Users/Shared/Enhancements/kill_siri/kill_siri.log"
+
+# Touch the trigger for the LaunchDaemon
+touch /Users/Shared/Enhancements/kill_siri/trigger/.trigger
+rm /Users/Shared/Enhancements/kill_siri/trigger/.trigger 2>/dev/null
+
+# Files and folders to delete
+FILES=(
+  "$HOME/Library/Assistant/SiriAnalytics.db"
+  "$HOME/Library/Assistant/SiriAnalytics.db-shm"
+  "$HOME/Library/Assistant/SiriAnalytics.db-wal"
+  "$HOME/Library/Assistant/session_did_finish_timestamp"
+  "$HOME/Library/Assistant/assistantdDidLaunch"
+  "$HOME/Library/Assistant/.DS_Store"
+)
+
+FOLDERS=(
+  "$HOME/Library/Assistant/SiriVocabulary"
+  "$HOME/Library/Assistant/CustomVocabulary"
+  "$HOME/Library/Assistant/SiriReferenceResolution"
+)
+
+echo "$(date): Starting Siri cleanup" >> "$LOGFILE"
+
+# Remove files and log deletions or errors
+for file in "${FILES[@]}"; do
+  if [ -f "$file" ]; then
+    error_output=$(rm -f -- "$file" 2>&1)
+    if [ $? -eq 0 ]; then
+      echo "$(date): Deleted file: $file" >> "$LOGFILE"
+    else
+      echo "$(date): Error deleting file: $file. Error: $error_output" >> "$LOGFILE"
+    fi
+  fi
+done
+
+# Remove folders and log deletions or errors
+for folder in "${FOLDERS[@]}"; do
+  if [ -d "$folder" ]; then
+    error_output=$(rm -rf -- "$folder" 2>&1)
+    if [ $? -eq 0 ]; then
+      echo "$(date): Deleted folder: $folder" >> "$LOGFILE"
+    else
+      echo "$(date): Error deleting folder: $folder. Error: $error_output" >> "$LOGFILE"
+    fi
+  fi
+done
+
+echo "$(date): Cleanup complete" >> "$LOGFILE"
+EOF
+
+# -------Make Scripts Executable:--------
+
+sudo chmod +x "$KILLSIRI_SCRIPT"
+sudo chmod +x "$KILLSIRI_HELPER"
 
 # -------Local Helper Daemon:--------
 
@@ -50,18 +153,18 @@ sudo tee "$LOCAL_DAEMON" << EOF > /dev/null
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Label</key>
-	<string>${LOCAL_DAEMON_NAME}</string>
-	<key>ProgramArguments</key>
-	<array>
-		<string>/bin/sh</string>
-		<string>-c</string>
-		<string>${TRIGGER_COMMAND}</string>
-	</array>
-	<key>WatchPaths</key>
-	<array>
-		<string>~/Library/Assistant</string>
-	</array>
+    <key>Label</key>
+    <string>$LOCAL_DAEMON_NAME</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>${KILLSIRI_HELPER}</string>
+    </array>
+
+    <key>WatchPaths</key>
+    <array>
+        <string>${WATCH_LOCATION}</string>
+    </array>
 </dict>
 </plist>
 EOF
@@ -73,18 +176,18 @@ sudo tee "$GLOBAL_DAEMON" << EOF > /dev/null
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Label</key>
-	<string>${GLOBAL_DAEMON_NAME}</string>
-	<key>ProgramArguments</key>
-	<array>
-		<string>/bin/sh</string>
-		<string>-c</string>
-		<string>${KILLALL_COMMAND}</string>
-	</array>
-	<key>WatchPaths</key>
-	<array>
-		<string>${TRIGGER_LOCATION}</string>
-	</array>
+    <key>Label</key>
+    <string>$GLOBAL_DAEMON_NAME</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>${KILLSIRI_SCRIPT}</string>
+    </array>
+
+    <key>WatchPaths</key>
+    <array>
+        <string>${TRIGGER_LOCATION}</string>
+    </array>
 </dict>
 </plist>
 EOF

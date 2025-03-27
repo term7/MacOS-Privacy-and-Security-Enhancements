@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#   UNINSTALL_kill-siri.sh
+#   UNINSTALL_kill_siri.sh
 #   term7 / 20.08.2022
 #
 #   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time - yet we have written this script with users in mind that are not yet used to the command line.
@@ -16,7 +16,6 @@
 
 # -------Styles:--------
 
-lil=$(tput setaf 255,000,255)
 bold=$(tput bold)
 reset=$(tput sgr0)
 
@@ -136,9 +135,7 @@ case $DELETE in
 
 # -------Variables:--------
 
-ENHANCEMENTS=/Users/Shared/Enhancements
-TRIGGER_LOCATION=$ENHANCEMENTS/trigger
-TRIGGER=$TRIGGER_LOCATION/.trigger
+SIRI_LOCATION=/Users/Shared/Enhancements/kill_siri
 
 LOCAL_DAEMON_FOLDER=/Library/LaunchAgents
 LOCAL_DAEMON_NAME=info.term7.killall.siri.helper
@@ -175,12 +172,12 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo "----------------------------delete Trigger Location-----------------------------"
+echo "------------------------------delete Siri Location------------------------------"
 echo " "
-echo "if [ -d \"${TRIGGER_LOCATION}\" ]; then sudo -u $(stat -f '%Su' /dev/console) rm -rf ${TRIGGER_LOCATION} fi"
+echo "if [ -d \"${SIRI_LOCATION}\" ]; then sudo -u $(stat -f '%Su' /dev/console) rm -rf ${SIRI_LOCATION} fi"
 
-if [ -d "$TRIGGER_LOCATION" ]; then
-    sudo -u $(stat -f '%Su' /dev/console) rm -rf $TRIGGER_LOCATION
+if [ -d "$SIRI_LOCATION" ]; then
+    sudo -u $(stat -f '%Su' /dev/console) rm -rf $SIRI_LOCATION
 fi
 
 sleep 1
