@@ -7,6 +7,7 @@
 
 # 01 About MacOS Privacy and Security Settings
 
+MORE INFO:[https://term7.info/macos-privacy-security-settings/](https://term7.info/macos-privacy-security-settings/)
 
 The installation scripts in this repository are interactive scripts that guide you through all relevant standard MacOS Privacy and Security Settings. The scripts also give you a brief explanation of each available option, so you can make an informed decision wether or not you want to change the respective system setting. Please note that at the time we do not have access to the latest ARM64 Silicon Mac with M1 Security Chip. We wrote and tested this script on an Intel-based Mac running MacOS Monterey and MacOS Ventura. To run our script, you first have to download it.
 

@@ -9,6 +9,8 @@
 
 # 01 About MacPorts
 
+MORE INFO:[https://term7.info/install-macports/](https://term7.info/install-macports/)
+
 The MacPorts Project is an open-source community initiative that enables you to compile software that runs natively on Linux (UNIX). We use MacPorts to install FOSS, software and command line tools that are otherwise not available on MacOS, but very useful to enhance our digital security and our online privacy.
  
 MacPorts requires XCODE and XCODE COMMAND LINE TOOLS to be installed on your system. Please install Xcode from the Apple AppStore. Alternatively you can dowload Xcode from the [Apple Developer Website](https://developer.apple.com/xcode/resources/).

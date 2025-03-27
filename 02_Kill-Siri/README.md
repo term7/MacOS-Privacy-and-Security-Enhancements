@@ -1,5 +1,7 @@
 # KILL SIRI
 
+MORE INFO:[https://term7.info/kill-siri/](https://term7.info/kill-siri/)
+
 Apple does not allow you to disable Siri permanently unless you disable your Mac's SIP, because since MacOS BigSur Siri is baked into the core operating system - which is protected by Apple's System Integrity Protection (SIP). In oder to disable Siri completely, you have to first disable SIP, unload Siri and then keep SIP disabled, which will make your computer less secure and more vulnerable to external attacks. As soon as you re-enable SIP Siri will be reactivated too, even if you did disable Siri in your System Preferences.
 
 With SIP enabled and Siri switched off in your System Preferences, depending on your version of MacOS, the following processes will keep to run in the background of your computer (tested on MacOS Monterey 12.5.1, MacOS Ventura 13.0.1 and MacOS Sonoma 14.5):
