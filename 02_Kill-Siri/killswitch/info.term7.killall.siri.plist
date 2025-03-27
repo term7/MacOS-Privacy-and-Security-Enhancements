@@ -4,10 +4,12 @@
 <dict>
     <key>Label</key>
     <string>info.term7.killall.siri</string>
+
     <key>ProgramArguments</key>
     <array>
         <string>/Users/Shared/Enhancements/kill_siri/kill_siri.sh</string>
     </array>
+
     <key>WatchPaths</key>
     <array>
         <string>/Users/Shared/Enhancements/kill_siri/trigger</string>
