@@ -5,7 +5,7 @@
 - [03 RESOURCES](#03-resoures)
 
 
-# 01 - About MacOS Privacy and Security Settings
+# 01 About MacOS Privacy and Security Settings
 
 
 Our scripts for [MacOS Ventura](script/MacOS-Ventura_Privacy-and-Security-Settings.sh) and for [MacOS Monterey](script/MacOS-Monterey_Privacy-and-Security-Settings.sh) are interactive scripts that guide you through all relevant standard MacOS Privacy and Security Settings. The scripts also give you a brief explanation of each available option, so you can make an informed decision wether or not you want to change the respective system setting. Please note that at the time we do not have access to the latest ARM64 Silicon Mac with M1 Security Chip. We wrote and tested this script on an Intel-based Mac running MacOS Monterey and MacOS Ventura. To run our script, you first have to download it.
@@ -58,7 +58,7 @@ Github Mirror:
 
 Furthermore we have written an additional [script](https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/02_Kill-Siri/script/kill-siri.sh) that sets up a [KillSwitch](https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/02_Kill-Siri) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
 
-# 02 - SETTINGS FEATURE LIST
+# 02 SETTINGS FEATURE LIST
 
 Our script guides you through the following Privacy and Security Settings:
 
@@ -90,7 +90,7 @@ Our script guides you through the following Privacy and Security Settings:
 09) <i>Enable FileVault (Full Disk Encryption)</i>
 10) <i>Lockdown Mode (MacOS Ventura or newer)</i>
 
-# 03 - RESOURCES
+# 03 RESOURCES
 
 Special thanks to https://privacy.sexy/ and https://github.com/drduh/macOS-Security-and-Privacy-Guide.<br>
 Without these two resources, this guide would not exist.
