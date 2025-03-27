@@ -21,17 +21,22 @@ In your Terminal, navigate to your Downloads Folder:
 
 Download the script for MacOS Monterey or MacOS Ventura:
 
-    # MacOS Monterey:
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Monterey_Privacy-and-Security-Settings.sh
+    # MacOS Sequoia:
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Sequoia_Privacy-and-Security-Settings.sh
     # MacOS Ventura:
     curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Ventura_Privacy-and-Security-Settings.sh
+    # MacOS Monterey:
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Monterey_Privacy-and-Security-Settings.sh
 
 Github Mirror:
 
-    # MacOS Monterey:
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Monterey_Privacy-and-Security-Settings.sh
+    # MacOS Sequoia:
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Sequoia_Privacy-and-Security-Settings.sh
     # MacOS Ventura:
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Ventura_Privacy-and-Security-Settings.sh
+    # MacOS Monterey:
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Monterey_Privacy-and-Security-Settings.sh
+
 
 Give the respective file execute permissions:
 
@@ -44,17 +49,20 @@ Execute the script (depending wether you are on MacOS Monterey or MacOS Ventura)
 
 Our script can adjust most System Preferences that are enabled by default in MacOS. You just have to press [Y/y] + [ENTER] to proceed, [N/n] + [ENTER] to skip a specific option, or [C/c] + [ENTER] to cancel. If manual action is required, this script will open the respective Settings Tab for you, so you can implement the changes yourself. If you want to use a faster version of this script with less explanation (which is useful if you want to skip quickly through the options), you can download our speedy install script for [MacOS Ventura](script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh) or [MacOS Monterey](script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh) instead:
 
-    # MacOS Monterey:
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh
+    # MacOS Sequoia:
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Sequoia_Privacy-and-Security-Settings.sh
     # MacOS Ventura:
     curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh
+    # MacOS Monterey:
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh
 
 Github Mirror:
 
+    # Github MacOS Sequoia:
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Sequoia_Privacy-and-Security-Settings.sh    # Github MacOS Ventura:
+    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh
     # Github MacOS Monterey:
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh
-    # Github MacOS Ventura:
-    curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh
 
 Furthermore we have written an additional [script](https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/02_Kill-Siri/script/kill-siri.sh) that sets up a [KillSwitch](https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/02_Kill-Siri) for you if you decide to disable Siri, yet you want to keep your Mac's System Integrity Protection (SIP) enabled.
 
