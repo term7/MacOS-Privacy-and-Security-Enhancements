@@ -16,6 +16,8 @@
 [https://term7.info/spoofmac/](https://term7.info/spoofmac/)<br>
 [https://term7.info/troubleshooting-spoofmac/](https://term7.info/troubleshooting-spoofmac/)
 
+* * *
+
 SpoofMAC randomizes your Mac's MAC Adress.
 
 SpoofMAC originally was written in Python by feross:
