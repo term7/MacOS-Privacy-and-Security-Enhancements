@@ -10,7 +10,7 @@
 - [08 Example AppleScript for DaVinci Resolve](#08-example-applescript-for-davinci-resolve)
 
 
-# 01 - About SpoofMAC
+# 01 About SpoofMAC
 
 SpoofMAC randomizes your Mac's MAC Adress.
 
@@ -22,7 +22,7 @@ Feross also provides a node.js port of this package:
 
 
 
-# 02 - Why install SpoofMAC
+# 02 Why install SpoofMAC
 
 
 *"The MAC address is a unique identifier tied to your physical Network Interface (Wired Ethernet or Wi-Fi) and could of course be used to track you if it is not randomized."*
@@ -37,7 +37,7 @@ To spoof your MAC address is especially recommended if you are working on a lapt
 
 
 
-# 03 - Installation
+# 03 Installation
 
 Our [interactive script](script/install_SpoofMAC.sh) installs [spoof](https://github.com/feross/spoof) by Github user *feross* and sets up a <em>LaunchDaemon</em>, that automatically randomizes your Mac's MAC Adress every time you reboot your computer. To install *spoof* you need to install *nodejs*. Our script takes care of that too, but it requires [MacPorts](https://www.macports.org/) to install the required software packages. If you have not yet installed MacPorts, please install MacPorts first! We have written an easy [MacPorts installation script](../03_MacPorts/install_MacPorts.sh) that guides you through the installation of MacPorts.
 
@@ -71,7 +71,7 @@ Alternatively you can also download our non-interactive [speedy install script](
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/SPEEDY-INSTALL_SpoofMAC.sh
 
 
-# 04 - How to use SpoofMAC
+# 04 How to use SpoofMAC
 
 You can use SpoofMAC to manually change your MAC addresses via the command line. To do so, open a Terminal Window to type commands.
 
@@ -115,22 +115,22 @@ Reset device to its original MAC address (requires root):
     sudo spoof reset wi-fi
 
 
-# 05 - MAC Address Tracking
+# 05 MAC Address Tracking
 
 The MAC address of a wireless device constitutes an excellent unique identifier to track its owner. MAC addresses of wireless devices are collected and stored by several systems. For instance logs of wireless routers include the MAC address of all devices that have been connected. Those logs contain events related to management aspects of the wireless network (association, authentication, disconnection, etc.) and each event associates a MAC address with a timestamp.
 Another example is Radio-Frequency tracking systems that are specifically designed to track the movement of individuals thanks to the wireless devices that they are wearing. Those systems are based on a set of sensors collecting wireless signals that triangulate and track the movement of individuals over time. Those systems are deployed in areas such as shopping centres, museums, roads, subway stations, etc. - where they provide valuable information on mobility patterns and shopping habits.
 
-# 06 - Resources
+# 06 Resources
 
 Wikipedia: https://en.wikipedia.org/wiki/MAC_address<br>
 The Hitchhiker's Guide to Online Anonymity: https://anonymousplanet.org/guide#your-wi-fi-or-ethernet-mac-address<br>
 Github (feross): https://github.com/feross/spoof
 
-# 07 - Proprietary Software License Issues
+# 07 Proprietary Software License Issues
 
 Sometimes when you purchase proprietary software, you have to enter a license key in order to use it. Depending on the software, after you restart your computer with SpoofMac installed as a service, it suddenly stops working unless you enter your license key again. This can quickly become very annoying and is an indicator that the software you purchased checks the MAC address of your computer in order to verify that it is the machine that was connected to a specific license key. If it cannot find the MAC address you used when you registered the product, the software thinks it is on a new machine and will force you to do the registration process again.
 The only way to avoid re-registration is to change your devices MAC address back to the MAC address you used when you registered the software. Please be aware that it is not necessarily the original MAC address of your computer! It can be a spoofed MAC address already.
 
-# 08 - Example AppleScript for DaVinci Resolve
+# 08 Example AppleScript for DaVinci Resolve
 
 If you use the free version of DaVinci Resolve, there are no licensing issues. However if you purchased the professional version of DaVinci Resolve, you will have exaclty the issue we described above. Fortunately there is an easy fix. We wrote a small AppleScript that changes 
