@@ -22,23 +22,37 @@ BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLO
 
 Open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder).
 In your Terminal, navigate to your Downloads Folder:
-```cd ~/Downloads```
+```
+cd ~/Downloads
+```
 
 Download the script (Codeberg or Github Mirror):
 
-```curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/install_MacPorts.sh```
-```curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/install_MacPorts.sh```
+```
+curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/install_MacPorts.sh
+```
+```
+curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/install_MacPorts.sh
+```
 
 Give the respective file execute permissions:
-```chmod +x install_MacPorts.sh```
+```
+chmod +x install_MacPorts.sh
+```
 
 Execute the script:
-```./install_MacPorts.sh```
+```
+./install_MacPorts.sh
+```
 
 If you want to uninstall MacPorts from your system, please download and execute our [UNINSTALL SCRIPT](script/UNINSTALL_MacPorts.sh) (Codeberg or Github Mirror):
 
-```curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/UNINSTALL_MacPorts.sh```
-```curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/UNINSTALL_MacPorts.sh```
+```
+curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/UNINSTALL_MacPorts.sh
+```
+```
+curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/UNINSTALL_MacPorts.sh
+```
 
 # 03 Automatic Updates
 
@@ -50,41 +64,71 @@ Please Notice:
 
 We use the Shared Folder on our machine to run our own scripts. In our setup the location for the Macports Updater Script is: */Users/Shared/Enhancements/macports_updater*. If you want to use another location for the script, you will have to adjust the path variable in the [LaunchDaemon](macports_updater/info.term7.macports.updater.plist) accordingly. To copy our setup, you first have to create the required folder structure:
 
-```mkdir -p /Users/Shared/Enhancements/macports_updater```
+```
+mkdir -p /Users/Shared/Enhancements/macports_updater
+```
 
 Navigate to the Macorts Updater Folder:
-```cd /Users/Shared/Enhancements/macports_updater```
+```
+cd /Users/Shared/Enhancements/macports_updater
+```
 
 Download the script (Codeberg or Github Mirror):
 
-```curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/macports_updater/macports_updater.sh```
-```curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/macports_updater/macports_updater.sh```
+```
+curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/macports_updater/macports_updater.sh
+```
+```
+curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/macports_updater/macports_updater.sh
+```
 
 Setup the log files:
-```touch macports.err.log && touch macports.out.log```
+```
+ouch macports.err.log && touch macports.out.log
+```
 
 Setup ownership and permissions:
 
-```sudo chown root:wheel macports_updater.sh```
-```sudo chown $(stat -f '%Su' /dev/console):admin macports.err.log macports.out.log```
-```sudo chmod 744 macports_updater.sh```
-```sudo chmod 644 macports.err.log macports.out.log```
+```
+sudo chown root:wheel macports_updater.sh
+```
+```
+sudo chown $(stat -f '%Su' /dev/console):admin macports.err.log macports.out.log
+```
+```
+sudo chmod 744 macports_updater.sh
+```
+```
+sudo chmod 644 macports.err.log macports.out.log
+```
 
 Next you want to setup the LaunchDaemon that runs the updater. Navigate to the default location where LaunchDaemons are stored:
-```cd /Library/LaunchDaemons```
+```
+cd /Library/LaunchDaemons
+```
 
 Download the LaunchDaemon (Codeberg or Github Mirror):
 
-```curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/macports_updater/info.term7.macports.updater.plist```
-```curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/macports_updater/info.term7.macports.updater.plist```
+```
+curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/macports_updater/info.term7.macports.updater.plist
+```
+```
+curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/macports_updater/info.term7.macports.updater.plist
+```
 
 Setup ownership and permissions:
 
-```sudo chown root:wheel info.term7.macports.updater.plist```
-```sudo chmod 644 info.term7.macports.updater.plist```
+```
+sudo chown root:wheel info.term7.macports.updater.plist
+```
+```
+sudo chmod 644 info.term7.macports.updater.plist
+```
 
 Manually start the LaunchDaemon (only required once):
-```sudo launchctl load info.term7.macports.updater.plist```
+```
+sudo launchctl load info.term7.macports.updater.plist
+```
 
 # 04 Usage
 
@@ -93,15 +137,23 @@ If you do not want to use our LaunchDaemon to update MacPorts automatically, you
 Please refer to the MacPorts documentation for a full manual: [https://guide.macports.org/](https://guide.macports.org/)
 
 Update MacPorts:
-```sudo port -v selfupdate```
+```
+sudo port -v selfupdate
+```
 
 Upgrade your MacPorts Installations:
-```sudo port -v upgrade outdated```
+```
+sudo port -v upgrade outdated
+```
 
 
 Unclutter your MacPorts Installation:
-```sudo port uninstall inactive```
-```sudo port uninstall leaves```
+```
+sudo port uninstall inactive
+```
+```
+sudo port uninstall leaves
+```
 
 # 05 Resources
 

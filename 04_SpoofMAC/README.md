@@ -45,28 +45,46 @@ BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLO
 
 Open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder).
 In your Terminal, navigate to your Downloads Folder:
-```cd ~/Downloads```
+```
+cd ~/Downloads
+```
 
 Download the script (Codeberg or Github Mirror):
 
-```curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/04_SpoofMAC/script/install_SpoofMAC.sh```
-```curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/install_SpoofMAC.sh```
+```
+curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/04_SpoofMAC/script/install_SpoofMAC.sh
+```
+```
+curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/install_SpoofMAC.sh
+```
 
 Give the respective file execute permissions:
-```chmod +x install_SpoofMAC.sh```
+```
+chmod +x install_SpoofMAC.sh
+```
 
 Execute the script:
-```./install_SpoofMAC.sh```
+```
+./install_SpoofMAC.sh
+```
 
 If you want to uninstall MacPorts from your system, please download and execute our [UNINSTALL SCRIPT](script/UNINSTALL_SpoofMAC.sh) (Codeberg or Github Mirror):
 
-```curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/04_SpoofMAC/script/UNINSTALL_SpoofMAC.sh```
-```curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/UNINSTALL_SpoofMAC.sh```
+```
+curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/04_SpoofMAC/script/UNINSTALL_SpoofMAC.sh
+```
+```
+curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/UNINSTALL_SpoofMAC.sh
+```
 
 Alternatively you can also download our non-interactive [speedy install script](script/SPEEDY-INSTALL_SpoofMAC.sh) (Codeberg or Github Mirror):
 
-```curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/04_SpoofMAC/script/SPEEDY-INSTALL_SpoofMAC.sh```
-```curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/SPEEDY-INSTALL_SpoofMAC.sh```
+```
+curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/04_SpoofMAC/script/SPEEDY-INSTALL_SpoofMAC.sh
+```
+```
+curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/SPEEDY-INSTALL_SpoofMAC.sh
+```
 
 
 # 04 How to use SpoofMAC
@@ -75,11 +93,15 @@ You can use SpoofMAC to manually change your MAC addresses via the command line.
 
 
 List all usage instructions:
-```spoof --help```
+```
+spoof --help
+```
 
 
 List all available devices:
-```spoof list```
+```
+spoof list
+```
 
 Example Output:
 ```
@@ -90,7 +112,9 @@ Example Output:
 ```
 
 List available devices, but only those on Wi-Fi:
-```spoof list --wifi```
+```
+spoof list --wifi
+```
 
 Example Output:
 ```
@@ -100,17 +124,27 @@ Example Output:
 
 Randomize MAC address (requires root) using hardware port name. IMPORTANT: You first have to switch off wifi, otherwise this command will fail to execute:
 
-```networksetup -setairportpower en0 off```
-```sudo spoof randomize wi-fi```
+```
+networksetup -setairportpower en0 off
+```
+```
+sudo spoof randomize wi-fi
+```
 
 
 Set device MAC address to something specific (requires root). IMPORTANT: You first have to switch off wifi, otherwise this command will fail to execute:
 
-```networksetup -setairportpower en0 off```
-```sudo spoof set 00:00:00:00:00:00 wi-fi```
+```
+networksetup -setairportpower en0 off
+```
+```
+sudo spoof set 00:00:00:00:00:00 wi-fi
+```
 
 Reset device to its original MAC address (requires root):
-```sudo spoof reset wi-fi```
+```
+sudo spoof reset wi-fi
+```
 
 
 # 05 MAC Address Tracking
