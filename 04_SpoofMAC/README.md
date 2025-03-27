@@ -1,13 +1,13 @@
 # SpoofMAC
 
-01) [About SpoofMAC](#01-about-spoofmac)
-02) [Why install SpoofMAC](#02-why-install-spoofmac)
-03) [Installation](#03-installation)
-04) [How to use SpoofMAC](#04-how-to-use-spoofmac)
-05) [MAC Address Tracking](#05-mac-address-tracking)
-06) [Resources](#06-resources)
-07) [Proprietary Software License Issues](#07-proprietary-software-license-issues)
-08) [Example AppleScript for DaVinci Resolve](#08-example-applescript-for-davinci-resolve)
+- [01 About SpoofMAC](#01-about-spoofmac)
+- [02 Why install SpoofMAC](#02-why-install-spoofmac)
+- [03 Installation](#03-installation)
+- [04 How to use SpoofMAC](#04-how-to-use-spoofmac)
+- [05 MAC Address Tracking](#05-mac-address-tracking)
+- [06 Resources](#06-resources)
+- [07 Proprietary Software License Issues](#07-proprietary-software-license-issues)
+- [08 Example AppleScript for DaVinci Resolve](#08-example-applescript-for-davinci-resolve)
 
 
 # 01 - About SpoofMAC

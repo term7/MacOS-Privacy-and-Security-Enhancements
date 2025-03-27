@@ -1,10 +1,10 @@
 # MACPORTS
 
-01) [About MacPorts](#01-about-macports)
-02) [Installation](#02-installation)
-03) [Automatic Updates](#03-automatic-updates)
-04) [Usage](#04-usage)
-05) [Resources](#05-resources)
+- [01 About MacPorts](#01-about-macports)
+- [02 Installation](#02-installation)
+- [03 Automatic Updates](#03-automatic-updates)
+- [04 Usage](#04-usage)
+- [05 Resources](#05-resources)
 
 
 # 01 - About MacPorts
