@@ -49,6 +49,9 @@ In your Terminal, navigate to your Downloads Folder:
     cd ~/Downloads
 
 Download the script:
+   curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/04_SpoofMAC/script/install_SpoofMAC.sh
+
+Github Mirror:
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/install_SpoofMAC.sh
 
@@ -61,10 +64,16 @@ Execute the script:
     ./install_SpoofMAC.sh
 
 If you want to uninstall MacPorts from your system, please download and execute our [UNINSTALL SCRIPT](script/UNINSTALL_SpoofMAC.sh):
+   curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/04_SpoofMAC/script/UNINSTALL_SpoofMAC.sh
+
+Github Mirror:
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/UNINSTALL_SpoofMAC.sh
 
 Alternatively you can also download our non-interactive [speedy install script](script/SPEEDY-INSTALL_SpoofMAC.sh):
+   curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/04_SpoofMAC/script/SPEEDY-INSTALL_SpoofMAC.sh
+
+Github Mirror:
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/04_SpoofMAC/script/SPEEDY-INSTALL_SpoofMAC.sh
 

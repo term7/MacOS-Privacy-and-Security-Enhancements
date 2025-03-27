@@ -16,7 +16,7 @@ MacPorts requires XCODE and XCODE COMMAND LINE TOOLS to be installed on your sys
 
 # 02 - Installation
 
-Our [installation script](script/install_MacPorts.sh) for MacPorts is an interactive script that will help you to compile MacPorts from source. Furthermore it can set up a System Service that updates MacPorts on a regular basis. To run our script, you first have to download it.
+Our [installation script](install_MacPorts.sh) for MacPorts is an interactive script that will help you to compile MacPorts from source. Furthermore it can set up a System Service that updates MacPorts on a regular basis. To run our script, you first have to download it.
 
 BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.
 
@@ -26,6 +26,10 @@ In your Terminal, navigate to your Downloads Folder:
     cd ~/Downloads
 
 Download the script:
+
+   curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts/install_MacPorts.sh
+
+Github Mirror:
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/install_MacPorts.sh
 
@@ -38,6 +42,10 @@ Execute the script:
     ./install_MacPorts.sh
 
 If you want to uninstall MacPorts from your system, please download and execute our [UNINSTALL SCRIPT](script/UNINSTALL_MacPorts.sh):
+
+   curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts/UNINSTALL_MacPorts.sh
+
+Github Mirror:
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/UNINSTALL_MacPorts.sh
 
@@ -59,6 +67,10 @@ Navigate to the Macorts Updater Folder:
 
 Download the script:
 
+   curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts/macports_updater/macports_updater.sh
+
+Github Mirror:
+
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/macports_updater/macports_updater.sh
 
 Setup the log files:
@@ -77,6 +89,10 @@ Next you want to setup the LaunchDaemon that runs the updater. Navigate to the d
     cd /Library/LaunchDaemons
 
 Download the LaunchDaemon:
+
+   curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts/macports_updater/info.term7.macports.updater.plist
+
+Github Mirror:
 
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/macports_updater/info.term7.macports.updater.plist
 
