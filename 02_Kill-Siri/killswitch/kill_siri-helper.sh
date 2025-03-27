@@ -20,7 +20,7 @@ FILES=(
 )
 
 FOLDERS=(
-  "$HOME/Library/Assistant/SiriVocabulary"
+#  "$HOME/Library/Assistant/SiriVocabulary" -> protected by SIP
   "$HOME/Library/Assistant/CustomVocabulary"
   "$HOME/Library/Assistant/SiriReferenceResolution"
 )

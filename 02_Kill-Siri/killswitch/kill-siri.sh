@@ -17,7 +17,7 @@ PROCS=(
   com.apple.siri-distributed-evaluation
 )
 
-echo "$(date): !!! KILL SIRI !!!" > "$LOGFILE"
+echo "$(date): !!!!! KILL SIRI !!!!!" > "$LOGFILE"
 
 # Kill matching processes and log each kill
 for proc in "${PROCS[@]}"; do
