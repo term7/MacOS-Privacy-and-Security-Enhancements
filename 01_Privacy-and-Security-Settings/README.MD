@@ -23,8 +23,10 @@ Download the script for MacOS Monterey or MacOS Ventura:
 
     # MacOS Sequoia:
     curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Sequoia_Privacy-and-Security-Settings.sh
+
     # MacOS Ventura:
     curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Ventura_Privacy-and-Security-Settings.sh
+
     # MacOS Monterey:
     curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Monterey_Privacy-and-Security-Settings.sh
 
@@ -32,8 +34,10 @@ Github Mirror:
 
     # MacOS Sequoia:
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Sequoia_Privacy-and-Security-Settings.sh
+
     # MacOS Ventura:
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Ventura_Privacy-and-Security-Settings.sh
+
     # MacOS Monterey:
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/01_Privacy-and-Security-Settings/script/MacOS-Monterey_Privacy-and-Security-Settings.sh
 
@@ -51,8 +55,10 @@ Our script can adjust most System Preferences that are enabled by default in Mac
 
     # MacOS Sequoia:
     curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Sequoia_Privacy-and-Security-Settings.sh
+
     # MacOS Ventura:
     curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh
+
     # MacOS Monterey:
     curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh
 
