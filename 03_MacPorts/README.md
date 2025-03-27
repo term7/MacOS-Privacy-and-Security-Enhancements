@@ -18,7 +18,7 @@ MacPorts requires XCODE and XCODE COMMAND LINE TOOLS to be installed on your sys
 
 Our [installation script](install_MacPorts.sh) for MacPorts is an interactive script that will help you to compile MacPorts from source. Furthermore it can set up a System Service that updates MacPorts on a regular basis. To run our script, you first have to download it.
 
-BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.
+**BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.**
 
 Open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder).
 In your Terminal, navigate to your Downloads Folder:

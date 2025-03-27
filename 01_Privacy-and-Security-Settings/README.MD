@@ -10,9 +10,9 @@
 
 The installation scripts in this repository are interactive scripts that guide you through all relevant standard MacOS Privacy and Security Settings. The scripts also give you a brief explanation of each available option, so you can make an informed decision wether or not you want to change the respective system setting. Please note that at the time we do not have access to the latest ARM64 Silicon Mac with M1 Security Chip. We wrote and tested this script on an Intel-based Mac running MacOS Monterey and MacOS Ventura. To run our script, you first have to download it.
 
-COMMENT: BETWEEN MACOS MONTEREY AND MACOS VENTURA, APPLE MADE SOME MAJOR CHANGES TO THEIR OPERATING SYSTEM. OUR SCRIPT HAS BEEN TESTED ON MACOS SONOMA AS WELL - ON AN INTEL BASED MAC (LATE 2019, RUNNING MACOS SONOMA). THE SCRIPT FOR MACOS VENTURA STILL WORKS WITHOUT ANY PROBLEMS.
+**COMMENT: BETWEEN MACOS MONTEREY AND MACOS VENTURA, APPLE MADE SOME MAJOR CHANGES TO THEIR OPERATING SYSTEM. OUR SCRIPT HAS BEEN TESTED ON MACOS SONOMA AS WELL - ON AN INTEL BASED MAC (LATE 2019, RUNNING MACOS SONOMA). THE SCRIPT FOR MACOS VENTURA STILL WORKS WITHOUT ANY PROBLEMS.**
 
-BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.
+**BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.**
 
 Open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder).
 In your Terminal, navigate to your Downloads Folder:

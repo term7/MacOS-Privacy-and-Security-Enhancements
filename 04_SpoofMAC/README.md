@@ -41,7 +41,7 @@ To spoof your MAC address is especially recommended if you are working on a lapt
 
 Our [interactive script](script/install_SpoofMAC.sh) installs [spoof](https://github.com/feross/spoof) by Github user *feross* and sets up a <em>LaunchDaemon</em>, that automatically randomizes your Mac's MAC Adress every time you reboot your computer. To install *spoof* you need to install *nodejs*. Our script takes care of that too, but it requires [MacPorts](https://www.macports.org/) to install the required software packages. If you have not yet installed MacPorts, please install MacPorts first! We have written an easy [MacPorts installation script](../03_MacPorts/install_MacPorts.sh) that guides you through the installation of MacPorts.
 
-BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.
+**BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.**
 
 Open the Terminal.app (found with Spotlight or in your Applications -> Utilities Folder).
 In your Terminal, navigate to your Downloads Folder:
