@@ -22,9 +22,9 @@ In your Terminal, navigate to your Downloads Folder:
 Download the script for MacOS Monterey or MacOS Ventura:
 
     # MacOS Monterey:
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Monterey_Privacy-and-Security-Settings.sh
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Monterey_Privacy-and-Security-Settings.sh
     # MacOS Ventura:
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Ventura_Privacy-and-Security-Settings.sh
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/MacOS-Ventura_Privacy-and-Security-Settings.sh
 
 Github Mirror:
 
@@ -45,9 +45,9 @@ Execute the script (depending wether you are on MacOS Monterey or MacOS Ventura)
 Our script can adjust most System Preferences that are enabled by default in MacOS. You just have to press [Y/y] + [ENTER] to proceed, [N/n] + [ENTER] to skip a specific option, or [C/c] + [ENTER] to cancel. If manual action is required, this script will open the respective Settings Tab for you, so you can implement the changes yourself. If you want to use a faster version of this script with less explanation (which is useful if you want to skip quickly through the options), you can download our speedy install script for [MacOS Ventura](script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh) or [MacOS Monterey](script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh) instead:
 
     # MacOS Monterey:
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Monterey_Privacy-and-Security-Settings.sh
     # MacOS Ventura:
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/01_Privacy-and-Security-Settings/script/SPEEDY-INSTALL_MacOS-Ventura_Privacy-and-Security-Settings.sh
 
 Github Mirror:
 

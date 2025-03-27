@@ -27,7 +27,7 @@ In your Terminal, navigate to your Downloads Folder:
 
 Download the script (Codeberg or Github Mirror):
 
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts/install_MacPorts.sh
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/install_MacPorts.sh
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/install_MacPorts.sh
 
 Give the respective file execute permissions:
@@ -40,7 +40,7 @@ Execute the script:
 
 If you want to uninstall MacPorts from your system, please download and execute our [UNINSTALL SCRIPT](script/UNINSTALL_MacPorts.sh) (Codeberg or Github Mirror):
 
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts/UNINSTALL_MacPorts.sh
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/UNINSTALL_MacPorts.sh
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/UNINSTALL_MacPorts.sh
 
 # 03 Automatic Updates
@@ -61,7 +61,7 @@ Navigate to the Macorts Updater Folder:
 
 Download the script (Codeberg or Github Mirror):
 
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts/macports_updater/macports_updater.sh
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/macports_updater/macports_updater.sh
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/macports_updater/macports_updater.sh
 
 Setup the log files:
@@ -81,7 +81,7 @@ Next you want to setup the LaunchDaemon that runs the updater. Navigate to the d
 
 Download the LaunchDaemon (Codeberg or Github Mirror):
 
-    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts/macports_updater/info.term7.macports.updater.plist
+    curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/03_MacPorts/macports_updater/info.term7.macports.updater.plist
     curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/03_MacPorts/macports_updater/info.term7.macports.updater.plist
 
 Setup ownership and permissions:
