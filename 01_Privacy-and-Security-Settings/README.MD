@@ -22,9 +22,7 @@ cd ~/Downloads
 
 * * *
 
-Download the script for MacOS Monterey or MacOS Ventura.
-
-#### CODEBERG
+#### CODEBERG
 
 **MacOS Sequoia:**
 ```
@@ -77,7 +75,7 @@ Our script can adjust most System Preferences that are enabled by default in Mac
 
 * * *
 
-#### CODEBERG
+#### CODEBERG
 
 **MacOS Sequoia:**
 ```
