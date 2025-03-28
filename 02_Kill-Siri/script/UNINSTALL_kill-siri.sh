@@ -200,6 +200,18 @@ echo "sudo rm ${GLOBAL_DAEMON}"
 sudo rm ${GLOBAL_DAEMON}
 sleep 1
 
+# -------Unlock SiriVocabulary:--------
+
+echo " "
+echo "-----------------------------unlock SiriVocabulary------------------------------"
+echo " "
+echo "sudo -u $(stat -f '%Su' /dev/console) chflags nouchg /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/SiriVocabulary"
+sudo -u $(stat -f '%Su' /dev/console) chflags nouchg /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/SiriVocabulary
+sleep 1
+echo "sudo -u $(stat -f '%Su' /dev/console) rm -rf /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/SiriVocabulary"
+sudo -u $(stat -f '%Su' /dev/console) rm -rf /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/SiriVocabulary
+sleep 1
+
 break;;
 
 # -------Input [C/c]: Abort:--------

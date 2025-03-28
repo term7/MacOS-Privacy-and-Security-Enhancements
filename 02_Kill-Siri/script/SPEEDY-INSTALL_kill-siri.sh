@@ -55,7 +55,27 @@ sudo tee /Users/Shared/Enhancements/kill_siri/kill_siri.sh > /dev/null << 'EOF'
 #!/bin/bash
 
 LOGFILE="/Users/Shared/Enhancements/kill_siri/kill_siri.log"
+mkdir -p "$(dirname "$LOGFILE")"
+touch "$LOGFILE"
 chmod 666 "$LOGFILE"
+
+log() {
+  echo "$(date): $1" >> "$LOGFILE"
+}
+
+run_and_log() {
+  CMD="$1"
+  log "Running: $CMD"
+  OUTPUT=$(eval "$CMD" 2>&1)
+  EXITCODE=$?
+  log "Exit code: $EXITCODE"
+  if [ -n "$OUTPUT" ]; then
+    log "Output: $OUTPUT"
+  fi
+  return $EXITCODE
+}
+
+echo "$(date): ===== KILL SIRI =====" > "$LOGFILE"
 
 # List of Siri-related processes to kill
 PROCS=(
@@ -71,13 +91,11 @@ PROCS=(
   com.apple.siri-distributed-evaluation
 )
 
-echo "$(date): !!! KILL SIRI !!!" > "$LOGFILE"
-
 # Kill matching processes and log each kill
 for proc in "${PROCS[@]}"; do
   if /usr/bin/pgrep "$proc" >/dev/null; then
-    /usr/bin/pkill -9 "$proc"
-    echo "$(/bin/date): Killed $proc" >> "$LOGFILE"
+    run_and_log "/usr/bin/pkill -9 $proc"
+    log "Killed $proc"
   fi
 done
 EOF
@@ -91,8 +109,27 @@ export USER=$(stat -f '%Su' /dev/console)
 export HOME="/Users/$USER"
 
 LOGFILE="/Users/Shared/Enhancements/kill_siri/kill_siri.log"
+mkdir -p "$(dirname "$LOGFILE")"
 
-# Touch the trigger for the LaunchDaemon
+log() {
+  echo "$(date): $1" >> "$LOGFILE"
+}
+
+run_and_log() {
+  CMD="$1"
+  log "Running: $CMD"
+  OUTPUT=$(eval "$CMD" 2>&1)
+  EXITCODE=$?
+  log "Exit code: $EXITCODE"
+  if [ -n "$OUTPUT" ]; then
+    log "Output: $OUTPUT"
+  fi
+  return $EXITCODE
+}
+
+log "===== CLEANUP ====="
+
+# Trigger the LaunchDaemon by touching then removing the trigger file
 touch /Users/Shared/Enhancements/kill_siri/trigger/.trigger
 rm /Users/Shared/Enhancements/kill_siri/trigger/.trigger 2>/dev/null
 
@@ -107,21 +144,19 @@ FILES=(
 )
 
 FOLDERS=(
-  "$HOME/Library/Assistant/SiriVocabulary"
+# "$HOME/Library/Assistant/SiriVocabulary" -> PROTECTED BY SIP
+#  LAUNCHAGENT CANNOT DELETE THIS FOLDER // we implemented a workaround in installation the scripts!
   "$HOME/Library/Assistant/CustomVocabulary"
   "$HOME/Library/Assistant/SiriReferenceResolution"
 )
 
-echo "$(date): Starting Siri cleanup" >> "$LOGFILE"
-
 # Remove files and log deletions or errors
 for file in "${FILES[@]}"; do
   if [ -f "$file" ]; then
-    error_output=$(rm -f -- "$file" 2>&1)
-    if [ $? -eq 0 ]; then
-      echo "$(date): Deleted file: $file" >> "$LOGFILE"
+    if run_and_log "rm -f -- '$file'"; then
+      log "Deleted file: $file"
     else
-      echo "$(date): Error deleting file: $file. Error: $error_output" >> "$LOGFILE"
+      log "Error deleting file: $file"
     fi
   fi
 done
@@ -129,16 +164,15 @@ done
 # Remove folders and log deletions or errors
 for folder in "${FOLDERS[@]}"; do
   if [ -d "$folder" ]; then
-    error_output=$(rm -rf -- "$folder" 2>&1)
-    if [ $? -eq 0 ]; then
-      echo "$(date): Deleted folder: $folder" >> "$LOGFILE"
+    if run_and_log "rm -rf -- '$folder'"; then
+      log "Deleted folder: $folder"
     else
-      echo "$(date): Error deleting folder: $folder. Error: $error_output" >> "$LOGFILE"
+      log "Error deleting folder: $folder"
     fi
   fi
 done
 
-echo "$(date): Cleanup complete" >> "$LOGFILE"
+log "===== CLEANUP COMPLETE ====="
 EOF
 
 # -------Make Scripts Executable:--------
@@ -163,7 +197,7 @@ sudo tee "$LOCAL_DAEMON" << EOF > /dev/null
 
     <key>WatchPaths</key>
     <array>
-        <string>${WATCH_LOCATION}</string>
+        <string>~/Library/Assistant/</string>
     </array>
 </dict>
 </plist>
@@ -208,6 +242,12 @@ sudo launchctl load "$GLOBAL_DAEMON"
 
 sudo -u $(stat -f '%Su' /dev/console) touch /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/.tmp
 sudo -u $(stat -f '%Su' /dev/console) rm /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/.tmp
+
+# -------Delete SiriVocabulary Manually, recreate it and protect it, so that Siri cannot modify it anymore--------
+
+sudo -u $(stat -f '%Su' /dev/console) rm -rf /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/SiriVocabulary
+sudo -u $(stat -f '%Su' /dev/console) mkdir /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/SiriVocabulary
+sudo -u $(stat -f '%Su' /dev/console) chflags uchg /Users/$(stat -f '%Su' /dev/console)/Library/Assistant/SiriVocabulary
 
 echo " "
 echo "Setup Finished! Press ${bold}[ANY KEY]${reset} to exit: "
