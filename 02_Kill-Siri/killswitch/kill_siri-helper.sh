@@ -40,7 +40,7 @@ FILES=(
 
 FOLDERS=(
 # "$HOME/Library/Assistant/SiriVocabulary" -> PROTECTED BY SIP
-#  LAUNCHAGENT CANNOT DELETE THIS FOLDER // we implemented a workaround in installation the scripts!
+#  LAUNCHAGENT CANNOT DELETE THIS FOLDER // we implemented a workaround in the installation scripts!
   "$HOME/Library/Assistant/CustomVocabulary"
   "$HOME/Library/Assistant/SiriReferenceResolution"
 )
