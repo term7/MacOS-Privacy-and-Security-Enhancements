@@ -191,7 +191,7 @@ Press ${bold}[C/c]${reset} to cancel: " KILLSIRI
 
 case $KILLSIRI in
 
-# -------Input [Y/y]: Disable Apple Remote Events:--------
+# -------Input [Y/y]: Kill Siri:--------
 
 [Yy])
 
