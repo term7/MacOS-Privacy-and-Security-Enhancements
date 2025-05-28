@@ -381,8 +381,8 @@ echo " "
 networksetup -setairportpower en0 off
 echo "networksetup -setairportpower en0 off"
 
-echo "sudo launchctl load ${SpoofMAC_DAEMON_FILE}"
-sudo launchctl load "$SpoofMAC_DAEMON_FILE"
+echo "launchctl bootstrap system ${SpoofMAC_DAEMON_FILE}"
+launchctl bootstrap system "$SpoofMAC_DAEMON_FILE"
 
 sleep 1
 

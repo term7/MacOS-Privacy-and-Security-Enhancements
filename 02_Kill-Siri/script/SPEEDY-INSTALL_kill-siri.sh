@@ -235,8 +235,8 @@ sudo chmod 644 "$GLOBAL_DAEMON"
 
 # -------Load Daemons:--------
 
-sudo -u $(stat -f '%Su' /dev/console) launchctl load "$LOCAL_DAEMON"
-sudo launchctl load "$GLOBAL_DAEMON"
+sudo -u "$(stat -f '%Su' /dev/console)" launchctl bootstrap "gui/$(stat -f '%u' /dev/console)" "$LOCAL_DAEMON"
+sudo launchctl bootstrap system "$GLOBAL_DAEMON"
 
 # -------Trigger Daemons:--------
 

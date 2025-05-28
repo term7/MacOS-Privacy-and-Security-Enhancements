@@ -532,15 +532,15 @@ echo " "
 echo "----------------------------------load daemons----------------------------------"
 echo " "
 
-echo "sudo -u $(stat -f '%Su' /dev/console) launchctl load ${LOCAL_DAEMON}"
+echo "sudo -u \"$(stat -f '%Su' /dev/console)\" launchctl bootstrap \"gui/$(stat -f '%u' /dev/console)\" ${LOCAL_DAEMON}"
 sleep 1
 
-sudo -u $(stat -f '%Su' /dev/console) launchctl load "$LOCAL_DAEMON"
+sudo -u "$(stat -f '%Su' /dev/console)" launchctl bootstrap "gui/$(stat -f '%u' /dev/console)" "$LOCAL_DAEMON"
 
-echo "sudo launchctl load ${GLOBAL_DAEMON}"
+echo "launchctl bootstrap system ${GLOBAL_DAEMON}"
 sleep 1
 
-sudo launchctl load "$GLOBAL_DAEMON"
+sudo launchctl bootstrap system "$GLOBAL_DAEMON"
 
 # -------Trigger Daemons:--------
 

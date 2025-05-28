@@ -132,7 +132,7 @@ sudo chmod 644 info.term7.macports.updater.plist
 
 Manually start the LaunchDaemon (only required once):
 ```
-sudo launchctl load info.term7.macports.updater.plist
+launchctl bootstrap system info.term7.macports.updater.plist
 ```
 
 # 04 Usage

@@ -913,10 +913,10 @@ echo " "
 echo "--------------------------load MacPorts updater daemon--------------------------"
 echo " "
 
-echo "sudo launchctl load ${UPDATER_DAEMON}"
+echo "launchctl bootstrap system ${UPDATER_DAEMON}"
 sleep 1
 
-sudo launchctl load "$UPDATER_DAEMON"
+sudo launchctl bootstrap system  "$UPDATER_DAEMON"
 
 echo " "
 echo " "

@@ -117,7 +117,7 @@ sudo chmod 644 "$SpoofMAC_DAEMON_FILE"
 # -------Load Daemons:--------
 
 networksetup -setairportpower en0 off
-sudo launchctl load "$SpoofMAC_DAEMON_FILE"
+launchctl bootstrap system "$SpoofMAC_DAEMON_FILE"
 
 echo " "
 echo "Setup Finished! Press ${bold}[ANY KEY]${reset} to exit: "
