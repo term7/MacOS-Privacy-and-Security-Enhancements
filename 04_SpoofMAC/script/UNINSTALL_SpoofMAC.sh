@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 #   UNINSTALL_SpoofMAC.sh
 #
@@ -18,7 +18,7 @@
 # -------Styles:--------
 
 bold=$(tput bold)
-normal=$(tput sgr0)
+reset=$(tput sgr0)
 
 # -------Countdown Function:--------
 
