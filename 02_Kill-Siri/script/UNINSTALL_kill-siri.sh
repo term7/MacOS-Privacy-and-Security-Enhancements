@@ -187,14 +187,14 @@ sleep 1
 echo " "
 echo "--------------------------unload and delete KillSwitch--------------------------"
 echo " "
-echo "sudo -u $(stat -f '%Su' /dev/console) launchctl unload ${LOCAL_DAEMON}"
-sudo -u $(stat -f '%Su' /dev/console) launchctl unload "$LOCAL_DAEMON"
+echo "sudo -u \"$(stat -f '%Su' /dev/console)\" launchctl bootout \"gui/$(stat -f '%u' /dev/console)\" ${LOCAL_DAEMON}"
+sudo -u "$(stat -f '%Su' /dev/console)" launchctl bootout "gui/$(stat -f '%u' /dev/console)" "$LOCAL_DAEMON"
 sleep 1
 echo "sudo rm ${LOCAL_DAEMON}"
 sudo rm ${LOCAL_DAEMON}
 sleep 1
-echo "sudo launchctl unload ${GLOBAL_DAEMON}"
-sudo launchctl unload "$GLOBAL_DAEMON"
+echo "sudo launchctl bootout system ${GLOBAL_DAEMON}"
+sudo launchctl bootout system "$GLOBAL_DAEMON"
 sleep 1
 echo "sudo rm ${GLOBAL_DAEMON}"
 sudo rm ${GLOBAL_DAEMON}

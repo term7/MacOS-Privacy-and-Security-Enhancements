@@ -182,8 +182,8 @@ sleep 1
 echo " "
 echo "-----------------------unload and delete SpoofMAC Daemon------------------------"
 echo " "
-echo "sudo launchctl unload ${SpoofMAC_DAEMON}"
-sudo launchctl unload "$SpoofMAC_DAEMON"
+echo "sudo launchctl bootout system ${SpoofMAC_DAEMON}"
+sudo launchctl bootout system "$SpoofMAC_DAEMON"
 sleep 1
 echo "sudo rm ${SpoofMAC_DAEMON}"
 sudo rm ${SpoofMAC_DAEMON}
