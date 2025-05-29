@@ -8,9 +8,7 @@
 **MORE INFO**<br>
 [https://term7.info/wifi-off/](https://term7.info/wifi-off/)
 
-On Linux it is relativey easy to configure your Laptop to start with its Wi-Fi interface switched off. For example Ubuntu remebers the last state of your Wi-Fi, which means when you switch off your Wi-Fi it will reboot with your Wi-Fi switched off. 
-
-This is not so easy on MacOS. Apple computers often restore the last known Wi-Fi state after a reboot, but this isn't guaranteed. If switched off, Wi-Fi may still turn back on automatically due to system services overriding the previous state. There’s no setting to prevent this, so we created a tool to keep Wi-Fi off at startup.
+While macOS is supposed to remember your last Wi-Fi state after a reboot, this isn’t reliable: Wi-Fi may turn back on automatically when you reboot your computer, either due to system processes or simply because you forgot to turn it off before shutdown. Since there’s no built-in setting to prevent this, we created a tool that keeps Wi-Fi disabled at startup. When you need it, just re-enable Wi-Fi manually with one click.
 
 Your Mac always will probe for known networks are broadcast at boot. MAC address randomization is only used when scanning, not when joining networks. Auto-join behavior makes Evil Twin attacks and Man-in-the-Middle attacks more viable.
 
