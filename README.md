@@ -34,7 +34,7 @@ We have tested and developed our code on MacOS Sonoma (14.1.1). All installed he
 
 ***
 
-# **Mirrors**
+# **MIRRORS**
 
 This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements

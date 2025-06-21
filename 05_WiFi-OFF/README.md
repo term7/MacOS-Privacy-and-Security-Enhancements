@@ -70,7 +70,7 @@ curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhan
 
 ***
 
-# **Mirrors**
+# **MIRRORS**
 
 This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/05_WIFI-OFF
