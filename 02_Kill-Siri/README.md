@@ -74,3 +74,11 @@ curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/b
 ```
 curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/02_Kill-Siri/script/UNINSTALL_kill-siri.sh
 ```
+
+### **MIRRORS**
+
+This repository is actively maintained on Codeberg:
+https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/02_Kill-Siri
+
+Changes are puhsed regularly to our Githoub Mirror:
+https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/02_Kill-Siri

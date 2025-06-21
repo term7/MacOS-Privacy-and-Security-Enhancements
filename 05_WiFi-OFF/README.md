@@ -67,3 +67,11 @@ curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/b
 ```
 curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhancements/main/05_WiFi-OFF/script/SPEEDY-INSTALL_WiFi-OFF.sh
 ```
+
+### **MIRRORS**
+
+This repository is actively maintained on Codeberg:
+https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/05_WIFI-OFF
+
+Changes are puhsed regularly to our Githoub Mirror:
+https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/05_WIFI-OFF

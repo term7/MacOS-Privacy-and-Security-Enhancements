@@ -163,3 +163,11 @@ sudo port uninstall leaves
 # 05 Resources
 
 The MacPorts Project: https://www.macports.org/
+
+### **MIRRORS**
+
+This repository is actively maintained on Codeberg:
+https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts
+
+Changes are puhsed regularly to our Githoub Mirror:
+https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/03_MacPorts

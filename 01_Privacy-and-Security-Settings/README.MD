@@ -162,3 +162,10 @@ Furthermore it is quite difficult to find documentation by Apple on how to open 
 [https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Ventura.md](https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Ventura.md)<br>
 [https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Monterey.md](https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Monterey.md)
 
+### **MIRRORS**
+
+This repository is actively maintained on Codeberg:
+https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/01_Privacy-and-Security-Settings
+
+Changes are puhsed regularly to our Githoub Mirror:
+https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/01_Privacy-and-Security-Settings
