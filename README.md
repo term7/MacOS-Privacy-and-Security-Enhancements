@@ -39,5 +39,5 @@ We have tested and developed our code on MacOS Sonoma (14.1.1). All installed he
 This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements
 
-Changes are pushed regularly to our Githoub Mirror:<br>
+Changes are pushed regularly to our Github Mirror:<br>
 https://github.com/term7/MacOS-Privacy-and-Security-Enhancements

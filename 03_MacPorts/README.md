@@ -171,5 +171,5 @@ The MacPorts Project: https://www.macports.org/
 This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts
 
-Changes are pushed regularly to our Githoub Mirror:<br>
+Changes are pushed regularly to our Github Mirror:<br>
 https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/03_MacPorts
