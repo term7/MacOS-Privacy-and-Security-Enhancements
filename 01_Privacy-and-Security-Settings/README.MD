@@ -162,6 +162,8 @@ Furthermore it is quite difficult to find documentation by Apple on how to open 
 [https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Ventura.md](https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Ventura.md)<br>
 [https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Monterey.md](https://github.com/bvanpeski/SystemPreferences/blob/main/macos_preferencepanes-Monterey.md)
 
+***
+
 ### **MIRRORS**
 
 This repository is actively maintained on Codeberg:<br>
