@@ -32,7 +32,9 @@ In that spirit we conclude our introduction with a warning by *drudh*:
 
 We have tested and developed our code on MacOS Sonoma (14.1.1). All installed helper tools run fine on our system. However, you alone are responsible if you break your system. To suggest improvements, please write a comment, report an issue or request a pull request.
 
-### **MIRRORS**
+***
+
+# **MIRRORS**
 
 This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements

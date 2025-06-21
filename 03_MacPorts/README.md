@@ -164,7 +164,9 @@ sudo port uninstall leaves
 
 The MacPorts Project: https://www.macports.org/
 
-### **MIRRORS**
+***
+
+# **MIRRORS**
 
 This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts

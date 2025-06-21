@@ -164,7 +164,7 @@ Furthermore it is quite difficult to find documentation by Apple on how to open 
 
 ***
 
-### **MIRRORS**
+# **MIRRORS**
 
 This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/01_Privacy-and-Security-Settings

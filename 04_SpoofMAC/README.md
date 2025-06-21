@@ -177,7 +177,9 @@ If you use the free version of DaVinci Resolve, there are no licensing issues. H
 
 [https://term7.info/troubleshooting-spoofmac/](https://term7.info/troubleshooting-spoofmac/)
 
-### **MIRRORS**
+***
+
+# **MIRRORS**
 
 This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/04_SpoofMAC
