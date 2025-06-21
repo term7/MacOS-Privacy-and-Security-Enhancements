@@ -166,8 +166,8 @@ The MacPorts Project: https://www.macports.org/
 
 ### **MIRRORS**
 
-This repository is actively maintained on Codeberg:
+This repository is actively maintained on Codeberg:<br>
 https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/src/branch/main/03_MacPorts
 
-Changes are puhsed regularly to our Githoub Mirror:
+Changes are puhsed regularly to our Githoub Mirror:<br>
 https://github.com/term7/MacOS-Privacy-and-Security-Enhancements/tree/main/03_MacPorts
