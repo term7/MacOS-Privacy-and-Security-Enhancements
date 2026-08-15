@@ -4,10 +4,11 @@
 - [02 Why install SpoofMAC](#02-why-install-spoofmac)
 - [03 Installation](#03-installation)
 - [04 How to use SpoofMAC](#04-how-to-use-spoofmac)
-- [05 MAC Address Tracking](#05-mac-address-tracking)
-- [06 Resources](#06-resources)
-- [07 Proprietary Software License Issues](#07-proprietary-software-license-issues)
-- [08 Troubleshooting SpoofMAC](#08-troubleshooting-spoofmac)
+- [05 How a random MAC address is generated](#05-how-a-random-mac-address-is-generated)
+- [06 MAC Address Tracking](#06-mac-address-tracking)
+- [07 Resources](#07-resources)
+- [08 Proprietary Software License Issues](#08-proprietary-software-license-issues)
+- [09 Troubleshooting SpoofMAC](#09-troubleshooting-spoofmac)
 
 
 # 01 About SpoofMAC
@@ -26,6 +27,13 @@ SpoofMAC originally was written in Python by feross:
 Feross also provides a node.js port of this package:
 * [https://github.com/feross/spoof](https://github.com/feross/spoof)
 
+Earlier versions of this chapter installed that node.js package. They no longer do. SpoofMAC is now a small shell script that only uses tools which are already part of macOS:
+
+* `/dev/urandom` generates the random address
+* `/usr/sbin/networksetup` finds your Wi-Fi Card and cycles its radio
+* `/sbin/ifconfig` applies the new address
+
+There is **nothing left to install**. No MacPorts, no Node.js, no npm. If you followed this guide only in order to get SpoofMAC working, you no longer need chapter [03 - MacPorts](../03_MacPorts) at all. It remains in this guide as an optional chapter for those who want MacPorts for other reasons.
 
 
 # 02 Why install SpoofMAC
@@ -41,11 +49,14 @@ Feross also provides a node.js port of this package:
 
 To spoof your MAC address is especially recommended if you are working on a laptop using public Wifi, in order to mitigate tracking methods that identify and track your devices MAC address.
 
+Feross is right that the Wi-Fi Card has to be disassociated from any connected network before a new address will stick. His tool did that with Apple's private `airport` command line utility. Apple deprecated that utility in macOS 14.4 and has since removed it, so we disassociate the supported way instead: we switch the Wi-Fi radio off with `networksetup`, change the address, and switch the radio back on.
 
 
 # 03 Installation
 
-Our [interactive script](script/install_SpoofMAC.sh) installs [spoof](https://github.com/feross/spoof) by Github user *feross* and sets up a <em>LaunchDaemon</em>, that automatically randomizes your Mac's MAC Adress every time you reboot your computer. To install *spoof* you need to install *nodejs*. Our script takes care of that too, but it requires [MacPorts](https://www.macports.org/) to install the required software packages. If you have not yet installed MacPorts, please install MacPorts first! We have written an easy [MacPorts installation script](../03_MacPorts/install_MacPorts.sh) that guides you through the installation of MacPorts.
+Our [interactive script](script/install_SpoofMAC.sh) installs a small helper script to `/Users/Shared/Enhancements/spoof_mac/spoof_mac.sh` and sets up a <em>LaunchDaemon</em>, that automatically randomizes your Mac's MAC Adress every time you reboot your computer.
+
+**THIS SCRIPT HAS NO PREREQUISITES.** It uses macOS built-in tools only.
 
 **BE CAREFUL: YOU SHOULD ALWAYS LOOK AT THE CONTENT OF ANY SHELL SCRIPT YOU DOWNLOAD FROM AN UNKNOWN SOURCE BEFORE YOU EXECUTE IT! VERIFY ITS CONTENT FIRST TO MAKE SURE IT IS SAFE TO EXECUTE.**
 
@@ -74,7 +85,7 @@ Execute the script:
 ./install_SpoofMAC.sh
 ```
 
-If you want to uninstall MacPorts from your system, please download and execute our [UNINSTALL SCRIPT](script/UNINSTALL_SpoofMAC.sh) (Codeberg or Github Mirror):
+If you want to remove SpoofMAC from your system, please download and execute our [UNINSTALL SCRIPT](script/UNINSTALL_SpoofMAC.sh) (Codeberg or Github Mirror):
 
 ```
 curl -O https://codeberg.org/term7/MacOS-Privacy-and-Security-Enhancements/raw/branch/main/04_SpoofMAC/script/UNINSTALL_SpoofMAC.sh
@@ -95,81 +106,122 @@ curl -O https://raw.githubusercontent.com/term7/MacOS-Privacy-and-Security-Enhan
 
 # 04 How to use SpoofMAC
 
-You can use SpoofMAC to manually change your MAC addresses via the command line. To do so, open a Terminal Window to type commands.
+Once installed, SpoofMAC runs on its own every time you reboot. You can also use it manually via the command line. To do so, open a Terminal Window to type commands.
 
 
-List all usage instructions:
+Randomize your Wi-Fi MAC address right now (requires root). This is exactly what the LaunchDaemon runs at boot. It switches your Wi-Fi radio off, applies a new random address and switches the radio back on, so **your Wi-Fi will briefly disconnect**:
 ```
-spoof --help
+sudo /Users/Shared/Enhancements/spoof_mac/spoof_mac.sh
+```
+
+
+Read the log of the last run:
+```
+cat /Users/Shared/Enhancements/spoof_mac/spoof_mac.log
 ```
 
 
-List all available devices:
+List all available devices and the MAC address that is currently set on each of them:
 ```
-spoof list
-```
-
-Example Output:
-```
-        - "Ethernet" on device "en0" with MAC address 70:56:51:BE:B3:00
-        - "Wi-Fi" on device "en1" with MAC address 70:56:51:BE:B3:01 
-          currently set to 00:05:69:2B:6A:23
-        - "Bluetooth PAN" on device "en1"
-```
-
-List available devices, but only those on Wi-Fi:
-```
-spoof list --wifi
+networksetup -listallhardwareports
 ```
 
 Example Output:
 ```
-        - "Wi-Fi" on device "en1" with MAC address 70:56:51:BE:B3:01 
-          currently set to 00:05:69:2B:6A:23
+Hardware Port: Ethernet
+Device: en1
+Ethernet Address: 70:56:51:be:b3:00
+
+Hardware Port: Wi-Fi
+Device: en0
+Ethernet Address: 70:56:51:be:b3:01
 ```
 
-Randomize MAC address (requires root) using hardware port name. IMPORTANT: You first have to switch off wifi, otherwise this command will fail to execute:
+Note that `networksetup` reports the **hardware** address that is burned into the card. To read the address that is **currently set** on your Wi-Fi Card, ask `ifconfig` instead:
 
 ```
-networksetup -setairportpower en0 off
-```
-```
-sudo spoof randomize wi-fi
+ifconfig en0 | grep ether
 ```
 
-
-Set device MAC address to something specific (requires root). IMPORTANT: You first have to switch off wifi, otherwise this command will fail to execute:
-
+Example Output:
 ```
-networksetup -setairportpower en0 off
-```
-```
-sudo spoof set 00:00:00:00:00:00 wi-fi
+	ether 92:d1:44:ec:95:cc
 ```
 
-Reset device to its original MAC address (requires root):
+Find out which device your Wi-Fi Card actually is. It is not always `en0` - a Thunderbolt dock, a USB Ethernet adapter or a tethered iPhone can shift it to `en1`, `en2` or later, which is why our script never hardcodes a device name:
 ```
-sudo spoof reset wi-fi
+networksetup -listallhardwareports | awk '/^Hardware Port: Wi-Fi$/ { getline; print $2 }'
 ```
 
 
-# 05 MAC Address Tracking
+Set your Wi-Fi Card to a specific MAC address (requires root). IMPORTANT: you first have to switch off your Wi-Fi radio, otherwise this command will fail to execute:
+
+```
+sudo networksetup -setairportpower en0 off
+```
+```
+sudo ifconfig en0 ether 00:00:00:00:00:00
+```
+```
+sudo networksetup -setairportpower en0 on
+```
+
+
+Reset your Wi-Fi Card to its original MAC address: simply reboot your computer with the SpoofMAC LaunchDaemon removed. A spoofed MAC address is never written to disk, it only lives in the running system, so macOS restores the hardware address of your Wi-Fi Card on the next boot.
+
+
+# 05 How a random MAC address is generated
+
+A MAC address is six bytes. Our script reads those six bytes from `/dev/urandom`, the kernel's cryptographically secure random number generator. We deliberately do not use the shell's `$RANDOM`, which is a weak, seeded generator and a poor source for an identifier that is supposed to be unlinkable across the places you visit.
+
+Six random bytes alone are not yet a valid address. The two least significant bits of the **first octet** are not part of the random identifier, they are flags, and getting them wrong is the single easiest mistake to make when you spoof a MAC address by hand:
+
+| bit | name | meaning | what we do |
+| --- | --- | --- | --- |
+| `0x01` | I/G bit | `0` = individual (unicast), `1` = group (multicast) | force it to `0` |
+| `0x02` | U/L bit | `0` = universally administered, `1` = locally administered | force it to `1` |
+
+The I/G bit **must** be `0`. An address with the multicast bit set is not a valid station address, and your Wi-Fi driver or the access point will simply reject it. This is the failure mode people run into when they spoof a MAC address from `/dev/urandom` without correcting the first octet: roughly half of all randomly generated addresses are unusable.
+
+The U/L bit **must** be `1`. Setting it declares "this address was made up locally", which is exactly what we did. It also guarantees that we are not accidentally impersonating some real manufacturer's registered OUI.
+
+In the script this is one line:
+
+```
+first=$(( (bytes[0] | 0x02) & 0xFE ))
+```
+
+`| 0x02` forces the locally administered bit on, `& 0xFE` forces the multicast bit off. The remaining five bytes stay fully random.
+
+
+# 06 MAC Address Tracking
 
 The MAC address of a wireless device constitutes an excellent unique identifier to track its owner. MAC addresses of wireless devices are collected and stored by several systems. For instance logs of wireless routers include the MAC address of all devices that have been connected. Those logs contain events related to management aspects of the wireless network (association, authentication, disconnection, etc.) and each event associates a MAC address with a timestamp.
 Another example is Radio-Frequency tracking systems that are specifically designed to track the movement of individuals thanks to the wireless devices that they are wearing. Those systems are based on a set of sensors collecting wireless signals that triangulate and track the movement of individuals over time. Those systems are deployed in areas such as shopping centres, museums, roads, subway stations, etc. - where they provide valuable information on mobility patterns and shopping habits.
 
-# 06 Resources
+# 07 Resources
 
 Wikipedia: [https://en.wikipedia.org/wiki/MAC_address](https://en.wikipedia.org/wiki/MAC_address)<br>
+Wikipedia (Organizationally unique identifier): [https://en.wikipedia.org/wiki/Organizationally_unique_identifier](https://en.wikipedia.org/wiki/Organizationally_unique_identifier)<br>
 The Hitchhiker's Guide to Online Anonymity: [https://anonymousplanet.org/guide#your-wi-fi-or-ethernet-mac-address](https://anonymousplanet.org/guide#your-wi-fi-or-ethernet-mac-address)<br>
 Github (feross): [https://github.com/feross/spoof](https://github.com/feross/spoof)
 
-# 07 Proprietary Software License Issues
+# 08 Proprietary Software License Issues
 
 Sometimes when you purchase proprietary software, you have to enter a license key in order to use it. Depending on the software, after you restart your computer with SpoofMac installed as a service, it suddenly stops working unless you enter your license key again. This can quickly become very annoying and is an indicator that the software you purchased checks the MAC address of your computer in order to verify that it is the machine that was connected to a specific license key. If it cannot find the MAC address you used when you registered the product, the software thinks it is on a new machine and will force you to do the registration process again.
 The only way to avoid re-registration is to change your devices MAC address back to the MAC address you used when you registered the software. Please be aware that it is not necessarily the original MAC address of your computer! It can be a spoofed MAC address already.
 
-# 08 Troubleshooting SpoofMac
+# 09 Troubleshooting SpoofMAC
+
+#### Read the log
+
+Every run of SpoofMAC writes what it did to a log file. If your MAC address did not change, look there first:
+
+```
+cat /Users/Shared/Enhancements/spoof_mac/spoof_mac.log
+```
+
+The script logs the address it generated and the address the card actually reports afterwards. If the two differ it says so explicitly and exits with an error.
 
 #### Example AppleScript for DaVinci Resolve
 

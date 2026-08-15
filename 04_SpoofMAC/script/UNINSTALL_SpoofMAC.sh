@@ -3,7 +3,13 @@
 #   UNINSTALL_SpoofMAC.sh
 #
 #   term7 / 10.03.2024
-
+#
+#   MODIFIED 15.08.2026 by OpenHat Security (https://github.com/openhat-security):
+#   SpoofMAC no longer installs the npm package "spoof", so this script no longer
+#   runs "npm uninstall". It removes the LaunchDaemon and the helper script that
+#   the current installer creates, and it still boots out and deletes a daemon left
+#   behind by an older, npm based SpoofMAC installation.
+#
 #   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time - yet we have written this script with users in mind that are not yet used to the command line.
 #
 ##   MIT License
@@ -102,6 +108,7 @@ function invalid {
   echo " "
   echo " "
   echo " "
+  echo " "
 }
 
 echo " "
@@ -138,47 +145,37 @@ case $DELETE in
 
 # -------Variables:--------
 
+ENHANCEMENTS=/Users/Shared/Enhancements/spoof_mac
+
 DAEMON_FOLDER=/Library/LaunchDaemons
 SpoofMAC_DAEMON_NAME=info.term7.spoof.mac
 SpoofMAC_DAEMON=$DAEMON_FOLDER/$SpoofMAC_DAEMON_NAME.plist
 
-# -------Delete Spoof:--------
-
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo "----------------------------------delete Spoof----------------------------------"
-echo " "
-echo "sudo npm uninstall spoof -g"
-
-sudo npm uninstall spoof -g
-
-sleep 1
-
-
 # -------Delete Daemon:--------
 
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
 echo " "
 echo "-----------------------unload and delete SpoofMAC Daemon------------------------"
 echo " "
@@ -188,6 +185,33 @@ sleep 1
 echo "sudo rm ${SpoofMAC_DAEMON}"
 sudo rm ${SpoofMAC_DAEMON}
 sleep 1
+
+# -------Delete Script:--------
+
+echo " "
+echo "-----------------------------delete SpoofMAC Script-----------------------------"
+echo " "
+echo "sudo rm -r ${ENHANCEMENTS}"
+if [ -d "$ENHANCEMENTS" ]; then
+    sudo rm -r "$ENHANCEMENTS"
+fi
+sleep 1
+
+# -------Delete legacy npm installation (if it exists):--------
+
+# Older versions of SpoofMAC installed the npm package "spoof" through MacPorts.
+# The current version does not, but we still clean up after an older installation.
+
+if [ -x /opt/local/bin/spoof ]; then
+
+    echo " "
+    echo "--------------------------delete legacy npm SpoofMAC----------------------------"
+    echo " "
+    echo "sudo npm uninstall spoof -g"
+    sudo npm uninstall spoof -g
+    sleep 1
+
+fi
 
 break;;
 
@@ -229,5 +253,9 @@ echo " "
 echo " "
 echo " "
 echo " "
+echo " "
+echo " "
+echo "Your Wi-Fi Card keeps its current, randomized MAC address until you reboot."
+echo "After the next reboot macOS restores the hardware address of your Wi-Fi Card."
 echo " "
 read -s -n 1 -p "Press ${bold}[ANY KEY]${reset} to exit this script: "
