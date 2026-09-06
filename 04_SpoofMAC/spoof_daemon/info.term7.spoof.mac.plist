@@ -6,10 +6,7 @@
     <string>info.term7.spoof.mac</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/opt/local/bin/node</string>
-        <string>/opt/local/bin/spoof</string>
-        <string>randomize</string>
-        <string>en0</string>
+        <string>/Users/Shared/Enhancements/spoof_mac/spoof_mac.sh</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
