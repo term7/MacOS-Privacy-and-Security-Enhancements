@@ -5,21 +5,26 @@
 #   term7 / 10.03.2024
 #
 #   MODIFIED 15.08.2026 by OpenHat Security (https://github.com/openhat-security):
-#   SpoofMAC no longer installs the npm package "spoof", so this script no longer
-#   runs "npm uninstall". It removes the LaunchDaemon and the helper script that
-#   the current installer creates, and it still boots out and deletes a daemon left
-#   behind by an older, npm based SpoofMAC installation.
+#   SpoofMAC no longer installs the npm package "spoof". This script removes the
+#   LaunchDaemon and helper script created by the current installer, while retaining
+#   conditional cleanup of the npm package left by an older SpoofMAC installation.
 #
-#   This script is meant to be educational and a resource for learning for unexperienced users. It has a lot of functionality that may be considered unnecessary from an advanced user's perspective. I.e. it pauses at certain times during the installation and displays a countdown. It echoes all commands to the terminal window and at certain times during the installation it displays informative texts and asks for user input. From an advanced user's perspective who knows exactly what he/she wants, this may be a waste of time - yet we have written this script with users in mind that are not yet used to the command line.
-#
-##   MIT License
-#   Copyright (c) 2022 term7
+#   MODIFIED 07.09.2026 by term7:
+#   Updated the uninstall status messages for the current SpoofMAC implementation
+#   and added defensive checks when removing installed files.
 #
 #   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 #
 #   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 #
 #   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+# -------Admin Check:--------
+
+if ! sudo -v; then
+    echo "Administrator privileges are required."
+    exit 1
+fi
 
 # -------Styles:--------
 
@@ -136,7 +141,7 @@ echo " "
 
 while true
 do
-read -s -p "Type ${bold}[delete]${reset} to unload and remove all Daemons and files that constitute 
+read -s -p "Type ${bold}[delete]${reset} to unload and remove all Daemons and files that constitute
 the SpoofMAC, or ${bold}[exit]${reset} to abort and press ${bold}[ENTER]${reset}: " DELETE
 
 case $DELETE in
@@ -179,12 +184,22 @@ echo " "
 echo " "
 echo "-----------------------unload and delete SpoofMAC Daemon------------------------"
 echo " "
-echo "sudo launchctl bootout system ${SpoofMAC_DAEMON}"
-sudo launchctl bootout system "$SpoofMAC_DAEMON"
-sleep 1
-echo "sudo rm ${SpoofMAC_DAEMON}"
-sudo rm ${SpoofMAC_DAEMON}
-sleep 1
+
+if [ -e "$SpoofMAC_DAEMON" ]; then
+
+    echo "sudo launchctl bootout system ${SpoofMAC_DAEMON}"
+    sudo launchctl bootout system "$SpoofMAC_DAEMON"
+    sleep 1
+
+    echo "sudo rm ${SpoofMAC_DAEMON}"
+    sudo rm "$SpoofMAC_DAEMON"
+    sleep 1
+
+else
+
+    echo "SpoofMAC LaunchDaemon not found – skipping daemon removal."
+
+fi
 
 # -------Delete Script:--------
 
@@ -232,6 +247,16 @@ done
 
 
 echo " "
+echo "------------------------------------SUMMARY-------------------------------------"
+echo " "
+echo "SpoofMAC has been removed."
+echo "The current Wi-Fi power state and MAC address are left unchanged by this"
+echo "uninstaller. After the next reboot, SpoofMAC will no longer randomize your Wi-Fi"
+echo "MAC address."
+echo " "
+countdown "00:00:3"
+
+echo " "
 echo " "
 echo " "
 echo " "
@@ -254,8 +279,6 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo " "
-echo "Your Wi-Fi Card keeps its current, randomized MAC address until you reboot."
-echo "After the next reboot macOS restores the hardware address of your Wi-Fi Card."
+
 echo " "
 read -s -n 1 -p "Press ${bold}[ANY KEY]${reset} to exit this script: "

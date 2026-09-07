@@ -5,6 +5,8 @@
 #   NEW FILE, added 15.08.2026 by OpenHat Security (https://github.com/openhat-security)
 #   as part of a modification of term7's "MacOS Privacy and Security Enhancements".
 #
+#   Modified by term7: 07.09.2026
+#
 #   It replaces the previous SpoofMAC daemon payload, which invoked the npm package
 #   "spoof" (https://github.com/feross/spoof) through a MacPorts installation of
 #   Node.js. This script performs the same job using macOS built-ins only:
@@ -128,29 +130,55 @@ log "$NEW_MAC"
 # airport CLI with -z. That binary was deprecated in macOS 14.4 and has since been
 # removed, so it is no longer an option. Powering the radio down achieves the same
 # dissociation using a documented, supported command.
+#
+# On current macOS versions, however, ifconfig cannot change the MAC address while
+# the Wi-Fi radio remains powered off. We therefore power Wi-Fi off to dissociate,
+# power it straight back on, and immediately attempt the MAC change before the
+# interface has time to associate with a network.
 
 log "DISSOCIATE FROM WI-FI NETWORK:"
 
-for i in {1..10}; do
-  if run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} off"; then
-    break
-  fi
-  log "Retrying setairportpower in 2 seconds... (attempt $i)"
-  sleep 2
-done
-
-# Pause to let the radio settle before we touch the hardware address
-sleep 2
-
 # -------Apply the New MAC Address:--------
 
+# The complete OFF -> ON -> MAC-change sequence is retried because macOS may
+# automatically reassociate with a remembered network before ifconfig gets a
+# chance to change the address.
+
 log "SPOOF MAC-ADDRESS:"
-run_and_log "/sbin/ifconfig ${WIFI_DEVICE} ether ${NEW_MAC}"
 
-# -------Power the Radio Back On:--------
+MAC_APPLIED=0
 
-log "ENABLE WI-FI:"
-run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} on"
+for i in {1..5}; do
+  log "MAC change attempt ${i}/5"
+
+  if ! run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} off"; then
+    log "Could not power Wi-Fi off."
+    sleep 1
+    continue
+  fi
+
+  # Do not pause here. The MAC change must be attempted while Wi-Fi is powered on
+  # but before it has associated with a network.
+  if ! run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} on"; then
+    log "Could not power Wi-Fi on."
+    sleep 1
+    continue
+  fi
+
+  if run_and_log "/sbin/ifconfig ${WIFI_DEVICE} ether ${NEW_MAC}"; then
+    MAC_APPLIED=1
+    break
+  fi
+
+  log "MAC change failed; retrying the off/on/change sequence."
+  sleep 1
+done
+
+if [ "$MAC_APPLIED" -ne 1 ]; then
+  log "Could not apply MAC address after 5 attempts."
+  log "===== SpoofMAC Daemon Script completed ====="
+  exit 1
+fi
 
 # -------Verify:--------
 

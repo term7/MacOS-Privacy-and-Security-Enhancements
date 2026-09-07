@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 
 #   INSTALL_Wifi-OFF.sh
-#   term7 / 26.05.2025
+#   term7 / 26.05.2025 - last modification: 07.09.2026
 #
 #   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 #
 #   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 #
 #   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+# -------Admin Check:--------
+
+if ! sudo -v; then
+    echo "Administrator privileges are required."
+    exit 1
+fi
 
 # -------Styles:--------
 
@@ -119,7 +126,7 @@ echo "             :XMW0,      'xNMWo                 cNMWO,      ,OWMXc"
 echo "              ;0MMXl.      ,ll'                 .co;.     .lXMMK;"
 echo "               .xNMWO;                                   ;OWMNx'"
 echo "                 ;kNWk.                                  .dNNO;"
-echo "                   ',.                                   .''      ...Wi-Fi = ON"
+echo "                   ',.                                   .''"
 
 countdown "00:00:7"
 
@@ -141,17 +148,16 @@ echo "not guaranteed. On macOS, Wi-Fi may turn back on automatically due to syst
 echo "services that override the previous state. There is no setting to prevent this,"
 echo "so we created a tool that ensures to keep Wi-Fi off at startup."
 echo " "
-echo "This simple script sets up two helper scripts and two LaunchDaemons that make"
-echo "sure your Wi-Fi is switched off when you boot your computer. Furthermore, if"
-echo "SpoofMAC is installed, it can randomize the MAC address of your Wi-Fi Card"
-echo "whenever you reboot your computer, making it impossible for other devices and"
-echo "network operators to discover your identity via its MAC address when you connect"
-echo "to the internet."
-echo " "
+echo "If SpoofMAC is already installed with automatic MAC randomization enabled,"
+echo "Wifi-OFF modifies the existing SpoofMAC helper script so that Wi-Fi is switched"
+echo "off immediately after the new MAC address has been successfully applied. If"
+echo "SpoofMAC is not installed, Wifi-OFF keeps its standalone design and sets up two"
+echo "helper scripts and two LaunchDaemons that make sure your Wi-Fi is switched off"
+echo "when you boot your computer and remains available for manual use after login."
 echo " "
 echo "--------------------------------------------------------------------------------"
 echo " "
-echo "                ${bold}THIS SCRIPT HAS BEEN TESTED ON MACOS SONOMA."${reset}
+echo "                ${bold}THIS SCRIPT HAS BEEN TESTED ON MACOS TAHOE."${reset}
 echo " "
 echo "--------------------------------------------------------------------------------"
 echo " "
@@ -173,9 +179,216 @@ ENABLE_DAEMON_NAME=info.term7.on.networksetup.daemon
 DISABLE_DAEMON=$DAEMON_FOLDER/$DISABLE_DAEMON_NAME.plist
 ENABLE_DAEMON=$DAEMON_FOLDER/$ENABLE_DAEMON_NAME.plist
 
+SPOOFMAC=/Users/Shared/Enhancements/spoof_mac/spoof_mac.sh
 SpoofMAC_DAEMON_NAME=info.term7.spoof.mac
 SpoofMAC_DAEMON=$DAEMON_FOLDER/$SpoofMAC_DAEMON_NAME.plist
 
+WIFIOFF_MARKER="# -------WiFi-OFF Integration:--------"
+
+
+# -------Choose Installation Mode:--------
+
+if [ -x "$SPOOFMAC" ] && [ -e "$SpoofMAC_DAEMON" ]; then
+
+INSTALL_MODE="SPOOFMAC"
+
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo "----------------------------SpoofMAC installation found-------------------------"
+echo " "
+echo "${SPOOFMAC}"
+echo " "
+echo "${SpoofMAC_DAEMON}"
+echo " "
+echo "Wifi-OFF will use the existing SpoofMAC boot setup."
+echo "No additional Wifi-OFF LaunchDaemons will be installed."
+echo " "
+countdown "00:00:3"
+
+# -------Check if Wifi-OFF is already integrated:--------
+
+if /usr/bin/grep -Fq "$WIFIOFF_MARKER" "$SPOOFMAC"; then
+
+    echo " "
+    echo "-----------------------------Wifi-OFF already installed-------------------------"
+    echo " "
+    echo "The existing SpoofMAC helper script already contains the Wifi-OFF integration."
+    echo "No changes are necessary."
+    echo " "
+    countdown "00:00:3"
+
+else
+
+# -------Find final SpoofMAC completion line:--------
+
+    FINAL_COMPLETION_LINE=$(
+        /usr/bin/grep -n '^[[:space:]]*log "===== SpoofMAC Daemon Script completed ====="[[:space:]]*$' "$SPOOFMAC" \
+        | /usr/bin/tail -n 1 \
+        | /usr/bin/cut -d: -f1
+    )
+
+    if [ -z "$FINAL_COMPLETION_LINE" ]; then
+        echo " "
+        echo "Could not locate the final completion line in the SpoofMAC helper script."
+        echo "The script has not been modified."
+        echo " "
+        exit 1
+    fi
+
+# -------Create Wifi-OFF integration block:--------
+
+    TMPFILE=$(/usr/bin/mktemp /tmp/Wifi-OFF.XXXXXX)
+    BLOCKFILE=$(/usr/bin/mktemp /tmp/Wifi-OFF-block.XXXXXX)
+
+    if [ -z "$TMPFILE" ] || [ -z "$BLOCKFILE" ]; then
+        echo "Could not create temporary files."
+        exit 1
+    fi
+
+    trap 'rm -f "$TMPFILE" "$BLOCKFILE"' EXIT
+
+    cat > "$BLOCKFILE" << 'WIFIOFF_EOF'
+# -------WiFi-OFF Integration:--------
+
+# After SpoofMAC has successfully randomized and verified the MAC address, power
+# the Wi-Fi radio off again. The Wi-Fi network service itself remains enabled, so
+# the logged-in user can turn Wi-Fi back on manually whenever needed.
+
+log "DISABLE WI-FI:"
+
+if ! run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} off"; then
+  log "Could not power Wi-Fi off."
+  log "===== SpoofMAC Daemon Script completed ====="
+  exit 1
+fi
+
+WIFIOFF_EOF
+
+# -------Add Wifi-OFF to SpoofMAC:--------
+
+    echo " "
+    echo "------------------------------integrate Wifi-OFF-------------------------------"
+    echo " "
+    echo "Adding Wifi-OFF to:"
+    echo " "
+    echo "${SPOOFMAC}"
+    echo " "
+
+    /usr/bin/awk \
+        -v insert_at="$FINAL_COMPLETION_LINE" \
+        -v block="$BLOCKFILE" \
+        '
+        NR == insert_at {
+            while ((getline line < block) > 0)
+                print line
+            close(block)
+        }
+        {
+            print
+        }
+        ' "$SPOOFMAC" > "$TMPFILE"
+
+# -------Validate modified SpoofMAC script:--------
+
+    echo "---------------------------validate modified script----------------------------"
+    echo " "
+    echo "/bin/bash -n ${TMPFILE}"
+    echo " "
+
+    if ! /bin/bash -n "$TMPFILE"; then
+        echo "The modified SpoofMAC helper script failed the Bash syntax check."
+        echo "The installed SpoofMAC helper script has NOT been changed."
+        echo " "
+        exit 1
+    fi
+
+    echo "Bash syntax check passed."
+    echo " "
+
+# -------Install modified SpoofMAC script:--------
+
+    echo "--------------------------install modified SpoofMAC----------------------------"
+    echo " "
+    echo "sudo /usr/bin/install -o root -g wheel -m 755 ${TMPFILE} ${SPOOFMAC}"
+    echo " "
+
+    if ! sudo /usr/bin/install -o root -g wheel -m 755 "$TMPFILE" "$SPOOFMAC"; then
+        echo "Could not install the modified SpoofMAC helper script."
+        echo "Wifi-OFF has not been installed."
+        echo " "
+        exit 1
+    fi
+
+    sleep 1
+
+# -------Verify Wifi-OFF integration:--------
+
+    if ! /usr/bin/grep -Fq "$WIFIOFF_MARKER" "$SPOOFMAC"; then
+        echo "Wifi-OFF integration could not be verified."
+        exit 1
+    fi
+
+    echo "Wifi-OFF was successfully added to the existing SpoofMAC helper script."
+    echo " "
+
+fi
+
+else
+
+INSTALL_MODE="STANDALONE"
+
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo " "
+echo "-----------------------------SpoofMAC not installed-----------------------------"
+echo " "
+echo "A complete automatic SpoofMAC installation was not found."
+echo "Wifi-OFF will install its standalone helper scripts and LaunchDaemons."
+echo " "
+countdown "00:00:3"
 
 # -------Setup Script Location:--------
 
@@ -257,20 +470,48 @@ log "System uptime: $(uptime)"
 
 log "===== Daemon Script 1) started ====="
 
-# Spoof Wi-Fi MAC Address if SpoofMAC exists
-if [ -x /opt/local/bin/spoof ]; then
-    log "SPOOF MAC-ADDRESS:"
-    run_and_log "/opt/local/bin/node /opt/local/bin/spoof randomize en0"
+# Find the Wi-Fi device. It is not always en0.
+WIFI_DEVICE=$(/usr/sbin/networksetup -listallhardwareports | awk '/^Hardware Port: Wi-Fi$/ { getline; print $2; exit }')
 
-    log "CURRENT SPOOF STATUS:"
-    SPOOF_OUTPUT=$(/opt/local/bin/node /opt/local/bin/spoof list --wifi 2>&1)
-    log "$SPOOF_OUTPUT"
+if [ -n "$WIFI_DEVICE" ]; then
+    log "Wi-Fi hardware port found on device: ${WIFI_DEVICE}"
 else
-    log "SpoofMAC not found at /opt/local/bin/spoof – skipping MAC spoofing and status check."
+    log "No Wi-Fi hardware port found."
+fi
+
+# Spoof Wi-Fi MAC Address if the new SpoofMAC helper exists.
+# WiFi-OFF owns the boot sequence when installed, so the separate SpoofMAC
+# LaunchDaemon is removed by the installer and this script invokes the helper
+# directly instead.
+SPOOFMAC="/Users/Shared/Enhancements/spoof_mac/spoof_mac.sh"
+
+if [ -x "$SPOOFMAC" ]; then
+    log "SPOOF MAC-ADDRESS:"
+    if run_and_log "$SPOOFMAC"; then
+        log "SpoofMAC completed successfully."
+    else
+        log "SpoofMAC failed. Continuing with Wi-Fi shutdown."
+    fi
+else
+    log "SpoofMAC helper not found at ${SPOOFMAC} – skipping MAC spoofing."
+fi
+
+# SpoofMAC intentionally leaves the Wi-Fi radio powered on because current macOS
+# requires the interface to be on but unassociated when changing its MAC address.
+# WiFi-OFF therefore turns the radio back off immediately afterwards.
+if [ -n "$WIFI_DEVICE" ]; then
+    log "DISABLE WI-FI RADIO:"
+    for i in {1..10}; do
+        if run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} off"; then
+            break
+        fi
+        log "Retrying setairportpower in 2 seconds... (attempt $i)"
+        sleep 2
+    done
 fi
 
 # Immediately disable Wi-Fi network service to prevent early connections
-log "DISABLE WI-FI:"
+log "DISABLE WI-FI NETWORK SERVICE:"
 run_and_log "/usr/sbin/networksetup -setnetworkserviceenabled Wi-Fi off"
 
 # Apply system power settings
@@ -334,15 +575,22 @@ log "Detected user login. Proceeding..."
 
 log "DISCONNECT WIFI:"
 
-# Turn off the Wi-Fi radio interface (en0)
-for i in {1..10}; do
-  run_and_log "/usr/sbin/networksetup -setairportpower en0 off"
-  if [ $? -eq 0 ]; then
-    break
-  fi
-  log "Retrying setairportpower in 2 seconds..."
-  sleep 2
-done
+# Find the Wi-Fi device. It is not always en0.
+WIFI_DEVICE=$(/usr/sbin/networksetup -listallhardwareports | awk '/^Hardware Port: Wi-Fi$/ { getline; print $2; exit }')
+
+# Turn off the Wi-Fi radio interface
+if [ -n "$WIFI_DEVICE" ]; then
+  for i in {1..10}; do
+    run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} off"
+    if [ $? -eq 0 ]; then
+      break
+    fi
+    log "Retrying setairportpower in 2 seconds..."
+    sleep 2
+  done
+else
+  log "No Wi-Fi hardware port found – skipping radio power command."
+fi
 
 log "ENABLE OFFLINE WIFI:"
 
@@ -448,7 +696,7 @@ sleep 1
 
 sudo chmod 644 "$ENABLE_DAEMON"
 
-# -------DISABLE AND DELETE SPOOFMAC DAEMON (if it exists):--------
+# -------DISABLE AND DELETE STANDALONE SPOOFMAC DAEMON (if it exists):--------
 
 if [ -e "$SpoofMAC_DAEMON" ]; then
 
@@ -462,7 +710,7 @@ if [ -e "$SpoofMAC_DAEMON" ]; then
     echo " "
 
     sleep 1
-    echo "---------------------------avoiding SpoofMAC conflicts--------------------------"
+    echo "--------------------------integrating SpoofMAC with WiFi-OFF--------------------"
     echo " "
     echo "sudo launchctl bootout system ${SpoofMAC_DAEMON}"
     sudo launchctl bootout system ${SpoofMAC_DAEMON}
@@ -497,6 +745,8 @@ sudo launchctl bootstrap system "$ENABLE_DAEMON"
 sleep 1
 
 
+fi
+
 break;;
 
 # -------Input [exit]: Abort:--------
@@ -514,38 +764,153 @@ invalid
 esac
 done
 
-echo " "
-echo "----------------------open Boot-Time Daemon in Text Editor----------------------"
-echo " "
-echo "open -a TextEdit ${DISABLE_DAEMON}"
-open -a TextEdit "$DISABLE_DAEMON"
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-countdown "00:00:5"
+
+# -------Open Installed Files in Text Editor:--------
+
+if [ "$INSTALL_MODE" = "SPOOFMAC" ]; then
+
+    echo " "
+    echo "------------------------open SpoofMAC Script in Text Editor---------------------"
+    echo " "
+    echo "open -a TextEdit ${SPOOFMAC}"
+    open -a TextEdit "$SPOOFMAC"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo "--------------------------------------------------------------------------------"
+    echo "     ${bold}We have opened the modified SpoofMAC helper script. Please review!${reset}"
+    echo "--------------------------------------------------------------------------------"
+    echo " "
+    read -s -p "Press ${bold}[ENTER]${reset} when you are ready: "
+
+else
+
+    echo " "
+    echo "----------------------open Boot-Time Daemon in Text Editor----------------------"
+    echo " "
+    echo "open -a TextEdit ${DISABLE_DAEMON}"
+    open -a TextEdit "$DISABLE_DAEMON"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    countdown "00:00:5"
+
+    echo " "
+    echo "---------------------open User-Login Daemon in Text Editor----------------------"
+    echo " "
+    echo "open -a TextEdit ${ENABLE_DAEMON}"
+    open -a TextEdit "$ENABLE_DAEMON"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    countdown "00:00:5"
+
+    echo " "
+    echo "----------------------open Boot-Time Script in Text Editor----------------------"
+    echo " "
+    echo "open -a TextEdit ${DISABLE}"
+    open -a TextEdit "$DISABLE"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    countdown "00:00:5"
+
+    echo " "
+    echo "----------------------open User-Login Script in Text Editor---------------------"
+    echo " "
+    echo "open -a TextEdit ${ENABLE}"
+    open -a TextEdit "$ENABLE"
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    echo " "
+    countdown "00:00:5"
+
+fi
 
 echo " "
-echo "---------------------open User-Login Daemon in Text Editor----------------------"
 echo " "
-echo "open -a TextEdit ${ENABLE_DAEMON}"
-open -a TextEdit "$ENABLE_DAEMON"
+echo "--------------------------------------------------------------------------------"
 echo " "
 echo " "
 echo " "
@@ -554,74 +919,21 @@ echo " "
 echo " "
 echo " "
 echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-countdown "00:00:5"
+
+if [ "$INSTALL_MODE" = "SPOOFMAC" ]; then
+    echo "Wifi-OFF has been integrated into the existing SpoofMAC helper script."
+    echo "No additional Wifi-OFF LaunchDaemons were installed."
+    echo " "
+    echo "Whenever SpoofMAC runs at boot, Wi-Fi will be switched off after the MAC"
+    echo "address has been successfully randomized and verified."
+else
+    echo "From now on, whenever you start your computer, Wi-Fi will be switched off!"
+    echo "You can always connect manually..."
+    echo "Please have a look at the open Text documents:"
+    echo "These are the ${bold}Scripts${reset} and the ${bold}LaunchDaemons${reset} that were set up by this script."
+fi
 
 echo " "
-echo "----------------------open Boot-Time Script in Text Editor----------------------"
-echo " "
-echo "open -a TextEdit ${DISABLE}"
-open -a TextEdit "$DISABLE"
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-countdown "00:00:5"
-
-echo " "
-echo "----------------------open User-Login Script in Text Editor---------------------"
-echo " "
-echo "open -a TextEdit ${ENABLE}"
-open -a TextEdit "$ENABLE"
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-countdown "00:00:5"
-
 echo " "
 echo " "
 echo " "
@@ -630,21 +942,6 @@ echo " "
 echo " "
 echo " "
 echo "--------------------------------------------------------------------------------"
-echo " "
-echo "From on on, whenever you start your computer, Wi-Fi will be switched off!"
-echo "You can always connect manually..."
-echo " "
-echo "Please have a look at the open Text documents:"
-echo "These are the ${bold}Scripts${reset} and the ${bold}LaunchDaemons${reset} that were set up by this script."
-echo " "
-echo "--------------------------------------------------------------------------------"
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
-echo " "
 read -s -p "Press ${bold}[ENTER]${reset} when you are ready: "
 
 echo " "

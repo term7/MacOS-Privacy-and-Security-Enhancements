@@ -10,11 +10,23 @@
 #   uses macOS built-ins (/dev/urandom, /usr/sbin/networksetup, /sbin/ifconfig).
 #   The LaunchDaemon design, the install flow and the script structure are term7's.
 #
+#   MODIFIED 07.09.2026 by term7:
+#   Changed MAC assignment from OFF -> MAC-change -> ON to OFF -> ON -> immediate MAC-change because current macOS does not accept the ifconfig MAC change while the Wi-Fi radio is still powered off.
+#   Added retry handling for the early-boot Wi-Fi readiness race.
+#   Added detection and migration of existing standalone Wifi-OFF [see: 05 - WiFi-OFF] installations: their LaunchDaemons and helper scripts are removed when automatic SpoofMAC is enabled, and the Wifi-OFF radio-off behavior is integrated into spoof_mac.sh.
+#
 #   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 #
 #   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 #
 #   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+# -------Admin Check:--------
+
+if ! sudo -v; then
+    echo "Administrator privileges are required."
+    exit 1
+fi
 
 # -------Styles:--------
 
@@ -31,12 +43,12 @@ function countdown {
   local START=$(date +%s)
   local END=$((START + SECONDS))
   local CUR=$START
-  
+
   while [[ $CUR -lt $END ]]
   do
   CUR=$(date +%s)
   LEFT=$((END-CUR))
-  
+
   printf "\r%02d:%02d:%02d" \
   $((LEFT/3600)) $(( (LEFT/60)%60)) $((LEFT%60))
   sleep 1
@@ -95,6 +107,29 @@ DAEMON_FOLDER=/Library/LaunchDaemons
 SpoofMAC_DAEMON_NAME=info.term7.spoof.mac
 SpoofMAC_DAEMON_FILE=$DAEMON_FOLDER/$SpoofMAC_DAEMON_NAME.plist
 
+WIFIOFF_ENHANCEMENTS=/Users/Shared/Enhancements/disable_wifi
+WIFIOFF_DISABLE_DAEMON_NAME=info.term7.off.networksetup.daemon
+WIFIOFF_ENABLE_DAEMON_NAME=info.term7.on.networksetup.daemon
+WIFIOFF_DISABLE_DAEMON=$DAEMON_FOLDER/$WIFIOFF_DISABLE_DAEMON_NAME.plist
+WIFIOFF_ENABLE_DAEMON=$DAEMON_FOLDER/$WIFIOFF_ENABLE_DAEMON_NAME.plist
+WIFIOFF_MIGRATE=0
+
+# -------Check for existing Wifi-OFF installation:--------
+
+if [ -e "$WIFIOFF_DISABLE_DAEMON" ] || \
+   [ -e "$WIFIOFF_ENABLE_DAEMON" ] || \
+   sudo launchctl print "system/${WIFIOFF_DISABLE_DAEMON_NAME}" > /dev/null 2>&1 || \
+   sudo launchctl print "system/${WIFIOFF_ENABLE_DAEMON_NAME}" > /dev/null 2>&1; then
+
+    WIFIOFF_MIGRATE=1
+
+    echo " "
+    echo "Existing Wifi-OFF LaunchDaemon setup detected."
+    echo "Wifi-OFF will be migrated into the new SpoofMAC helper script."
+    echo " "
+
+fi
+
 # -------Setup Script Location:--------
 
 if [ ! -d "$ENHANCEMENTS" ]; then
@@ -123,6 +158,12 @@ sudo tee "$SPOOF" > /dev/null << 'EOF'
 #   term7's own conventions (see 05_WiFi-OFF/network_daemon/01_disable_wifi.sh).
 #
 #   Copyright (c) 2026 OpenHat Security
+#
+#   MODIFIED 07.09.2026 by term7:
+#   Changed MAC assignment from OFF -> MAC-change -> ON to OFF -> ON -> immediate
+#   MAC-change because current macOS does not accept the ifconfig MAC change while
+#   the Wi-Fi radio is still powered off.
+#   Added retry handling for the early-boot Wi-Fi readiness race.
 #
 #   This program is free software: you can redistribute it and/or modify it under
 #   the terms of the GNU General Public License as published by the Free Software
@@ -236,29 +277,65 @@ log "$NEW_MAC"
 # airport CLI with -z. That binary was deprecated in macOS 14.4 and has since been
 # removed, so it is no longer an option. Powering the radio down achieves the same
 # dissociation using a documented, supported command.
+#
+# On current macOS versions, however, ifconfig cannot change the MAC address while
+# the Wi-Fi radio remains powered off. We therefore power Wi-Fi off to dissociate,
+# power it straight back on, and immediately attempt the MAC change before the
+# interface has time to associate with a network.
 
 log "DISSOCIATE FROM WI-FI NETWORK:"
 
-for i in {1..10}; do
-  if run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} off"; then
-    break
-  fi
-  log "Retrying setairportpower in 2 seconds... (attempt $i)"
-  sleep 2
-done
-
-# Pause to let the radio settle before we touch the hardware address
-sleep 2
-
 # -------Apply the New MAC Address:--------
 
+# During early boot, networksetup may successfully power Wi-Fi on before the
+# Wi-Fi interface is fully ready to accept a new link-layer address. In that
+# state, networksetup returns exit code 0, but ifconfig can still fail with:
+#
+#   ifconfig: ioctl (SIOCAIFADDR): Network is down
+#
+# Testing on both reboot and cold boot showed that this condition can persist
+# for several seconds after the LaunchDaemon starts.
+#
+# The complete OFF -> ON -> MAC-change sequence is therefore retried. Repeating
+# the power cycle also forces Wi-Fi back into an unassociated state on each
+# attempt, giving ifconfig a fresh opportunity to change the MAC address before
+# macOS automatically reconnects to a remembered network.
+
 log "SPOOF MAC-ADDRESS:"
-run_and_log "/sbin/ifconfig ${WIFI_DEVICE} ether ${NEW_MAC}"
 
-# -------Power the Radio Back On:--------
+MAC_APPLIED=0
 
-log "ENABLE WI-FI:"
-run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} on"
+for i in {1..5}; do
+  log "MAC change attempt ${i}/5"
+
+  if ! run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} off"; then
+    log "Could not power Wi-Fi off."
+    sleep 1
+    continue
+  fi
+
+  # Do not pause here. The MAC change must be attempted while Wi-Fi is powered on
+  # but before it has associated with a network.
+  if ! run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} on"; then
+    log "Could not power Wi-Fi on."
+    sleep 1
+    continue
+  fi
+
+  if run_and_log "/sbin/ifconfig ${WIFI_DEVICE} ether ${NEW_MAC}"; then
+    MAC_APPLIED=1
+    break
+  fi
+
+  log "MAC change failed; retrying the off/on/change sequence."
+  sleep 1
+done
+
+if [ "$MAC_APPLIED" -ne 1 ]; then
+  log "Could not apply MAC address after 5 attempts."
+  log "===== SpoofMAC Daemon Script completed ====="
+  exit 1
+fi
 
 # -------Verify:--------
 
@@ -276,6 +353,86 @@ fi
 
 log "===== SpoofMAC Daemon Script completed ====="
 EOF
+
+# -------Carry existing Wifi-OFF into SpoofMAC:--------
+
+if [ "$WIFIOFF_MIGRATE" -eq 1 ]; then
+
+    FINAL_COMPLETION_LINE=$(
+        /usr/bin/grep -n '^[[:space:]]*log "===== SpoofMAC Daemon Script completed ====="[[:space:]]*$' "$SPOOF" \
+        | /usr/bin/tail -n 1 \
+        | /usr/bin/cut -d: -f1
+    )
+
+    if [ -z "$FINAL_COMPLETION_LINE" ]; then
+        echo "Could not locate the final completion line in the SpoofMAC helper script."
+        echo "The existing Wifi-OFF installation has NOT been removed."
+        exit 1
+    fi
+
+    TMPFILE=$(/usr/bin/mktemp /tmp/SpoofMAC-Wifi-OFF.XXXXXX)
+    BLOCKFILE=$(/usr/bin/mktemp /tmp/SpoofMAC-Wifi-OFF-block.XXXXXX)
+
+    if [ -z "$TMPFILE" ] || [ -z "$BLOCKFILE" ]; then
+        echo "Could not create temporary files."
+        echo "The existing Wifi-OFF installation has NOT been removed."
+        exit 1
+    fi
+
+    trap 'rm -f "$TMPFILE" "$BLOCKFILE"' EXIT
+
+    cat > "$BLOCKFILE" << 'WIFIOFF_EOF'
+# -------WiFi-OFF Integration:--------
+
+# After SpoofMAC has successfully randomized and verified the MAC address, power
+# the Wi-Fi radio off again. The Wi-Fi network service itself remains enabled, so
+# the logged-in user can turn Wi-Fi back on manually whenever needed.
+
+log "DISABLE WI-FI:"
+
+if ! run_and_log "/usr/sbin/networksetup -setairportpower ${WIFI_DEVICE} off"; then
+  log "Could not power Wi-Fi off."
+  log "===== SpoofMAC Daemon Script completed ====="
+  exit 1
+fi
+
+WIFIOFF_EOF
+
+    /usr/bin/awk \
+        -v insert_at="$FINAL_COMPLETION_LINE" \
+        -v block="$BLOCKFILE" \
+        '
+        NR == insert_at {
+            while ((getline line < block) > 0)
+                print line
+            close(block)
+        }
+        {
+            print
+        }
+        ' "$SPOOF" > "$TMPFILE"
+
+    if ! /bin/bash -n "$TMPFILE"; then
+        echo "The Wifi-OFF integrated SpoofMAC helper failed the Bash syntax check."
+        echo "The existing Wifi-OFF installation has NOT been removed."
+        exit 1
+    fi
+
+    if ! sudo /usr/bin/install -o root -g wheel -m 755 "$TMPFILE" "$SPOOF"; then
+        echo "Could not install the Wifi-OFF integrated SpoofMAC helper script."
+        echo "The existing Wifi-OFF installation has NOT been removed."
+        exit 1
+    fi
+
+    if ! /usr/bin/grep -Fq "# -------WiFi-OFF Integration:--------" "$SPOOF"; then
+        echo "Wifi-OFF integration could not be verified."
+        echo "The existing Wifi-OFF installation has NOT been removed."
+        exit 1
+    fi
+
+    echo "Wifi-OFF was successfully added to the SpoofMAC helper script."
+
+fi
 
 # -------Make Script Executable:--------
 
@@ -306,9 +463,38 @@ EOF
 sudo chown root:wheel "$SpoofMAC_DAEMON_FILE"
 sudo chmod 644 "$SpoofMAC_DAEMON_FILE"
 
+# -------Remove standalone Wifi-OFF installation:--------
+
+if [ "$WIFIOFF_MIGRATE" -eq 1 ]; then
+
+    if sudo launchctl print "system/${WIFIOFF_DISABLE_DAEMON_NAME}" > /dev/null 2>&1; then
+        sudo launchctl bootout "system/${WIFIOFF_DISABLE_DAEMON_NAME}"
+    fi
+
+    if sudo launchctl print "system/${WIFIOFF_ENABLE_DAEMON_NAME}" > /dev/null 2>&1; then
+        sudo launchctl bootout "system/${WIFIOFF_ENABLE_DAEMON_NAME}"
+    fi
+
+    if [ -e "$WIFIOFF_DISABLE_DAEMON" ]; then
+        sudo rm "$WIFIOFF_DISABLE_DAEMON"
+    fi
+
+    if [ -e "$WIFIOFF_ENABLE_DAEMON" ]; then
+        sudo rm "$WIFIOFF_ENABLE_DAEMON"
+    fi
+
+    if [ -d "$WIFIOFF_ENHANCEMENTS" ]; then
+        sudo rm -rf "$WIFIOFF_ENHANCEMENTS"
+    fi
+
+    echo "Existing standalone Wifi-OFF installation removed."
+    echo "Wifi-OFF is now integrated into the SpoofMAC helper script."
+
+fi
+
 # -------Load Daemons:--------
 
-launchctl bootstrap system "$SpoofMAC_DAEMON_FILE"
+sudo launchctl bootstrap system "$SpoofMAC_DAEMON_FILE"
 
 echo " "
 echo "Setup Finished! Press ${bold}[ANY KEY]${reset} to exit: "
