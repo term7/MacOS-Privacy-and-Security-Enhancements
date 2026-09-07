@@ -2492,6 +2492,7 @@ echo " "
 echo " "
 echo " "
 countdown "00:00:5"
+fi
 
 break;;
 
